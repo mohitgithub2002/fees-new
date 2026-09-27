@@ -122,7 +122,7 @@ h1,h2,h3,h4,p{margin:0}
 .link:hover{text-decoration:underline}
 
 /* ---------- Surfaces ---------- */
-.stack{display:grid;gap:20px}
+.stack{display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
 .grid{display:grid;gap:20px}
 .g-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .g-3{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -417,6 +417,101 @@ tr.flag td{background:var(--orange-tint)}
 .app[data-role="owner"] .not-owner{display:none!important}
 
 /* ---------- Responsive ---------- */
+
+/* ---------- Analytics ---------- */
+.an-tabs-bar{position:sticky;top:calc(60px + env(safe-area-inset-top,0px));z-index:20;background:rgba(255,255,255,.9);-webkit-backdrop-filter:saturate(180%) blur(16px);backdrop-filter:saturate(180%) blur(16px);padding:10px 0;margin:-6px 0}
+.insights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.insight{background:var(--canvas);border-radius:var(--r-lg);padding:18px 20px;display:grid;gap:6px;align-content:start;min-width:0}
+.insight .ins-ic{width:28px;height:28px;border-radius:8px;background:#fff;display:grid;place-items:center;margin-bottom:4px;color:var(--ink-2)}
+.insight .ins-ic .ic{width:15px;height:15px}
+.insight b{font:600 24px/1.15 var(--font-display);letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.insight > span:last-child{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.kpi-tile{border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;min-width:0;background:#fff}
+.kpi-tile .v{font:600 22px/1.2 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:6px;white-space:nowrap}
+.kpi-tile .s{font-size:12px;color:var(--muted);margin-top:3px}
+.chart-box{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.hbars.wide .hbar{grid-template-columns:minmax(120px,172px) minmax(0,1fr) 74px}
+.hbar .hl{min-width:0;line-height:1.25}
+.hbar .hl small{display:block;font-size:11.5px;color:var(--muted);margin-top:1px}
+.hbar .track{position:relative}
+.hbar .track i{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);transform:translateX(-1px)}
+.hbar.click{cursor:pointer;border-radius:10px;padding:5px 8px;margin:-5px -8px}
+.hbar.click:hover{background:var(--canvas)}
+.s100s{display:grid;gap:10px;margin-top:14px}
+.s100{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;font-size:12.5px;color:var(--ink-2)}
+.s100 .bar{display:flex;gap:2px;height:24px;border-radius:6px;overflow:hidden}
+.s100 .bar span{flex-basis:0;display:grid;place-items:center;font-size:11px;font-weight:600;min-width:0;overflow:hidden;font-variant-numeric:tabular-nums}
+.funnel{display:grid;gap:14px}
+.funnel .f{display:grid;grid-template-columns:120px minmax(0,1fr);gap:4px 14px;align-items:center;font-size:13.5px}
+.funnel .fl{font-weight:500}
+.funnel .fbar{display:flex;align-items:center;height:32px;border-radius:8px;background:#1d1d1f;color:#fff;font-weight:600;font-size:13px;padding:0 12px;min-width:44px;font-variant-numeric:tabular-nums}
+.funnel .fs{grid-column:2;font-size:12px;color:var(--muted)}
+.heat{display:grid;grid-template-columns:84px repeat(4,minmax(78px,1fr));gap:4px;min-width:420px}
+.heat > div{border-radius:10px;padding:10px;font-size:12px;display:grid;gap:2px;align-content:center;min-height:58px}
+.heat .h{min-height:0;padding:0 4px 4px;color:var(--muted);font-weight:500;align-content:end;line-height:1.25}
+.heat .rh{font-weight:600;color:var(--ink-2);padding-left:0}
+.heat .cell b{font:600 15px/1.2 var(--font-display);font-variant-numeric:tabular-nums}
+.heat .cell small{font-size:11px;opacity:.85}
+.heat .cell.empty{background:var(--canvas);color:var(--faint);place-items:center}
+.heat .cell.click{cursor:pointer}
+.heat .cell.click:hover{outline:2px solid #000;outline-offset:1px}
+.heat .span4{grid-column:span 4}
+.heat-scale{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-top:12px}
+.heat-scale span{display:flex;gap:2px}
+.heat-scale i{width:22px;height:10px;border-radius:3px;display:block}
+.tbl tr.tfoot td{border-top:1px solid var(--line-strong);border-bottom:0;font-weight:600}
+.tbl-sm{font-size:13px}
+.tbl-sm td{padding:11px 12px}
+
+/* ---------- Students ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filters .search{flex:1 1 240px;max-width:360px;height:38px}
+.filters select.input{height:38px;width:auto;min-width:0;font-size:13.5px;padding:0 34px 0 12px;border-radius:10px;background-color:#fff}
+.fchips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.fchips:empty{display:none}
+.fchip{display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 8px 0 12px;border-radius:999px;background:#000;color:#fff;font-size:12.5px;font-weight:500;border:0;cursor:pointer}
+.fchip .ic{width:13px;height:13px;stroke-width:2.4}
+.drill{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#000;color:#fff;border-radius:14px;padding:12px 16px;font-size:14px}
+.drill .ic{width:16px;height:16px}
+.drill button{margin-left:auto}
+.sumstrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0 8px}
+.sumstrip .tile .kpi-sm{margin-top:4px}
+.tbl tr[data-stu]{cursor:pointer}
+.tbl tr[data-stu]:hover td{background:#fafafb}
+
+/* ---------- Student drawer ---------- */
+.drawer-bg{position:fixed;inset:0;background:rgba(0,0,0,.28);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);z-index:85}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(600px,100%);background:#fff;z-index:86;box-shadow:var(--shadow-lg);overflow-y:auto;padding:calc(22px + env(safe-area-inset-top,0px)) 26px calc(28px + env(safe-area-inset-bottom,0px));display:grid;gap:22px;align-content:start;animation:slidein .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes slidein{from{transform:translateX(28px);opacity:0}to{transform:none;opacity:1}}
+.drawer-head{display:flex;align-items:center;gap:14px}
+.drawer-head .icon-btn{margin-left:auto}
+.mini-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.mini-kpis .tile{padding:12px 14px}
+.mini-kpis .kpi-sm{font-size:19px}
+.dsec-title{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.chance{display:flex;align-items:center;gap:12px}
+.chance .progress{flex:1}
+.drawer-actions{display:flex;flex-wrap:wrap;gap:10px}
+.drawer-actions .btn{flex:1 1 auto}
+
+@media (max-width:1240px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){.insights{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sumstrip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .chart-box .chart{min-width:560px}
+  .hbars.wide .hbar{grid-template-columns:104px minmax(0,1fr) 62px}
+  .drawer{padding-left:18px;padding-right:18px}
+  .mini-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .filters .search{max-width:none;flex-basis:100%}
+  .filters select.input{flex:1 1 calc(50% - 5px)}
+  .funnel .f{grid-template-columns:96px minmax(0,1fr)}
+}
+
+.report-card{transition:border-color .15s}
+.report-card:hover{border-color:var(--line-strong)}
+
 @media (max-width:1240px){
   :root{--side-w:240px}
   .content{padding:32px 24px 64px}
@@ -474,7 +569,7 @@ tr.flag td{background:var(--orange-tint)}
 </style>
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><!-- Icons: Lucide (ISC license) --><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m4.9 4.9 14.2 14.2" /></symbol><symbol id="i-banknote" viewBox="0 0 24 24"><rect width="20" height="12" x="2" y="6" rx="2" /> <circle cx="12" cy="12" r="2" /> <path d="M6 12h.01M18 12h.01" /></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0" /> <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 7v14" /> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /> <rect width="20" height="14" x="2" y="6" rx="2" /></symbol><symbol id="i-bus" viewBox="0 0 24 24"><path d="M8 6v6" /> <path d="M15 6v6" /> <path d="M2 12h19.6" /> <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3" /> <circle cx="7" cy="18" r="2" /> <path d="M9 18h5" /> <circle cx="16" cy="18" r="2" /></symbol><symbol id="i-calendar-clock" viewBox="0 0 24 24"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" /> <path d="M16 2v4" /> <path d="M8 2v4" /> <path d="M3 10h5" /> <path d="M17.5 17.5 16 16.3V14" /> <circle cx="16" cy="16" r="6" /></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" /></symbol><symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5" /> <path d="m22 10-7.5 7.5L13 16" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol><symbol id="i-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m15 9-6 6" /> <path d="m9 9 6 6" /></symbol><symbol id="i-corner-down-right" viewBox="0 0 24 24"><polyline points="15 10 20 15 15 20" /> <path d="M4 4v7a4 4 0 0 0 4 4h12" /></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="7 10 12 15 17 10" /> <line x1="12" x2="12" y1="15" y2="3" /></symbol><symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" /> <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" /> <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" /> <path d="m2 2 20 20" /></symbol><symbol id="i-file-spreadsheet" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M8 13h2" /> <path d="M14 13h2" /> <path d="M8 17h2" /> <path d="M14 17h2" /></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></symbol><symbol id="i-filter" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></symbol><symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3" /> <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /> <path d="m21 3 1 11h-2" /> <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" /> <path d="M3 4h8" /></symbol><symbol id="i-heart-handshake" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /> <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66" /> <path d="m18 15-2-2" /> <path d="m15 18-2-2" /></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /> <path d="M3 3v5h5" /> <path d="M12 7v5l4 2" /></symbol><symbol id="i-house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol><symbol id="i-landmark" viewBox="0 0 24 24"><line x1="3" x2="21" y1="22" y2="22" /> <line x1="6" x2="6" y1="18" y2="11" /> <line x1="10" x2="10" y1="18" y2="11" /> <line x1="14" x2="14" y1="18" y2="11" /> <line x1="18" x2="18" y1="18" y2="11" /> <polygon points="12 2 20 7 4 7" /></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol><symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol><symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z" /> <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /> <line x1="4" x2="20" y1="6" y2="6" /> <line x1="4" x2="20" y1="18" y2="18" /></symbol><symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></symbol><symbol id="i-message-square" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></symbol><symbol id="i-message-square-warning" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /> <path d="M12 7v2" /> <path d="M12 13h.01" /></symbol><symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19" /> <circle cx="6.5" cy="6.5" r="2.5" /> <circle cx="17.5" cy="17.5" r="2.5" /></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></symbol><symbol id="i-phone-call" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /> <path d="M14.05 2a9 9 0 0 1 8 7.94" /> <path d="M14.05 6A5 5 0 0 1 18 10" /></symbol><symbol id="i-phone-off" viewBox="0 0 24 24"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91" /> <line x1="22" x2="2" y1="2" y2="22" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol><symbol id="i-qr-code" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1" /> <rect width="5" height="5" x="16" y="3" rx="1" /> <rect width="5" height="5" x="3" y="16" rx="1" /> <path d="M21 16h-3a2 2 0 0 0-2 2v3" /> <path d="M21 21v.01" /> <path d="M12 7v3a2 2 0 0 1-2 2H7" /> <path d="M3 12h.01" /> <path d="M12 3h.01" /> <path d="M12 16v.01" /> <path d="M16 12h1" /> <path d="M21 12v.01" /> <path d="M12 21v-1" /></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" /> <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" /> <path d="M12 17.5v-11" /></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /> <path d="m21 21-4.3-4.3" /></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></symbol><symbol id="i-settings-2" viewBox="0 0 24 24"><path d="M20 7h-9" /> <path d="M14 17H5" /> <circle cx="17" cy="17" r="3" /> <circle cx="7" cy="7" r="3" /></symbol><symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-sliders-horizontal" viewBox="0 0 24 24"><line x1="21" x2="14" y1="4" y2="4" /> <line x1="10" x2="3" y1="4" y2="4" /> <line x1="21" x2="12" y1="12" y2="12" /> <line x1="8" x2="3" y1="12" y2="12" /> <line x1="21" x2="16" y1="20" y2="20" /> <line x1="12" x2="3" y1="20" y2="20" /> <line x1="14" x2="14" y1="2" y2="6" /> <line x1="8" x2="8" y1="10" y2="14" /> <line x1="16" x2="16" y1="18" y2="22" /></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /> <path d="M12 18h.01" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /> <path d="M20 3v4" /> <path d="M22 5h-4" /> <path d="M4 17v2" /> <path d="M5 18H3" /></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7" /> <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /> <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4" /> <path d="M2 7h20" /> <path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7" /></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /> <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /> <polyline points="16 7 22 7 22 13" /></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="17 8 12 3 7 8" /> <line x1="12" x2="12" y1="3" y2="15" /></symbol><symbol id="i-user-cog" viewBox="0 0 24 24"><circle cx="18" cy="15" r="3" /> <circle cx="9" cy="7" r="4" /> <path d="M10 15H6a4 4 0 0 0-4 4v2" /> <path d="m21.7 16.4-.9-.3" /> <path d="m15.2 13.9-.9-.3" /> <path d="m16.6 18.7.3-.9" /> <path d="m19.1 12.2.3-.9" /> <path d="m19.6 18.7-.4-1" /> <path d="m16.8 12.3-.4-1" /> <path d="m14.3 16.6 1-.4" /> <path d="m20.7 13.8 1-.4" /></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <circle cx="9" cy="7" r="4" /> <path d="M22 21v-2a4 4 0 0 0-3-3.87" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol><symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><!-- Icons: Lucide (ISC license) --><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></symbol><symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10" /> <path d="M7 17 17 7" /></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m4.9 4.9 14.2 14.2" /></symbol><symbol id="i-banknote" viewBox="0 0 24 24"><rect width="20" height="12" x="2" y="6" rx="2" /> <circle cx="12" cy="12" r="2" /> <path d="M6 12h.01M18 12h.01" /></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0" /> <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 7v14" /> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /> <rect width="20" height="14" x="2" y="6" rx="2" /></symbol><symbol id="i-bus" viewBox="0 0 24 24"><path d="M8 6v6" /> <path d="M15 6v6" /> <path d="M2 12h19.6" /> <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3" /> <circle cx="7" cy="18" r="2" /> <path d="M9 18h5" /> <circle cx="16" cy="18" r="2" /></symbol><symbol id="i-calendar-check" viewBox="0 0 24 24"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="m9 16 2 2 4-4" /></symbol><symbol id="i-calendar-clock" viewBox="0 0 24 24"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" /> <path d="M16 2v4" /> <path d="M8 2v4" /> <path d="M3 10h5" /> <path d="M17.5 17.5 16 16.3V14" /> <circle cx="16" cy="16" r="6" /></symbol><symbol id="i-calendar-days" viewBox="0 0 24 24"><path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="M8 14h.01" /> <path d="M12 14h.01" /> <path d="M16 14h.01" /> <path d="M8 18h.01" /> <path d="M12 18h.01" /> <path d="M16 18h.01" /></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" /></symbol><symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></symbol><symbol id="i-chart-pie" viewBox="0 0 24 24"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z" /> <path d="M21.21 15.89A10 10 0 1 1 8 2.83" /></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5" /> <path d="m22 10-7.5 7.5L13 16" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol><symbol id="i-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m15 9-6 6" /> <path d="m9 9 6 6" /></symbol><symbol id="i-corner-down-right" viewBox="0 0 24 24"><polyline points="15 10 20 15 15 20" /> <path d="M4 4v7a4 4 0 0 0 4 4h12" /></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="7 10 12 15 17 10" /> <line x1="12" x2="12" y1="15" y2="3" /></symbol><symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" /> <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" /> <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" /> <path d="m2 2 20 20" /></symbol><symbol id="i-file-chart-column" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M8 18v-1" /> <path d="M12 18v-6" /> <path d="M16 18v-3" /></symbol><symbol id="i-file-spreadsheet" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M8 13h2" /> <path d="M14 13h2" /> <path d="M8 17h2" /> <path d="M14 17h2" /></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></symbol><symbol id="i-filter" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></symbol><symbol id="i-graduation-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" /> <path d="M22 10v6" /> <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></symbol><symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3" /> <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /> <path d="m21 3 1 11h-2" /> <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" /> <path d="M3 4h8" /></symbol><symbol id="i-heart-handshake" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /> <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66" /> <path d="m18 15-2-2" /> <path d="m15 18-2-2" /></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /> <path d="M3 3v5h5" /> <path d="M12 7v5l4 2" /></symbol><symbol id="i-house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol><symbol id="i-landmark" viewBox="0 0 24 24"><line x1="3" x2="21" y1="22" y2="22" /> <line x1="6" x2="6" y1="18" y2="11" /> <line x1="10" x2="10" y1="18" y2="11" /> <line x1="14" x2="14" y1="18" y2="11" /> <line x1="18" x2="18" y1="18" y2="11" /> <polygon points="12 2 20 7 4 7" /></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol><symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /> <path d="M9 18h6" /> <path d="M10 22h4" /></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol><symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol><symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z" /> <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /> <line x1="4" x2="20" y1="6" y2="6" /> <line x1="4" x2="20" y1="18" y2="18" /></symbol><symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></symbol><symbol id="i-message-square" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></symbol><symbol id="i-message-square-warning" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /> <path d="M12 7v2" /> <path d="M12 13h.01" /></symbol><symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19" /> <circle cx="6.5" cy="6.5" r="2.5" /> <circle cx="17.5" cy="17.5" r="2.5" /></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></symbol><symbol id="i-phone-call" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /> <path d="M14.05 2a9 9 0 0 1 8 7.94" /> <path d="M14.05 6A5 5 0 0 1 18 10" /></symbol><symbol id="i-phone-off" viewBox="0 0 24 24"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91" /> <line x1="22" x2="2" y1="2" y2="22" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol><symbol id="i-qr-code" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1" /> <rect width="5" height="5" x="16" y="3" rx="1" /> <rect width="5" height="5" x="3" y="16" rx="1" /> <path d="M21 16h-3a2 2 0 0 0-2 2v3" /> <path d="M21 21v.01" /> <path d="M12 7v3a2 2 0 0 1-2 2H7" /> <path d="M3 12h.01" /> <path d="M12 3h.01" /> <path d="M12 16v.01" /> <path d="M16 12h1" /> <path d="M21 12v.01" /> <path d="M12 21v-1" /></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" /> <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" /> <path d="M12 17.5v-11" /></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /> <path d="m21 21-4.3-4.3" /></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></symbol><symbol id="i-settings-2" viewBox="0 0 24 24"><path d="M20 7h-9" /> <path d="M14 17H5" /> <circle cx="17" cy="17" r="3" /> <circle cx="7" cy="7" r="3" /></symbol><symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-sliders-horizontal" viewBox="0 0 24 24"><line x1="21" x2="14" y1="4" y2="4" /> <line x1="10" x2="3" y1="4" y2="4" /> <line x1="21" x2="12" y1="12" y2="12" /> <line x1="8" x2="3" y1="12" y2="12" /> <line x1="21" x2="16" y1="20" y2="20" /> <line x1="12" x2="3" y1="20" y2="20" /> <line x1="14" x2="14" y1="2" y2="6" /> <line x1="8" x2="8" y1="10" y2="14" /> <line x1="16" x2="16" y1="18" y2="22" /></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /> <path d="M12 18h.01" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /> <path d="M20 3v4" /> <path d="M22 5h-4" /> <path d="M4 17v2" /> <path d="M5 18H3" /></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7" /> <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /> <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4" /> <path d="M2 7h20" /> <path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7" /></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /> <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /> <polyline points="16 7 22 7 22 13" /></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="17 8 12 3 7 8" /> <line x1="12" x2="12" y1="3" y2="15" /></symbol><symbol id="i-user-cog" viewBox="0 0 24 24"><circle cx="18" cy="15" r="3" /> <circle cx="9" cy="7" r="4" /> <path d="M10 15H6a4 4 0 0 0-4 4v2" /> <path d="m21.7 16.4-.9-.3" /> <path d="m15.2 13.9-.9-.3" /> <path d="m16.6 18.7.3-.9" /> <path d="m19.1 12.2.3-.9" /> <path d="m19.6 18.7-.4-1" /> <path d="m16.8 12.3-.4-1" /> <path d="m14.3 16.6 1-.4" /> <path d="m20.7 13.8 1-.4" /></symbol><symbol id="i-user-round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5" /> <path d="M20 21a8 8 0 0 0-16 0" /></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <circle cx="9" cy="7" r="4" /> <path d="M22 21v-2a4 4 0 0 0-3-3.87" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol><symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol></svg>
 <div class="app" id="app" data-role="owner" data-lang="en">
 
 <!-- ===================== SIDEBAR ===================== -->
@@ -509,6 +604,7 @@ tr.flag td{background:var(--orange-tint)}
     <div class="nav-group">
       <div class="nav-label" data-hi="लोग">People</div>
       <a href="#families" data-go="families" data-roles="owner accountant caller"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg><span data-hi="परिवार">Families</span><em class="count">765</em></a>
+      <a href="#students" data-go="students" data-roles="owner accountant"><svg class="ic" aria-hidden="true"><use href="#i-graduation-cap"></use></svg><span data-hi="छात्र">Students</span><em class="count">812</em></a>
       <a href="#staff" data-go="staff" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-user-cog"></use></svg><span data-hi="स्टाफ और भूमिकाएँ">Staff &amp; roles</span></a>
     </div>
     <div class="nav-group">
@@ -519,7 +615,8 @@ tr.flag td{background:var(--orange-tint)}
     </div>
     <div class="nav-group">
       <div class="nav-label" data-hi="जानकारी">Insights</div>
-      <a href="#reports" data-go="reports" data-roles="owner accountant"><svg class="ic" aria-hidden="true"><use href="#i-chart-column"></use></svg><span data-hi="रिपोर्ट">Reports</span></a>
+      <a href="#analytics" data-go="analytics" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-chart-pie"></use></svg><span data-hi="विश्लेषण">Analytics</span></a>
+      <a href="#reports" data-go="reports" data-roles="owner accountant"><svg class="ic" aria-hidden="true"><use href="#i-file-chart-column"></use></svg><span data-hi="रिपोर्ट">Reports</span></a>
     </div>
     <div class="nav-group">
       <div class="nav-label" data-hi="सेटअप">Setup</div>
@@ -778,8 +875,8 @@ tr.flag td{background:var(--orange-tint)}
             <tr class="link" data-cat="promised" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Patel family</div><div class="cell-sub">Krish 7-A</div></td><td><span class="pill promised">Promised</span></td><td class="r">₹15,500</td><td class="r">—</td><td class="nw">4 Jun</td><td>Seasonal · promised ₹15,500 for today</td><td><span class="meter"><i><b style="width:40%"></b></i>40</span></td><td>Priya</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
             <tr class="link" data-cat="support" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Yadav family</div><div class="cell-sub">Pooja 6-B · Rahul 3-B</div></td><td><span class="pill support">Support</span></td><td class="r">₹30,000</td><td class="r">₹9,000</td><td class="nw">15 Jan</td><td>Hardship: crop loss · review on 15 Dec</td><td><span class="meter"><i><b style="width:12%"></b></i>12</span></td><td>Owner</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
             <tr class="link" data-cat="tag" hidden data-go="quicktag"><td><div class="cell-main">Das family</div><div class="cell-sub">Arjun UKG</div></td><td><span class="pill tag">Tag first</span></td><td class="r">₹9,000</td><td class="r">—</td><td class="nw">12 Jun</td><td>New family · ability not set yet</td><td><span class="meter"><i><b style="width:35%"></b></i>35</span></td><td>—</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
-            <tr class="link" data-cat="good" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Jain family</div><div class="cell-sub">Aadya 1-A</div></td><td><span class="pill good">Good payer</span></td><td class="r">₹6,500</td><td class="r">—</td><td class="nw">3 Jul</td><td>Early payer · next installment due 10 Oct</td><td><span class="meter"><i><b style="width:4%"></b></i>4</span></td><td>—</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
-            <tr class="link" data-cat="good" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Reddy family</div><div class="cell-sub">Sai 10-A</div></td><td><span class="pill good">Good payer</span></td><td class="r">₹9,750</td><td class="r">—</td><td class="nw">8 Jul</td><td>On-time · next installment due 10 Oct</td><td><span class="meter"><i><b style="width:3%"></b></i>3</span></td><td>—</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="good" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Jain family</div><div class="cell-sub">Aadya 1-A</div></td><td><span class="pill good">Good payer</span></td><td class="r">₹6,500</td><td class="r">—</td><td class="nw">3 Jul</td><td>Early payer · paid up to December</td><td><span class="meter"><i><b style="width:4%"></b></i>4</span></td><td>—</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="good" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Reddy family</div><div class="cell-sub">Sai 10-A</div></td><td><span class="pill good">Good payer</span></td><td class="r">₹9,750</td><td class="r">—</td><td class="nw">8 Jul</td><td>On-time · paid up to December</td><td><span class="meter"><i><b style="width:3%"></b></i>3</span></td><td>—</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
           </tbody>
         </table>
       </div>
@@ -909,7 +1006,7 @@ tr.flag td{background:var(--orange-tint)}
             <thead><tr><th>Child</th><th>Class</th><th class="r">Year's fee</th><th class="r">Paid</th><th class="r">Pending</th><th>Concession</th></tr></thead>
             <tbody>
               <tr><td class="cell-main">Aarav Sharma</td><td>7-B</td><td class="r">₹32,000</td><td class="r">₹10,000</td><td class="r"><b>₹22,000</b></td><td class="muted">—</td></tr>
-              <tr><td class="cell-main">Diya Sharma</td><td>3-A</td><td class="r">₹26,000</td><td class="r">₹10,000</td><td class="r"><b>₹16,000</b></td><td class="muted">Sibling · approved by Mr. Verma</td></tr>
+              <tr><td class="cell-main">Diya Sharma</td><td>3-A</td><td class="r">₹26,000</td><td class="r">₹10,000</td><td class="r"><b>₹16,000</b></td><td class="muted">—</td></tr>
             </tbody>
           </table>
         </div>
@@ -1289,10 +1386,10 @@ tr.flag td{background:var(--orange-tint)}
         <table class="tbl">
           <thead><tr><th>Person</th><th>Role</th><th class="r">Calls</th><th class="r">Promises</th><th class="r">Kept</th><th class="r">Recovered</th></tr></thead>
           <tbody>
-            <tr><td><div class="fam" style="min-width:0"><div class="avatar">PK</div><div><div class="cell-main">Priya Kaushik</div><div class="cell-sub">Front office</div></div></div></td><td>Caller</td><td class="r">412</td><td class="r">96</td><td class="r">71%</td><td class="r"><b>₹4.6 L</b></td></tr>
-            <tr><td><div class="fam" style="min-width:0"><div class="avatar">SB</div><div><div class="cell-main">Sunita Bhat</div><div class="cell-sub">Fee counter</div></div></div></td><td>Accountant</td><td class="r">138</td><td class="r">31</td><td class="r">65%</td><td class="r"><b>₹1.4 L</b></td></tr>
-            <tr><td><div class="fam" style="min-width:0"><div class="avatar">AD</div><div><div class="cell-main">Mrs. D'Souza</div><div class="cell-sub">Class teacher 7-B</div></div></div></td><td>Caller · own class</td><td class="r">64</td><td class="r">12</td><td class="r">58%</td><td class="r"><b>₹0.5 L</b></td></tr>
-            <tr><td><div class="fam" style="min-width:0"><div class="avatar">FA</div><div><div class="cell-main">Mr. Ansari</div><div class="cell-sub">Class teacher 9-A</div></div></div></td><td>Caller · own class</td><td class="r">52</td><td class="r">9</td><td class="r">67%</td><td class="r"><b>₹0.4 L</b></td></tr>
+            <tr><td><div class="fam" style="min-width:0"><div class="avatar">PK</div><div><div class="cell-main">Priya Kaushik</div><div class="cell-sub">Front office</div></div></div></td><td>Caller</td><td class="r">412</td><td class="r">96</td><td class="r">71%</td><td class="r"><b>₹2.6 L</b></td></tr>
+            <tr><td><div class="fam" style="min-width:0"><div class="avatar">SB</div><div><div class="cell-main">Sunita Bhat</div><div class="cell-sub">Fee counter</div></div></div></td><td>Accountant</td><td class="r">138</td><td class="r">31</td><td class="r">64%</td><td class="r"><b>₹0.9 L</b></td></tr>
+            <tr><td><div class="fam" style="min-width:0"><div class="avatar">AD</div><div><div class="cell-main">Mrs. D'Souza</div><div class="cell-sub">Class teacher 7-B</div></div></div></td><td>Caller · own class</td><td class="r">64</td><td class="r">12</td><td class="r">58%</td><td class="r"><b>₹0.3 L</b></td></tr>
+            <tr><td><div class="fam" style="min-width:0"><div class="avatar">FA</div><div><div class="cell-main">Mr. Ansari</div><div class="cell-sub">Class teacher 9-A</div></div></div></td><td>Caller · own class</td><td class="r">52</td><td class="r">9</td><td class="r">67%</td><td class="r"><b>₹0.2 L</b></td></tr>
           </tbody>
         </table>
       </div>
@@ -1477,6 +1574,101 @@ tr.flag td{background:var(--orange-tint)}
     </div>
   </div>
   <div class="grid g-3" id="report-cards"></div>
+</section>
+
+<!-- ===================== ANALYTICS ===================== -->
+<section data-screen="analytics" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Insights</p>
+      <h1 class="page-title" data-hi="विश्लेषण">Analytics</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Every angle on your fees in one place: money in, what is pending and how old it is, family habits, classes, staff and concessions. Tap a bar or row to see the students behind it.</span></p>
+    </div>
+    <div class="page-actions">
+      <span class="pill outline plain"><svg class="ic" aria-hidden="true"><use href="#i-calendar-days"></use></svg>Session 2026-27 · till 26 Sep</span>
+      <button class="btn btn-secondary" type="button" data-toast="Analytics exported to Excel"><svg class="ic" aria-hidden="true"><use href="#i-download"></use></svg>Export</button>
+    </div>
+  </header>
+  <div class="an-tabs-bar">
+    <div class="seg" id="an-tabs" role="tablist" aria-label="Analytics sections">
+      <button type="button" data-an="overview" class="on">Overview</button>
+      <button type="button" data-an="collections">Collections</button>
+      <button type="button" data-an="dues">Dues &amp; ageing</button>
+      <button type="button" data-an="habits">Habits &amp; recovery</button>
+      <button type="button" data-an="classes">Classes</button>
+      <button type="button" data-an="staff">Staff &amp; calls</button>
+      <button type="button" data-an="concessions">Concessions</button>
+      <button type="button" data-go="students">By student<svg class="ic" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></button>
+    </div>
+  </div>
+  <div id="an-body" class="stack"></div>
+</section>
+
+<!-- ===================== STUDENTS ===================== -->
+<section data-screen="students" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">People</p>
+      <h1 class="page-title" data-hi="छात्र">Students</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Fee data for each student: what they owe, what is overdue and how late, and how the family usually pays. Tap a student to see their installments and payments.</span></p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-secondary" type="button" data-toast="Student list exported to Excel"><svg class="ic" aria-hidden="true"><use href="#i-download"></use></svg>Export</button>
+      <button class="btn btn-primary" type="button" data-go="collect"><svg class="ic" aria-hidden="true"><use href="#i-wallet"></use></svg>Collect fee</button>
+    </div>
+  </header>
+  <div class="drill" id="st-drill" hidden><svg class="ic" aria-hidden="true"><use href="#i-chart-pie"></use></svg><span id="st-drill-text"></span><button class="btn btn-inverse btn-sm" type="button" id="st-drill-clear">Show all students</button></div>
+  <div class="card">
+    <div class="filters">
+      <label class="search" for="st-q"><svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg><input id="st-q" type="search" placeholder="Name, admission no. or phone" autocomplete="off"></label>
+      <select class="input" id="st-class" aria-label="Class">
+        <option value="all">All classes</option><option value="Nursery">Nursery</option><option value="LKG">LKG</option><option value="UKG">UKG</option>
+        <option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option>
+        <option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option>
+      </select>
+      <select class="input" id="st-group" aria-label="Group">
+        <option value="all">All groups</option><option value="chase">Chase now</option><option value="nudge">Nudge</option><option value="promised">Promised</option><option value="support">Support</option><option value="tag">Tag first</option><option value="good">Good payers</option>
+      </select>
+      <select class="input" id="st-habit" aria-label="Payment habit">
+        <option value="all">All habits</option><option>Early payer</option><option>On-time</option><option>Late but steady</option><option>Year-end payer</option><option>Carry-forward</option><option>Irregular</option><option>Selective payer</option><option>Seasonal</option><option>Non-payer</option><option>New</option>
+      </select>
+      <select class="input" id="st-status" aria-label="Status">
+        <option value="all">Any status</option><option value="overdue">Something overdue</option><option value="q1">169 days late (April)</option><option value="q2">78 days late (July)</option><option value="due">Nothing overdue yet</option><option value="old">Has old dues</option><option value="paid">Paid in full</option>
+      </select>
+      <select class="input" id="st-sort" aria-label="Sort">
+        <option value="pending">Sort: most to collect</option><option value="late">Sort: most days late</option><option value="name">Sort: name</option><option value="class">Sort: class</option>
+      </select>
+    </div>
+    <div class="fchips" id="st-chips"></div>
+    <div class="sumstrip" id="st-sum"></div>
+    <div class="table-wrap">
+      <table class="tbl" id="st-table">
+        <thead><tr><th>Student</th><th>Class</th><th>Parent</th><th class="r">Pending this year</th><th class="r">Overdue</th><th class="r">Old dues</th><th>Last paid</th><th>Group · habit</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="more" id="st-more"></p>
+  </div>
+</section>
+
+<!-- ===================== REPORT (one page, filled per report) ===================== -->
+<section data-screen="report" class="stack" hidden>
+  <div>
+    <a class="back" href="#reports" data-go="reports"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"></use></svg>All reports</a>
+    <header class="page-head" style="margin-bottom:0">
+      <div>
+        <p class="eyebrow">Report</p>
+        <h1 class="page-title" id="rp-title">Report</h1>
+        <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span id="rp-sub"></span></p>
+      </div>
+      <div class="page-actions">
+        <span class="pill outline plain" id="rp-period"></span>
+        <button class="btn btn-secondary" type="button" id="rp-excel" data-toast="Exported to Excel"><svg class="ic" aria-hidden="true"><use href="#i-download"></use></svg>Excel</button>
+        <button class="btn btn-primary" type="button" id="rp-send" data-toast="Sent on WhatsApp"><svg class="ic" aria-hidden="true"><use href="#i-send"></use></svg>Send on WhatsApp</button>
+      </div>
+    </header>
+  </div>
+  <div id="rp-body" class="stack"></div>
 </section>
 
 <!-- ===================== FEE SETUP ===================== -->
@@ -1688,16 +1880,19 @@ tr.flag td{background:var(--orange-tint)}
   </div>
 </div>
 
+<div class="drawer-bg" id="st-drawer-bg" hidden></div>
+<aside class="drawer" id="st-drawer" role="dialog" aria-modal="true" aria-labelledby="sd-name" hidden><div id="sd-body" style="display:contents"></div></aside>
+
 <div class="toast" id="toast" role="status" aria-live="polite"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"></use></svg><span id="toast-text"></span></div>
 </div>
 
 <script>
 (function(){
   var app = document.getElementById('app');
-  var ALL = ['home','forecast','recover','calls','promises','quicktag','collect','daybook','approvals','alerts','families','family','staff','campaigns','templates','parent','reports','setup','import','settings'];
+  var ALL = ['home','forecast','recover','calls','promises','quicktag','collect','daybook','approvals','alerts','families','students','family','staff','campaigns','templates','parent','analytics','reports','report','setup','import','settings'];
   var ROLE_ROUTES = {
     owner: ALL,
-    accountant: ['collect','daybook','calls','promises','families','family','templates','parent','reports','setup','import'],
+    accountant: ['collect','daybook','calls','promises','families','students','family','templates','parent','reports','report','setup','import'],
     caller: ['calls','promises','families','family','templates','parent']
   };
   var START = {owner:'home', accountant:'collect', caller:'calls'};
@@ -1720,16 +1915,21 @@ tr.flag td{background:var(--orange-tint)}
   }
 
   /* ---------- routing ---------- */
-  function allowed(r){ return ROLE_ROUTES[role].indexOf(r) !== -1; }
+  function screenOf(r){ return r.indexOf('report-') === 0 ? 'report' : r; }
+  function allowed(r){ return ROLE_ROUTES[role].indexOf(screenOf(r)) !== -1; }
   function show(r){
-    if (!$('[data-screen="' + r + '"]') || !allowed(r)) r = START[role];
+    var scr = screenOf(r);
+    if (scr === 'report' && !REPORTS[r.slice(7)]) r = scr = 'reports';
+    if (!$('[data-screen="' + scr + '"]') || !allowed(r)) r = scr = START[role];
     if (r !== current) previous = current;
     current = r;
-    $$('[data-screen]').forEach(function(s){ s.hidden = s.getAttribute('data-screen') !== r; });
+    if (scr === 'report') renderReport(r.slice(7));
+    $$('[data-screen]').forEach(function(s){ s.hidden = s.getAttribute('data-screen') !== scr; });
     $$('.nav a').forEach(function(a){
       var g = a.getAttribute('data-go');
-      a.classList.toggle('active', g === r || (r === 'family' && g === 'families'));
+      a.classList.toggle('active', g === scr || (scr === 'family' && g === 'families') || (scr === 'report' && g === 'reports'));
     });
+    closeDrawer();
     app.classList.remove('nav-open');
     window.scrollTo(0, 0);
   }
@@ -1870,7 +2070,7 @@ tr.flag td{background:var(--orange-tint)}
 
   /* ---------- charts (drawn from data, one scale each) ---------- */
   var MONTHS = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
-  function cumChart(){
+  function cumChart(id){
     var last = [20,26,30,38,42,54,62,71,75,81,88,93], now = [24,30,34,42,45.4,61];
     var W = 640, H = 250, L = 40, R = 600, T = 18, B = 210;
     var x = function(i){ return L + i * (R - L) / 11; }, y = function(v){ return B - v * (B - T) / 100; };
@@ -1893,7 +2093,7 @@ tr.flag td{background:var(--orange-tint)}
       s += '<rect x="' + (x(i) - 22) + '" y="' + T + '" width="44" height="' + (B - T) + '" fill="transparent"><title>' + tip + '</title></rect>';
     }
     s += '</svg>';
-    $('#chart-cum').innerHTML = s;
+    $('#' + (id || 'chart-cum')).innerHTML = s;
   }
   function monthChart(){
     var vals = [9.4,2.3,1.6,3.1,1.3,6.1,1.9,2.6,1.2,1.0,1.6,2.2];
@@ -1920,20 +2120,505 @@ tr.flag td{background:var(--orange-tint)}
     }).join('');
   }
   function reportCards(){
-    var R = [
-      ['calendar-check','Daily summary','On WhatsApp every day at 7 PM'],
-      ['chart-column','Monthly collection','Collected vs expected vs last year'],
-      ['layers','Class-wise pending','Which classes owe the most'],
-      ['target','Group lists','Chase now, Support and the rest, printable'],
-      ['history','Old-dues recovery','Previous years’ dues coming back'],
-      ['users','Staff work','Calls, promises, % kept, ₹ recovered'],
-      ['percent','Concessions & discounts','What was given, and by whom'],
-      ['trending-up','Year comparison','% collected each month, this year vs last'],
-      ['shield-check','Alerts & audit','Every change: who, when, before and after']
-    ];
-    $('#report-cards').innerHTML = R.map(function(r){
-      return '<div class="card" style="display:flex;gap:14px;align-items:flex-start"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-' + r[0] + '"></use></svg></div><div style="flex:1;min-width:0"><div class="row-title">' + r[1] + '</div><div class="row-sub">' + r[2] + '</div><div style="display:flex;gap:14px;margin-top:10px"><button class="link" type="button" data-toast="' + r[1] + ' opened">Open</button><button class="link" type="button" data-toast="' + r[1] + ' exported to Excel" style="color:var(--muted)">Excel</button></div></div></div>';
+    $('#report-cards').innerHTML = Object.keys(REPORTS).map(function(k){
+      var r = REPORTS[k];
+      return '<div class="card report-card" data-go="report-' + k + '" role="link" tabindex="0" style="display:flex;gap:14px;align-items:flex-start;cursor:pointer"><div class="ico-box">' + icon(r.ic) + '</div><div style="flex:1;min-width:0"><div class="row-title">' + r.t + '</div><div class="row-sub">' + r.d + '</div><div style="display:flex;gap:14px;margin-top:10px"><button class="link" type="button" data-go="report-' + k + '">Open' + icon('chevron-right') + '</button><button class="link" type="button" data-toast="' + r.t + ' exported to Excel" style="color:var(--muted)">Excel</button></div></div></div>';
     }).join('');
+  }
+
+  /* ================= ANALYTICS · STUDENTS · REPORTS ================= */
+  var L1 = function(v){ return '₹' + v.toFixed(1) + ' L'; };
+  function esc(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function icon(n){ return '<svg class="ic" aria-hidden="true"><use href="#i-' + n + '"></use></svg>'; }
+  function card(title, sub, body, right){
+    return '<div class="card"><div class="card-head"><div><h2 class="card-title">' + title + '</h2>' + (sub ? '<p class="card-sub">' + sub + '</p>' : '') + '</div>' + (right || '') + '</div>' + body + '</div>';
+  }
+  function insights(list){
+    return '<div class="insights">' + list.map(function(i){ return '<div class="insight"><span class="ins-ic">' + icon('lightbulb') + '</span><b>' + i[0] + '</b><span>' + i[1] + '</span></div>'; }).join('') + '</div>';
+  }
+  function kpis(list){
+    return '<div class="kpis">' + list.map(function(k){ return '<div class="kpi-tile"><div class="label">' + k[0] + '</div><div class="v">' + k[1] + '</div><div class="s">' + k[2] + '</div></div>'; }).join('') + '</div>';
+  }
+  function legend(items){
+    return '<div class="legend">' + items.map(function(it){ return '<span><i style="background:' + it[1] + '"></i>' + it[0] + '</span>'; }).join('') + '</div>';
+  }
+  function table(head, rows, opt){
+    opt = opt || {};
+    var right = head.map(function(h){ return h.charAt(0) === '>'; });
+    var td = function(c, i){ return '<td' + (right[i] ? ' class="r"' : '') + '>' + c + '</td>'; };
+    return '<div class="table-wrap"><table class="tbl' + (opt.small ? ' tbl-sm' : '') + '"><thead><tr>' +
+      head.map(function(h, i){ return '<th' + (right[i] ? ' class="r"' : '') + '>' + (right[i] ? h.slice(1) : h) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      rows.map(function(r){ var cells = r.cells || r; return '<tr' + (r.attrs || '') + '>' + cells.map(td).join('') + '</tr>'; }).join('') +
+      (opt.foot ? '<tr class="tfoot">' + opt.foot.map(td).join('') + '</tr>' : '') + '</tbody></table></div>';
+  }
+  function meterCell(p){ return '<span class="meter"><i><b style="width:' + p + '%"></b></i>' + p + '%</span>'; }
+
+  /* bar chart: grouped or stacked, one scale, 4px rounded data ends on the baseline */
+  function barPath(x0, top, bw, base){
+    var h = base - top, r = Math.min(4, bw / 2, h);
+    if (h <= 0) return '';
+    return 'M' + x0 + ',' + base + ' V' + (top + r) + ' Q' + x0 + ',' + top + ' ' + (x0 + r) + ',' + top + ' H' + (x0 + bw - r) + ' Q' + (x0 + bw) + ',' + top + ' ' + (x0 + bw) + ',' + (top + r) + ' V' + base + ' Z';
+  }
+  function vbars(o){
+    var W = o.w || 560, H = o.h || 240, L = 44, R = W - 12, T = 20, B = H - 32, n = o.cats.length, band = (R - L) / n;
+    var y = function(v){ return B - v * (B - T) / o.max; };
+    var fmt = o.fmt || function(v){ return v; };
+    var s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.label) + '">';
+    o.ticks.forEach(function(g){ s += '<line x1="' + L + '" x2="' + R + '" y1="' + y(g) + '" y2="' + y(g) + '" stroke="var(--grid)"/><text x="' + (L - 8) + '" y="' + (y(g) + 4) + '" text-anchor="end">' + (o.tickFmt ? o.tickFmt(g) : g) + '</text>'; });
+    o.cats.forEach(function(c, i){
+      var cx = L + band * i + band / 2;
+      if (o.stacked) {
+        var acc = 0, bw = Math.min(40, band * 0.6), x0 = cx - bw / 2;
+        o.series.forEach(function(se){
+          var v = se.vals[i] || 0; if (!v) return;
+          var y0 = y(acc), y1 = y(acc + v);
+          s += '<rect x="' + x0 + '" y="' + y1 + '" width="' + bw + '" height="' + Math.max(0, y0 - y1 - 2) + '" rx="2" fill="' + se.fill + '"><title>' + c + ' · ' + se.name + ': ' + fmt(v) + '</title></rect>';
+          acc += v;
+        });
+        if (o.totalLabels) s += '<text class="v" x="' + cx + '" y="' + (y(acc) - 8) + '" text-anchor="middle">' + fmt(acc) + '</text>';
+      } else {
+        var k = o.series.length, gap = 3, bw2 = Math.min(o.bw || 28, (band * 0.72 - gap * (k - 1)) / k);
+        o.series.forEach(function(se, j){
+          var v = se.vals[i]; if (v == null) return;
+          var x1 = cx - (k * bw2 + (k - 1) * gap) / 2 + j * (bw2 + gap);
+          var fill = typeof se.fill === 'function' ? se.fill(i) : se.fill;
+          var nm = typeof se.name === 'function' ? se.name(i) : se.name;
+          s += '<path d="' + barPath(x1, y(v), bw2, B) + '" fill="' + fill + '"><title>' + c + ' · ' + nm + ': ' + fmt(v) + '</title></path>';
+          if (o.labels && (o.labels === true ? j === 0 : o.labels(i, j))) s += '<text class="v" x="' + (x1 + bw2 / 2) + '" y="' + (y(v) - 7) + '" text-anchor="middle">' + fmt(v) + '</text>';
+        });
+      }
+      s += '<text x="' + cx + '" y="' + (B + 20) + '" text-anchor="middle">' + c + '</text>';
+    });
+    if (o.divider != null) s += '<line x1="' + (L + band * o.divider) + '" x2="' + (L + band * o.divider) + '" y1="' + T + '" y2="' + B + '" stroke="var(--line-strong)" stroke-dasharray="2 4"/>';
+    return '<div class="chart-box">' + s + '</svg></div>';
+  }
+  function hbars(rows, o){
+    o = o || {};
+    var max = o.max || Math.max.apply(null, rows.map(function(r){ return r.v; }));
+    return '<div class="hbars' + (o.wide ? ' wide' : '') + '">' + rows.map(function(r){
+      var w = Math.max(0, Math.min(100, r.v / max * 100));
+      return '<div class="hbar' + (r.drill ? ' click' : '') + '"' + (r.drill ? ' data-drill="' + esc(r.drill) + '" role="button" tabindex="0"' : '') + ' title="' + esc(r.tip || (r.l + ': ' + (r.text || r.v))) + '">' +
+        '<span class="hl">' + r.l + (r.sub ? '<small>' + r.sub + '</small>' : '') + '</span>' +
+        '<span class="track"><b style="width:' + w + '%' + (r.color ? ';background:' + r.color : '') + '"></b>' + (o.marker != null ? '<i style="left:' + (o.marker / max * 100) + '%"></i>' : '') + '</span>' +
+        '<span class="val">' + (r.text || r.v) + '</span></div>';
+    }).join('') + '</div>';
+  }
+  var GREYS = ['#1d1d1f', '#636366', '#aeaeb2', '#dcdce0'];
+  function stack100(rows, keys){
+    return legend(keys.map(function(k, i){ return [k, GREYS[i]]; })) + '<div class="s100s">' + rows.map(function(r){
+      return '<div class="s100"><span>' + r.l + '</span><div class="bar">' + r.v.map(function(v, i){
+        return '<span style="flex-grow:' + v + ';background:' + GREYS[i] + ';color:' + (i < 2 ? '#fff' : 'var(--ink)') + '" title="' + r.l + ' · ' + keys[i] + ': ' + v + '%">' + (v >= 7 ? v + '%' : '') + '</span>';
+      }).join('') + '</div></div>';
+    }).join('') + '</div>';
+  }
+  function funnel(rows){
+    var first = rows[0].v;
+    return '<div class="funnel">' + rows.map(function(r, i){
+      var note = r.note || (i ? Math.round(r.v / rows[i - 1].v * 100) + '% of the step before' : 'Everyone the team tried to reach');
+      return '<div class="f"><span class="fl">' + r.l + '</span><span><span class="fbar" style="width:' + (r.v / first * 100) + '%">' + r.v + '</span></span><span class="fs">' + note + '</span></div>';
+    }).join('') + '</div>';
+  }
+  function heatColor(v){ return v >= 5 ? ['#1d1d1f', '#fff'] : v >= 3 ? ['#48484a', '#fff'] : v >= 1.5 ? ['#a1a1a6', 'var(--ink)'] : v >= 0.5 ? ['#d9d9de', 'var(--ink)'] : ['#f1f1f3', 'var(--ink)']; }
+  function heatCell(v, label, drill){
+    if (v == null) return '<div class="cell empty">—</div>';
+    var c = heatColor(v);
+    return '<div class="cell click" data-drill="' + drill + '" role="button" tabindex="0" style="background:' + c[0] + ';color:' + c[1] + '" title="' + label + ': ₹' + v.toFixed(1) + ' L"><b>₹' + v.toFixed(1) + ' L</b><small>' + label + '</small></div>';
+  }
+
+  /* ---------- school-level sample figures (match the other screens) ---------- */
+  var AN = {
+    months: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+    now: [9.4, 2.3, 1.6, 3.1, 1.3, 6.1],
+    last: [7.3, 2.2, 1.5, 2.9, 1.5, 4.4, 2.9, 3.3, 1.5, 2.2, 2.6, 1.8],
+    expected: [1.9, 2.6, 1.2, 1.0, 1.6, 2.2],
+    receipts: [172, 51, 36, 60, 30, 127],
+    modes: [[52, 30, 10, 8], [48, 36, 8, 8], [45, 40, 7, 8], [44, 41, 7, 8], [40, 46, 6, 8], [42, 45, 5, 8]],
+    classes: [['Nursery', 'Nursery', 52, 2.0, 0.6], ['LKG', 'LKG', 58, 2.2, 0.7], ['UKG', 'UKG', 60, 2.3, 0.8], ['Class 1', '1', 66, 2.8, 1.0], ['Class 2', '2', 64, 2.8, 1.1], ['Class 3', '3', 68, 3.0, 1.2], ['Class 4', '4', 62, 2.8, 1.1], ['Class 5', '5', 66, 3.1, 1.3], ['Class 6', '6', 70, 3.6, 1.4], ['Class 7', '7', 72, 3.8, 1.6], ['Class 8', '8', 64, 3.5, 1.5], ['Class 9', '9', 58, 3.6, 1.3], ['Class 10', '10', 52, 3.5, 1.6]],
+    habits: [['Year-end payer', 78, 4.7], ['Late but steady', 96, 3.1], ['Carry-forward', 41, 2.7], ['Selective payer', 31, 2.3], ['Non-payer', 44, 2.2], ['On-time', 270, 1.5], ['New', 56, 1.3], ['Early payer', 118, 0.3], ['Irregular', 9, 0.3], ['Seasonal', 22, 0.2]],
+    staff: [['Priya Kaushik', 'Caller', [96, 104, 110, 102], 96, 71, 2.6], ['Sunita Bhat', 'Accountant', [30, 36, 38, 34], 31, 64, 0.9], ["Mrs. D'Souza", 'Class teacher 7-B', [14, 16, 18, 16], 12, 58, 0.3], ['Mr. Ansari', 'Class teacher 9-A', [12, 14, 14, 12], 9, 67, 0.2]],
+    outcomes: [['Not reachable', 168], ['Will pay', 148], ['Call back later', 121], ['Paid already', 64], ['Wants installments', 58], ['Reminded, no promise', 55], ['Money problem', 31], ['Refused', 12], ['Complaint', 9]],
+    campaigns: [['Re-admission: clear old dues', 'Apr 2026', 148, 97, 66, '₹4.1 L'], ['Result day reminder', 'Mar 2026', 212, 131, 62, '₹6.8 L'], ['Diwali: no late fee', 'Oct 2025', 94, 51, 54, '₹3.6 L'], ['Summer soft reminder', 'May 2025', 320, 88, 28, '₹2.2 L']]
+  };
+  var GN = {chase: 'Chase now', nudge: 'Nudge', promised: 'Promised', support: 'Support', tag: 'Tag first', good: 'Good payer'};
+  var GC = {chase: 'var(--red)', nudge: 'var(--orange)', promised: 'var(--yellow)', support: 'var(--blue)', tag: 'var(--grey)', good: 'var(--green)'};
+  var CUM_LEGEND = '<div class="legend"><span><i class="line" style="background:var(--chart-1)"></i>2026-27</span><span><i class="dash"></i>2025-26</span></div>';
+
+  function groupBars(){
+    return hbars([
+      {l: 'Chase now', sub: '142 families', v: 9.8, text: '₹9.8 L', color: GC.chase, drill: 'group=chase'},
+      {l: 'Nudge', sub: '96 families', v: 3.1, text: '₹3.1 L', color: GC.nudge, drill: 'group=nudge'},
+      {l: 'Support', sub: '61 families', v: 2.4, text: '₹2.4 L', color: GC.support, drill: 'group=support'},
+      {l: 'Good payers', sub: '410 families · not yet due', v: 2.0, text: '₹2.0 L', color: GC.good, drill: 'group=good'},
+      {l: 'Tag first', sub: '56 families', v: 1.3, text: '₹1.3 L', color: GC.tag, drill: 'group=tag'}
+    ], {wide: true, max: 9.8});
+  }
+  function classTable(){
+    var rows = AN.classes.map(function(c){
+      var col = c[3] - c[4], p = Math.round(col / c[3] * 100);
+      return {attrs: ' class="link" data-drill="class=' + c[1] + '"', cells: ['<b>' + c[0] + '</b>', c[2], L1(c[3]), L1(col), '<b>' + L1(c[4]) + '</b>', meterCell(p)]};
+    });
+    return table(['Class', '>Students', '>Fees', '>Collected', '>Pending', 'Collected'], rows, {small: true, foot: ['Whole school', '812', '₹39.0 L', '₹23.8 L', '₹15.2 L', meterCell(61)]});
+  }
+  function classPctBars(){
+    return hbars(AN.classes.map(function(c){
+      var p = Math.round((c[3] - c[4]) / c[3] * 100);
+      return {l: c[0], v: p, text: p + '%', color: p < 58 ? 'var(--chart-1)' : 'var(--chart-2)', drill: 'class=' + c[1]};
+    }), {max: 100, marker: 61});
+  }
+  function monthMoneyChart(){
+    return vbars({cats: ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'], series: [{name: function(i){ return i < 6 ? 'Collected' : 'Expected'; }, vals: AN.now.concat(AN.expected), fill: function(i){ return i < 6 ? 'var(--chart-1)' : 'var(--chart-2)'; }}], max: 10, ticks: [0, 2.5, 5, 7.5, 10], labels: function(i){ return i === 0 || i === 5 || i === 7 || i === 11; }, fmt: function(v){ return '₹' + v + ' L'; }, tickFmt: function(v){ return v; }, divider: 6, w: 1040, h: 260, label: 'Collected April to September and expected October to March, in lakh rupees'});
+  }
+  function staffWeekChart(){
+    return vbars({cats: ['1–5 Sep', '7–12 Sep', '14–19 Sep', '21–26 Sep'], stacked: true, series: AN.staff.map(function(s, i){ return {name: s[0], vals: s[2], fill: GREYS[i]}; }), max: 200, ticks: [0, 50, 100, 150, 200], totalLabels: true, label: 'Calls each week in September by person'}) +
+      legend(AN.staff.map(function(s, i){ return [s[0], GREYS[i]]; }));
+  }
+  function staffTable(){
+    return table(['Person', '>Calls', '>Promises', '>Kept', '>Recovered'], AN.staff.map(function(s){
+      return ['<div class="cell-main">' + s[0] + '</div><div class="cell-sub">' + s[1] + '</div>', s[2].reduce(function(a, b){ return a + b; }, 0), s[3], s[4] + '%', '<b>' + L1(s[5]) + '</b>'];
+    }), {foot: ['Everyone', '666', '148', '68%', '₹4.0 L']});
+  }
+  function outcomeBars(){
+    return hbars(AN.outcomes.map(function(o){ return {l: o[0], v: o[1], text: String(o[1]), color: o[0] === 'Will pay' ? 'var(--chart-1)' : 'var(--chart-2)'}; }), {wide: true, max: 168});
+  }
+  function concessionTable(){
+    return table(['Type', 'Rule', '>Students', '>Amount'], [
+      ['<b>Sibling</b>', '5% on the younger child', '118', '₹1.6 L'],
+      ['<b>Staff child</b>', '50% of tuition', '9', '₹1.1 L'],
+      ['<b>Merit</b>', 'Up to 25% · owner approves', '14', '₹0.8 L'],
+      ['<b>RTE seats</b> <span class="pill outline plain">Govt pays</span>', 'Kept out of recovery lists', '25', '₹6.2 L']
+    ], {foot: ['Given by the school', 'Sibling, staff child, merit', '141', '₹3.5 L']});
+  }
+  function giversTable(){
+    return table(['Given by', '>Count', '>Amount', 'Limits'], [
+      ['<b>Mr. Verma</b> (owner)', '11', '₹26,000', 'Owner decides'],
+      ['<b>Sunita Bhat</b>', '36', '₹38,000', '35 within · <span style="color:var(--red-ink);font-weight:600">1 without approval</span>'],
+      ['<b>Priya Kaushik</b>', '41', '₹21,000', 'All within'],
+      ['<b>Class teachers</b>', '9', '₹5,000', 'All within']
+    ], {foot: ['Everyone', '97', '₹90,000', '']});
+  }
+  function campaignTable(){
+    return table(['Campaign', 'Sent', '>Families', '>Paid', '>Collected'], AN.campaigns.map(function(c){ return ['<b>' + c[0] + '</b>', c[1], c[2], c[3] + ' · ' + c[4] + '%', '<b>' + c[5] + '</b>']; }));
+  }
+
+  var anTab = 'overview';
+  function renderAnalytics(){
+    var h = '';
+    if (anTab === 'overview') {
+      h += insights([['+7 pts', 'Ahead of last year: 61% collected by 26 Sep, against 54% on the same date last year.'], ['₹9.8 L', 'Sits with 142 families who can pay but haven’t. That is 53% of all pending money.'], ['₹2.5 L', 'Of old dues recovered since April. ₹3.4 L of old dues is still left.']]);
+      h += kpis([["Year's fees", '₹39.0 L', '812 students'], ['Collected', '₹23.8 L', '61% · 7 pts ahead'], ['Pending this year', '₹15.2 L', '₹7.4 L of it overdue'], ['Old dues', '₹3.4 L', '127 families'], ['Promises kept', '68%', 'Last 90 days'], ['Average delay', '34 days', 'For families who pay late']]);
+      h += '<div class="grid split">' + card("Share of the year's fees collected", 'Running total by month, this year vs last year', '<div id="an-cum" class="chart-box"></div>', CUM_LEGEND) + card('Pending by group', '₹18.6 L in all · tap a group to see its students', groupBars()) + '</div>';
+      h += card('Money in, month by month', 'Collected so far, then expected until 31 March · ₹ lakh', monthMoneyChart(), legend([['Collected', 'var(--chart-1)'], ['Expected', 'var(--chart-2)']]));
+    } else if (anTab === 'collections') {
+      h += insights([['₹23.8 L', 'Collected in 476 receipts since April. The average receipt is ₹5,000.'], ['45%', 'Of September’s money came by UPI, up from 30% in April. Cash is slowly falling.'], ['31%', 'Of each month’s money arrives in the 5 days before the 10th, when fees are due.']]);
+      h += '<div class="grid g-2">' +
+        card('This year vs last year', 'Collected each month · ₹ lakh', vbars({cats: AN.months, series: [{name: '2026-27', vals: AN.now, fill: 'var(--chart-1)'}, {name: '2025-26', vals: AN.last.slice(0, 6), fill: 'var(--chart-2)'}], max: 10, ticks: [0, 2.5, 5, 7.5, 10], labels: true, fmt: function(v){ return v; }, label: 'Collected each month this year and last year'}), legend([['2026-27', 'var(--chart-1)'], ['2025-26', 'var(--chart-2)']])) +
+        card('How parents pay', 'Share of each month’s money by payment mode', stack100(AN.months.map(function(m, i){ return {l: m, v: AN.modes[i]}; }), ['Cash', 'UPI', 'Cheque', 'Bank transfer'])) + '</div>';
+      h += '<div class="grid g-2">' +
+        card('When in the month money comes in', 'Share of collections by day of the month, April–September', vbars({cats: ['1st–5th', '6th–10th', '11th–15th', '16th–20th', '21st–25th', '26th–31st'], series: [{name: 'Share', vals: [14, 31, 18, 12, 10, 15], fill: function(i){ return i === 1 ? 'var(--chart-1)' : 'var(--chart-2)'; }}], max: 40, ticks: [0, 10, 20, 30, 40], tickFmt: function(v){ return v + '%'; }, fmt: function(v){ return v + '%'; }, labels: true, label: 'Share of collections by day of month'})) +
+        card('Receipts by month', 'Count and size of receipts', table(['Month', '>Receipts', '>Collected', '>Average', '>Cash', '>UPI'], AN.months.map(function(m, i){ return ['<b>' + m + '</b>', AN.receipts[i], L1(AN.now[i]), inr(AN.now[i] * 100000 / AN.receipts[i]), AN.modes[i][0] + '%', AN.modes[i][1] + '%']; }), {small: true, foot: ['Total', '476', '₹23.8 L', '₹5,000', '45%', '40%']})) + '</div>';
+    } else if (anTab === 'dues') {
+      h += insights([['₹7.4 L', 'Is overdue this year: ₹4.6 L from the July installment and ₹2.8 L still unpaid from April.'], ['₹7.8 L', 'Is not due yet. It belongs to the October and January installments.'], ['42%', 'Of old dues recovered since 1 April: ₹2.5 L of ₹5.9 L.']]);
+      h += '<div class="grid g-2">' +
+        card('How old is the pending money?', 'All ₹18.6 L pending, by age · tap a bar to see its students', hbars([
+          {l: 'Not due yet', sub: 'October and January installments', v: 7.8, text: '₹7.8 L', color: 'var(--chart-3)', drill: 'status=due'},
+          {l: '78 days late', sub: 'July installment', v: 4.6, text: '₹4.6 L', color: 'var(--chart-2)', drill: 'status=q2'},
+          {l: '169 days late', sub: 'April installment', v: 2.8, text: '₹2.8 L', drill: 'status=q1'},
+          {l: 'Last year', sub: '2025-26 dues', v: 2.5, text: '₹2.5 L', drill: 'status=old'},
+          {l: 'Older', sub: '2024-25 and before', v: 0.9, text: '₹0.9 L', drill: 'status=old'}
+        ], {wide: true, max: 7.8})) +
+        card('Pending by fee head', 'This year’s ₹15.2 L', hbars([{l: 'Tuition', v: 10.9, text: '₹10.9 L'}, {l: 'Annual charges', v: 1.9, text: '₹1.9 L'}, {l: 'Transport', v: 1.5, text: '₹1.5 L'}, {l: 'Exam', v: 0.6, text: '₹0.6 L'}, {l: 'Computer', v: 0.3, text: '₹0.3 L'}], {wide: true, max: 10.9})) + '</div>';
+      h += '<div class="grid g-2">' +
+        card('Old dues by session', 'Money from past years', table(['Session', '>Families', '>On 1 Apr', '>Recovered', '>Left'], [['<b>2025-26</b>', '96', '₹4.3 L', '₹1.8 L', '<b>₹2.5 L</b>'], ['<b>2024-25</b>', '24', '₹1.2 L', '₹0.5 L', '<b>₹0.7 L</b>'], ['<b>2023-24 and older</b>', '7', '₹0.4 L', '₹0.2 L', '<b>₹0.2 L</b>']], {foot: ['Total', '127', '₹5.9 L', '₹2.5 L', '₹3.4 L']})) +
+        card('Old dues recovered each month', '₹ lakh · most comes in at re-admission', vbars({cats: AN.months, series: [{name: 'Recovered', vals: [1.1, 0.3, 0.2, 0.4, 0.1, 0.4], fill: 'var(--chart-1)'}], max: 1.2, ticks: [0, 0.4, 0.8, 1.2], tickFmt: function(v){ return v.toFixed(1); }, labels: true, fmt: function(v){ return v.toFixed(1); }, label: 'Old dues recovered by month'})) + '</div>';
+    } else if (anTab === 'habits') {
+      h += insights([['78 families', 'Pay only at year end. Calling them in Oct–Nov brings their money in months earlier.'], ['68%', 'Of promises were kept in the last 90 days. Broken ones go to the top of the next day’s calls.'], ['23%', 'Of families called in September paid within the month: 71 of 312.']]);
+      var hm = '<div class="table-wrap"><div class="heat">' +
+        '<div class="h"></div><div class="h">On time</div><div class="h">Late, same year</div><div class="h">Year-end, carry, selective</div><div class="h">Not paying</div>' +
+        '<div class="rh">High</div>' + heatCell(1.2, 'Good payers', 'group=good') + heatCell(1.6, 'Nudge', 'group=nudge') + heatCell(5.3, 'Chase now', 'group=chase') + heatCell(0.8, 'Chase now', 'group=chase') +
+        '<div class="rh">Medium</div>' + heatCell(0.6, 'Good payers', 'group=good') + heatCell(1.5, 'Nudge', 'group=nudge') + heatCell(3.3, 'Chase now', 'group=chase') + heatCell(0.4, 'Chase now', 'group=chase') +
+        '<div class="rh">Low</div>' + heatCell(0.2, 'Good payers', 'group=good') + heatCell(null) + heatCell(1.4, 'Support', 'group=support') + heatCell(1.0, 'Support', 'group=support') +
+        '<div class="rh">Not tagged</div><div class="cell click span4" data-drill="group=tag" role="button" tabindex="0" style="background:#d9d9de;color:var(--ink)" title="Tag first: ₹1.3 L"><b>₹1.3 L</b><small>New families · set their ability in Quick Tag</small></div>' +
+        '</div></div><div class="heat-scale">Less<span><i style="background:#f1f1f3"></i><i style="background:#d9d9de"></i><i style="background:#a1a1a6"></i><i style="background:#48484a"></i><i style="background:#1d1d1f"></i></span>More</div>';
+      h += '<div class="grid g-2">' +
+        card('Pending by payment habit', '765 families · tap a habit to see its students', hbars(AN.habits.map(function(x){ return {l: x[0], sub: x[1] + ' families', v: x[2], text: L1(x[2]), drill: 'habit=' + x[0]}; }), {wide: true, max: 4.7})) +
+        '<div class="card owner-only"><div class="card-head"><div><h2 class="card-title">Ability to pay × payment habit</h2><p class="card-sub">₹ lakh pending · darker means more money · only you see ability</p></div></div>' + hm + '</div>' + '</div>';
+      h += '<div class="grid g-2">' +
+        card('Promises by month', 'Kept, broken and still open', vbars({cats: AN.months, stacked: true, series: [{name: 'Kept', vals: [31, 25, 19, 46, 47, 15], fill: 'var(--chart-1)'}, {name: 'Broken', vals: [11, 13, 10, 18, 24, 9], fill: 'var(--red)'}, {name: 'Still open', vals: [0, 0, 0, 0, 0, 34], fill: 'var(--chart-3)'}], max: 80, ticks: [0, 20, 40, 60, 80], totalLabels: true, label: 'Promises by month: kept, broken and open'}), legend([['Kept', 'var(--chart-1)'], ['Broken', 'var(--red)'], ['Still open', 'var(--chart-3)']])) +
+        card('From call to payment · September', 'Families at each step', funnel([{l: 'Called', v: 312}, {l: 'Picked up', v: 241}, {l: 'Gave a promise', v: 148}, {l: 'Paid', v: 71, note: '48% of promises · ₹4.0 L collected'}])) + '</div>';
+      h += card('What campaigns brought in', 'Past campaigns, best first', campaignTable());
+    } else if (anTab === 'classes') {
+      h += insights([['Class 10', 'Has the lowest share collected: 54%, with ₹1.6 L pending.'], ['Nursery', 'Is best at 70%. Families of young children pay early.'], ['₹5.8 L', 'Is pending in classes 5 to 8. Ask those class teachers to join the calls.']]);
+      h += '<div class="grid split">' + card('Every class', 'Tap a class to see its students', classTable()) + card('Share collected by class', 'Line = school average, 61% · black = below 58%', classPctBars()) + '</div>';
+    } else if (anTab === 'staff') {
+      h += insights([['666 calls', 'Made in September by 4 people. Priya made 62% of them.'], ['83%', 'Of parents pick up between 5 and 7 PM, against 52% in the early afternoon.'], ['₹4.0 L', 'Came in from families after a call this month: 66% of September’s money.']]);
+      h += '<div class="grid g-2">' + card('Calls each week · September', 'By person', staffWeekChart()) +
+        card('Best time to call', 'Share of calls where the parent picked up', vbars({cats: ['9–11 AM', '11–1 PM', '1–3 PM', '3–5 PM', '5–7 PM'], series: [{name: 'Picked up', vals: [58, 64, 52, 71, 83], fill: function(i){ return i === 4 ? 'var(--chart-1)' : 'var(--chart-2)'; }}], max: 100, ticks: [0, 25, 50, 75, 100], tickFmt: function(v){ return v + '%'; }, fmt: function(v){ return v + '%'; }, labels: true, label: 'Share of calls answered by time of day'})) + '</div>';
+      h += '<div class="grid g-2">' + card('What parents said', 'Results of 666 calls in September', outcomeBars()) + card('Staff results · September', 'Money recovered = paid within the month after a call', staffTable()) + '</div>';
+    } else if (anTab === 'concessions') {
+      h += insights([['₹3.5 L', 'Given in concessions this session (sibling, staff child, merit): 9% of the year’s fees.'], ['₹6.2 L', 'Is owed by the government for 25 RTE students. ₹3.1 L of that claim is still pending.'], ['₹90,000', 'In discounts and late-fee waivers since April. 1 was given without approval.']]);
+      h += '<div class="grid g-2">' + card('Concessions by type', 'This session', concessionTable()) +
+        card('Discounts & waivers each month', '₹ thousand', vbars({cats: AN.months, series: [{name: 'Discounts & waivers', vals: [28, 8, 5, 16, 9, 24], fill: 'var(--chart-1)'}], max: 30, ticks: [0, 10, 20, 30], labels: true, fmt: function(v){ return '₹' + v + 'k'; }, label: 'Discounts and waivers by month in thousand rupees'})) + '</div>';
+      h += card('Who gave them', 'Discounts and waivers since April', giversTable());
+    }
+    $('#an-body').innerHTML = h;
+    $$('#an-tabs button[data-an]').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-an') === anTab); });
+    if (anTab === 'overview') cumChart('an-cum');
+  }
+
+  /* ---------- students: a sample of 48, worked out from the class fee table ---------- */
+  var CLASS_ORDER = ['Nursery', 'LKG', 'UKG', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  var FEES = [
+    {total: 23000, heads: [['Tuition', 18000], ['Annual charges', 4000], ['Exam', 1000]]},
+    {total: 26000, heads: [['Tuition', 20000], ['Annual charges', 4500], ['Exam', 1500]]},
+    {total: 32000, heads: [['Tuition', 24500], ['Annual charges', 5000], ['Exam', 1500], ['Computer', 1000]]},
+    {total: 39000, heads: [['Tuition', 30000], ['Annual charges', 5500], ['Exam', 2000], ['Computer', 1500]]}
+  ];
+  function feeBand(ck){ var i = CLASS_ORDER.indexOf(ck); return FEES[i < 3 ? 0 : i < 8 ? 1 : i < 11 ? 2 : 3]; }
+  /* [name, class, parent, phone, family, habit, group, old dues, last paid before this session, payments this session] */
+  var ST_RAW = [
+    ['Kiara Mathur', 'Nursery-A', 'Rohit Mathur', '98291 20455', 'mathur', 'On-time', 'good', 0, null, [['8 Apr', 5750, 'UPI'], ['9 Jul', 5750, 'UPI']]],
+    ['Advik Soni', 'Nursery-B', 'Pankaj Soni', '97822 41190', 'soni', 'New', 'tag', 0, null, [['15 Apr', 5750, 'Cash']]],
+    ['Zoya Siddiqui', 'Nursery-A', 'Farhan Siddiqui', '99508 33721', 'siddiqui', 'Early payer', 'good', 0, null, [['2 Apr', 23000, 'Bank']]],
+    ['Reyansh Pandey', 'LKG-A', 'Amit Pandey', '94141 77302', 'pandey', 'Late but steady', 'nudge', 0, null, [['28 May', 5750, 'Cash']]],
+    ['Saanvi Choudhary', 'LKG-B', 'Deepak Choudhary', '98870 12094', 'choudhary', 'Year-end payer', 'chase', 4200, '18 Mar', []],
+    ['Vivaan Rathore', 'LKG-A', 'Mahendra Rathore', '94600 55218', 'rathore', 'On-time', 'good', 0, null, [['7 Apr', 5750, 'Cash'], ['8 Jul', 5750, 'Cash']]],
+    ['Arjun Das', 'UKG-A', 'Suman Das', '90240 51876', 'das', 'New', 'tag', 0, null, [['10 Apr', 5750, 'Cash'], ['12 Jun', 8250, 'Cash']]],
+    ['Anaya Kohli', 'UKG-B', 'Sunil Kohli', '98110 64420', 'kohli', 'Irregular', 'chase', 1500, null, [['20 Apr', 2000, 'Cash'], ['2 Jun', 1500, 'Cash'], ['19 Jul', 2000, 'UPI'], ['9 Sep', 1500, 'UPI']]],
+    ['Ishita Bajaj', 'UKG-A', 'Nitin Bajaj', '97990 22831', 'bajaj', 'Seasonal', 'good', 0, null, [['4 Jun', 11500, 'UPI']]],
+    ['Aadya Jain', '1-A', 'Nikhil Jain', '98292 60451', 'jain', 'Early payer', 'good', 0, null, [['3 Apr', 13000, 'Bank'], ['3 Jul', 6500, 'UPI']]],
+    ['Rudra Meena', '1-B', 'Shankar Meena', '96360 41277', 'meena', 'Non-payer', 'support', 7800, '12 Feb', []],
+    ['Navya Hegde', '1-A', 'Prakash Hegde', '94480 30912', 'hegde', 'On-time', 'good', 0, null, [['9 Apr', 6500, 'UPI'], ['8 Jul', 6500, 'UPI']]],
+    ['Kiaan Ahuja', '2-B', 'Rohan Ahuja', '98280 90341', 'ahuja', 'Selective payer', 'chase', 0, '2 May · transport only', []],
+    ['Aarohi Vyas', '2-A', 'Hemant Vyas', '97720 81145', 'vyas', 'Late but steady', 'nudge', 0, null, [['25 May', 6500, 'Cash']]],
+    ['Shaurya Negi', '2-B', 'Kamal Negi', '99280 13380', 'negi', 'On-time', 'good', 0, null, [['10 Apr', 6500, 'Cash'], ['9 Jul', 6500, 'Cash']]],
+    ['Diya Sharma', '3-A', 'Rajesh Sharma', '98290 43210', 'sharma', 'Year-end payer', 'chase', 3000, null, [['8 Apr', 2000, 'Cash', 'R-0187'], ['14 Jul', 8000, 'UPI', 'R-1733']]],
+    ['Parth Trivedi', '3-B', 'Mukesh Trivedi', '98290 50664', 'trivedi', 'Year-end payer', 'chase', 0, null, [['21 Apr', 3000, 'Cash']]],
+    ['Siya Kamath', '3-A', 'Raghu Kamath', '94490 23106', 'kamath', 'On-time', 'good', 0, null, [['8 Apr', 6500, 'UPI'], ['7 Jul', 6500, 'UPI']]],
+    ['Anika Kohli', '4-B', 'Sunil Kohli', '98110 64420', 'kohli', 'Irregular', 'chase', 2000, null, [['20 Apr', 2000, 'Cash'], ['2 Jun', 2000, 'Cash'], ['9 Sep', 2000, 'UPI']]],
+    ['Dhruv Shekhawat', '4-A', 'Vikram Shekhawat', '94140 90218', 'shekhawat', 'Carry-forward', 'chase', 4500, '28 Jun · old dues only', []],
+    ['Tara Dhillon', '4-A', 'Gurpreet Dhillon', '98150 71102', 'dhillon', 'Late but steady', 'nudge', 0, null, [['19 May', 6500, 'UPI']]],
+    ['Ira Saini', '5-A', 'Rajiv Saini', '98287 14430', 'saini', 'Carry-forward', 'chase', 6000, '17 Jun · old dues only', []],
+    ['Harsh Raut', '5-C', 'Sanjay Raut', '97994 20017', 'raut', 'Non-payer', 'support', 12000, '9 Jan', []],
+    ['Meher Gill', '5-B', 'Harjeet Gill', '98722 88210', 'gill', 'Seasonal', 'good', 0, null, [['20 Jun', 13000, 'Cash']]],
+    ['Aditya Srivastava', '6-A', 'Manoj Srivastava', '94150 33096', 'srivastava', 'Year-end payer', 'chase', 5000, null, [['16 Apr', 8000, 'Cash']]],
+    ['Sara Mathew', '6-B', 'Jacob Mathew', '94470 55621', 'mathew', 'On-time', 'good', 0, null, [['7 Apr', 8000, 'Bank'], ['8 Jul', 8000, 'Bank']]],
+    ['Yash Tripathi', '6-A', 'Alok Tripathi', '99350 12783', 'tripathi', 'Late but steady', 'nudge', 0, null, [['30 May', 8000, 'UPI']]],
+    ['Fatima Rizvi', '6-B', 'Imtiaz Rizvi', '98390 40228', 'rizvi', 'Non-payer', 'support', 16000, '4 Dec', []],
+    ['Aarav Sharma', '7-B', 'Rajesh Sharma', '98290 43210', 'sharma', 'Year-end payer', 'chase', 3500, null, [['8 Apr', 8000, 'Cash', 'R-0187'], ['14 Jul', 2000, 'UPI', 'R-1733']]],
+    ['Krish Patel', '7-A', 'Mehul Patel', '97990 40318', 'patel', 'Seasonal', 'promised', 0, null, [['4 Jun', 16500, 'UPI']]],
+    ['Rohan Chawla', '7-A', 'Vinod Chawla', '98100 23419', 'chawla', 'Selective payer', 'chase', 0, '5 Sep · transport only', []],
+    ['Avni Desai', '7-B', 'Kunal Desai', '97722 31056', 'desai', 'On-time', 'good', 0, null, [['9 Apr', 8000, 'UPI'], ['10 Jul', 8000, 'UPI']]],
+    ['Vihaan Bhardwaj', '8-B', 'Sameer Bhardwaj', '98280 66713', 'bhardwaj', 'Year-end payer', 'chase', 6000, '11 Mar', []],
+    ['Pari Shah', '8-A', 'Jignesh Shah', '99250 40981', 'shah', 'Early payer', 'good', 0, null, [['1 Apr', 32000, 'Bank']]],
+    ['Kunal Jha', '8-B', 'Ranjan Jha', '94310 72215', 'jha', 'Late but steady', 'nudge', 0, null, [['12 Jun', 8000, 'Cash']]],
+    ['Ayesha Baig', '8-A', 'Salim Baig', '98870 45560', 'baig', 'Year-end payer', 'support', 3000, null, [['2 May', 4000, 'Cash']]],
+    ['Samar Lal', '9-A', 'Vivek Lal', '98291 88204', 'lal', 'Carry-forward', 'chase', 11500, null, [['30 Jun', 9750, 'Cash']]],
+    ['Nisha Kurian', '9-B', 'Philip Kurian', '94470 91833', 'kurian', 'On-time', 'good', 0, null, [['8 Apr', 9750, 'Bank'], ['9 Jul', 9750, 'Bank']]],
+    ['Om Dubey', '9-A', 'Rakesh Dubey', '99350 61420', 'dubey', 'Non-payer', 'chase', 14000, '8 Feb', []],
+    ['Tanya Ahuja', '9-B', 'Rohan Ahuja', '98280 90341', 'ahuja', 'Selective payer', 'chase', 0, '2 May · transport only', []],
+    ['Sai Reddy', '10-A', 'K. Reddy', '94600 18209', 'reddy', 'On-time', 'good', 0, null, [['8 Apr', 9750, 'UPI'], ['8 Jul', 19500, 'UPI']]],
+    ['Aryan Saini', '10-B', 'Rajiv Saini', '98287 14430', 'saini', 'Carry-forward', 'chase', 8000, null, [['17 Jun', 9750, 'Cash']]],
+    ['Riddhi Parikh', '10-A', 'Chetan Parikh', '98250 71139', 'parikh', 'Early payer', 'good', 0, null, [['2 Apr', 39000, 'Bank']]],
+    ['Farhan Qazi', '10-B', 'Anwar Qazi', '98390 15542', 'qazi', 'Year-end payer', 'chase', 0, null, [['22 Apr', 9750, 'Cash']]],
+    ['Kavish Pawar', '3-B', 'Sachin Pawar', '97650 30228', 'pawar', 'New', 'tag', 0, null, [['30 Jul', 6500, 'UPI']]],
+    ['Nidhi Sinha', '6-A', 'Arvind Sinha', '94310 20981', 'sinha', 'Late but steady', 'nudge', 0, null, [['22 May', 8000, 'UPI']]],
+    ['Rehan Mirza', '9-A', 'Javed Mirza', '98292 70331', 'mirza', 'New', 'tag', 0, null, [['29 Jul', 9750, 'Cash']]],
+    ['Anvi Shetty', '2-A', 'Suresh Shetty', '99020 41562', 'shetty', 'Late but steady', 'nudge', 0, null, [['2 Jun', 6500, 'Cash']]]
+  ];
+  var STU = ST_RAW.map(function(r, i){
+    var ck = r[1].split('-')[0], band = feeBand(ck), net = band.total, q = net / 4;
+    var pays = r[9], paid = pays.reduce(function(a, p){ return a + p[1]; }, 0);
+    var overdue = Math.max(0, 2 * q - paid), late = paid < q ? 169 : paid < 2 * q ? 78 : 0;
+    var yr = 2026 - CLASS_ORDER.indexOf(ck);
+    return {i: i, name: r[0], cls: r[1], ck: ck, parent: r[2], phone: '+91 ' + r[3], fam: r[4], habit: r[5], group: r[6], old: r[7],
+      pays: pays, paid: paid, net: net, q: q, pending: net - paid, overdue: overdue, late: late, band: band,
+      last: pays.length ? pays[pays.length - 1][0] : (r[8] || '—'),
+      adm: 'SPS-' + yr + '-' + String(100 + (i * 37) % 900).padStart(4, '0'),
+      init: r[0].split(' ').map(function(w){ return w.charAt(0); }).join('')};
+  });
+  var HABIT_NOTE = {'Early payer': 'Pays the whole year in April.', 'On-time': 'Pays each installment within 15 days of the due date.', 'Late but steady': 'Pays every installment, about 40 days late.', 'Year-end payer': 'Clears most of the year’s fees in Feb–Mar. Calls in Oct–Nov bring it in earlier.', 'Carry-forward': 'Clears last year’s fees in the next session.', 'Irregular': 'Pays small amounts with no pattern. A fixed monthly plan helps.', 'Selective payer': 'Pays transport and extras on time but not tuition, so the family can pay.', 'Seasonal': 'Pays in the same months every year.', 'Non-payer': 'No payment for 6 months or more.', 'New': 'Joined this year, so the habit isn’t known yet.'};
+  var CHANCE = {'Early payer': 99, 'On-time': 97, 'Late but steady': 90, 'Year-end payer': 85, 'Carry-forward': 60, 'Irregular': 70, 'Selective payer': 75, 'Seasonal': 90, 'Non-payer': 35, 'New': 60};
+  var STATUS_NAME = {overdue: 'Something overdue', q1: '169 days late (April)', q2: '78 days late (July)', due: 'Nothing overdue yet', old: 'Has old dues', paid: 'Paid in full'};
+  var SORT_NAME = {pending: 'most to collect', late: 'most days late', name: 'name', 'class': 'class'};
+  var SF;
+  function resetSF(){ SF = {q: '', cls: 'all', group: 'all', habit: 'all', status: 'all', sort: 'pending'}; $('#st-q').value = ''; $('#st-drill').hidden = true; }
+  function stMatch(s){
+    if (SF.cls !== 'all' && s.ck !== SF.cls) return false;
+    if (SF.group !== 'all' && s.group !== SF.group) return false;
+    if (SF.habit !== 'all' && s.habit !== SF.habit) return false;
+    if (SF.status === 'overdue' && !s.overdue) return false;
+    if (SF.status === 'q1' && s.late !== 169) return false;
+    if (SF.status === 'q2' && s.late !== 78) return false;
+    if (SF.status === 'due' && (s.overdue || !s.pending)) return false;
+    if (SF.status === 'old' && !s.old) return false;
+    if (SF.status === 'paid' && (s.pending || s.old)) return false;
+    if (SF.q) {
+      var hay = (s.name + ' ' + s.adm + ' ' + s.phone + ' ' + s.parent).toLowerCase();
+      if (hay.indexOf(SF.q) === -1 && hay.replace(/\s/g, '').indexOf(SF.q.replace(/\s/g, '')) === -1) return false;
+    }
+    return true;
+  }
+  function clsLabel(ck){ return /^\d/.test(ck) ? 'Class ' + ck : ck; }
+  function lateCell(s){ return s.overdue ? inr(s.overdue) + '<div class="cell-sub">' + s.late + ' days late</div>' : '<span class="muted">—</span>'; }
+  function renderStudents(){
+    var list = STU.filter(stMatch).sort(function(a, b){
+      if (SF.sort === 'late') return (b.late - a.late) || (b.overdue - a.overdue) || (b.old - a.old);
+      if (SF.sort === 'name') return a.name.localeCompare(b.name);
+      if (SF.sort === 'class') return CLASS_ORDER.indexOf(a.ck) - CLASS_ORDER.indexOf(b.ck) || a.cls.localeCompare(b.cls) || a.name.localeCompare(b.name);
+      return (b.pending + b.old) - (a.pending + a.old);
+    });
+    var sum = function(k){ return list.reduce(function(t, s){ return t + s[k]; }, 0); };
+    var over = list.filter(function(s){ return s.overdue; }).length;
+    $('#st-sum').innerHTML =
+      '<div class="tile"><div class="label">Students</div><div class="kpi-sm">' + list.length + '</div></div>' +
+      '<div class="tile"><div class="label">Pending this year</div><div class="kpi-sm">' + inr(sum('pending')) + '</div></div>' +
+      '<div class="tile"><div class="label">Overdue</div><div class="kpi-sm">' + inr(sum('overdue')) + '</div><div class="muted" style="font-size:12px">' + over + ' students</div></div>' +
+      '<div class="tile"><div class="label">Old dues</div><div class="kpi-sm">' + inr(sum('old')) + '</div></div>';
+    $('#st-table tbody').innerHTML = list.length ? list.map(function(s){
+      return '<tr data-stu="' + s.i + '" tabindex="0"><td><div class="cell-main nw">' + s.name + '</div><div class="cell-sub num">' + s.adm + '</div></td>' +
+        '<td class="nw">' + s.cls + '</td><td><div class="nw">' + s.parent + '</div><div class="cell-sub num nw">' + s.phone + '</div></td>' +
+        '<td class="r"><b>' + inr(s.pending) + '</b><div class="cell-sub nw">paid ' + inr(s.paid) + ' of ' + inr(s.net) + '</div></td>' +
+        '<td class="r nw">' + lateCell(s) + '</td><td class="r">' + (s.old ? inr(s.old) : '<span class="muted">—</span>') + '</td>' +
+        '<td style="min-width:84px">' + s.last + '</td><td><span class="pill ' + s.group + '">' + GN[s.group] + '</span><div class="cell-sub nw" style="margin-top:4px">' + s.habit + '</div></td></tr>';
+    }).join('') : '<tr><td colspan="8" class="muted" style="padding:32px 0;text-align:center">No students match these filters. <button class="link" type="button" id="st-empty-clear">Show all students</button></td></tr>';
+    var chips = [];
+    if (SF.q) chips.push(['q', '“' + esc(SF.q) + '”']);
+    if (SF.cls !== 'all') chips.push(['cls', clsLabel(SF.cls)]);
+    if (SF.group !== 'all') chips.push(['group', GN[SF.group]]);
+    if (SF.habit !== 'all') chips.push(['habit', SF.habit]);
+    if (SF.status !== 'all') chips.push(['status', STATUS_NAME[SF.status]]);
+    $('#st-chips').innerHTML = chips.map(function(c){ return '<button type="button" class="fchip" data-clear="' + c[0] + '" aria-label="Remove filter ' + esc(c[1]) + '">' + c[1] + icon('x') + '</button>'; }).join('') + (chips.length > 1 ? '<button type="button" class="link" data-clear="all">Clear all</button>' : '');
+    $('#st-class').value = SF.cls; $('#st-group').value = SF.group; $('#st-habit').value = SF.habit; $('#st-status').value = SF.status; $('#st-sort').value = SF.sort;
+    $('#st-more').textContent = 'Showing ' + list.length + ' of a 48-student sample, sorted by ' + SORT_NAME[SF.sort] + '. The real app lists all 812 students.';
+  }
+  function drillTo(spec){
+    var kv = spec.split('='), k = kv[0], v = kv.slice(1).join('=');
+    resetSF();
+    var label = '';
+    if (k === 'class') { SF.cls = v; label = clsLabel(v); }
+    if (k === 'group') { SF.group = v; label = GN[v]; }
+    if (k === 'habit') { SF.habit = v; label = v; }
+    if (k === 'status') { SF.status = v; label = STATUS_NAME[v]; }
+    $('#st-drill-text').textContent = 'From ' + (current.indexOf('report-') === 0 ? 'the report' : 'Analytics') + ': students in “' + label + '”';
+    $('#st-drill').hidden = false;
+    go('students');
+    renderStudents();
+  }
+
+  /* ---------- student drawer ---------- */
+  var DUES = ['10 Apr', '10 Jul', '10 Oct', '10 Jan'];
+  var MODE_IC = {Cash: 'banknote', UPI: 'qr-code', Bank: 'landmark', Cheque: 'file-text'};
+  function openStudent(i){
+    var s = STU[i], sibs = STU.filter(function(x){ return x.fam === s.fam && x.i !== s.i; });
+    var lateFees = 0, rows = [];
+    if (s.old) rows.push(['<b>Old dues</b><div class="cell-sub">2025-26</div>', '—', inr(s.old), '₹0', '<b>' + inr(s.old) + '</b>', '<span class="pill chase plain">Overdue</span>']);
+    for (var k = 0; k < 4; k++) {
+      var paidK = Math.max(0, Math.min(s.q, s.paid - k * s.q)), bal = s.q - paidK, st;
+      if (!bal) st = '<span class="pill good">Paid</span>';
+      else if (k < 2) { st = '<span class="pill chase plain">' + (k ? 78 : 169) + ' days late · ₹500 late fee</span>'; lateFees += 500; }
+      else if (k === 2) st = '<span class="pill outline plain">Due in 14 days</span>';
+      else st = '<span class="pill outline plain">Upcoming</span>';
+      rows.push(['<b>Q' + (k + 1) + '</b>', DUES[k], inr(s.q), inr(paidK), bal ? '<b>' + inr(bal) + '</b>' : '₹0', st]);
+    }
+    var chance = s.group === 'support' ? Math.round(CHANCE[s.habit] * 0.5) : CHANCE[s.habit];
+    var status = s.overdue ? '<span class="pill chase plain">' + inr(s.overdue) + ' overdue · ' + s.late + ' days</span>' : s.pending ? '<span class="pill outline plain">Nothing overdue · next due ' + (s.paid < 3 * s.q ? '10 Oct' : '10 Jan') + '</span>' : '<span class="pill good">Paid in full</span>';
+    var h = '<div class="drawer-head"><div class="avatar lg' + (s.group === 'chase' ? ' dark' : '') + '">' + s.init + '</div><div style="min-width:0"><h2 class="sheet-title" id="sd-name">' + s.name + '</h2><p class="card-sub num">Class ' + s.cls + ' · ' + s.adm + '</p></div><button class="icon-btn" type="button" data-close-drawer aria-label="Close">' + icon('x') + '</button></div>';
+    h += '<div class="chips"><span class="pill ' + s.group + '">' + GN[s.group] + '</span><span class="pill outline plain">' + s.habit + '</span>' + status + '</div>';
+    h += '<div class="mini-kpis">' +
+      '<div class="tile"><div class="label">Year’s fee</div><div class="kpi-sm">' + inr(s.net) + '</div></div>' +
+      '<div class="tile"><div class="label">Paid</div><div class="kpi-sm">' + inr(s.paid) + '</div></div>' +
+      '<div class="tile"><div class="label">Pending</div><div class="kpi-sm">' + inr(s.pending) + '</div></div>' +
+      '<div class="tile"><div class="label">Overdue</div><div class="kpi-sm">' + inr(s.overdue) + '</div></div>' +
+      '<div class="tile"><div class="label">Old dues</div><div class="kpi-sm">' + inr(s.old) + '</div></div>' +
+      '<div class="tile"><div class="label">Late fees</div><div class="kpi-sm">' + inr(lateFees) + '</div></div></div>';
+    h += '<div><div class="dsec-title">Parent</div><div class="rows"><div class="row"><div class="ico-box">' + icon('user-round') + '</div><div class="grow"><div class="row-title">' + s.parent + '</div><div class="row-sub num">' + s.phone + '</div></div><button class="btn btn-secondary btn-sm" type="button" data-toast="Calling ' + s.phone + '…">' + icon('phone') + 'Call</button></div></div>' +
+      (sibs.length ? '<div class="chips" style="margin-top:10px"><span class="muted" style="font-size:13px;align-self:center">Siblings in school:</span>' + sibs.map(function(x){ return '<button type="button" class="chip" data-stu="' + x.i + '">' + x.name.split(' ')[0] + ' · ' + x.cls + '</button>'; }).join('') + '</div>' : '') + '</div>';
+    h += '<div><div class="dsec-title">Installments</div>' + table(['', 'Due', '>Amount', '>Paid', '>Balance', 'Status'], rows, {small: true}) + '</div>';
+    h += '<div><div class="dsec-title">What the year’s fee is made of</div><dl class="kv">' + s.band.heads.map(function(x){ return '<dt>' + x[0] + '</dt><dd>' + inr(x[1]) + '</dd>'; }).join('') + '<dt class="total">Year’s fee</dt><dd class="total">' + inr(s.net) + '</dd></dl></div>';
+    h += '<div><div class="dsec-title">Payments this session</div>' + (s.pays.length ? '<div class="rows">' + s.pays.map(function(p, j){
+      var rc = p[3] || ('R-' + String(200 + ((s.i * 53 + j * 17) % 2100)).padStart(4, '0'));
+      return '<div class="row"><div class="ico-box">' + icon(MODE_IC[p[2]] || 'receipt') + '</div><div class="grow"><div class="row-title">' + inr(p[1]) + ' · ' + p[2] + '</div><div class="row-sub">' + p[0] + ' · Receipt ' + rc + (p[3] ? ' · shared family receipt' : '') + '</div></div></div>';
+    }).join('') + '</div>' : '<p class="muted" style="font-size:13.5px">No payment this session. Last payment: ' + s.last + '.</p>') + '</div>';
+    h += '<div><div class="dsec-title">Chance of paying by 31 March</div><div class="chance"><div class="progress lg"><span style="width:' + chance + '%"></span></div><b class="num">' + chance + '%</b></div><p class="muted" style="font-size:13px;margin-top:8px">' + HABIT_NOTE[s.habit] + (s.group === 'support' ? ' The family is in Support, so the chance is lower.' : '') + '</p></div>';
+    h += '<div class="drawer-actions"><button class="btn btn-primary" type="button" data-go="collect">' + icon('wallet') + 'Collect fee</button><button class="btn btn-secondary" type="button" data-toast="Reminder sent to ' + s.parent + ' on WhatsApp">' + icon('send') + 'Send reminder</button>' +
+      (s.fam === 'sharma' ? '<button class="btn btn-secondary" type="button" data-go="family">' + icon('users') + 'Open family card</button>' : '<button class="btn btn-secondary" type="button" data-toast="In this mockup, the Sharma family has the full card">' + icon('users') + 'Open family card</button>') + '</div>';
+    $('#sd-body').innerHTML = h;
+    $('#st-drawer').hidden = false; $('#st-drawer-bg').hidden = false;
+    $('#st-drawer').scrollTop = 0;
+    var c = $('#st-drawer [data-close-drawer]'); if (c) c.focus();
+  }
+  function closeDrawer(){ $('#st-drawer').hidden = true; $('#st-drawer-bg').hidden = true; }
+
+  /* ---------- reports: every card opens a full page ---------- */
+  var REPORTS = {
+    daily: {t: 'Daily summary', ic: 'calendar-check', d: 'On WhatsApp every day at 7 PM', s: 'What happened today at the fee counter and on the phones. It reaches your WhatsApp at 7 PM.', p: 'Sat, 26 Sep 2026'},
+    monthly: {t: 'Monthly collection', ic: 'chart-column', d: 'Collected vs expected vs last year', s: 'Money collected each month, against what is expected and against last year.', p: 'Apr 2026 – Mar 2027'},
+    classwise: {t: 'Class-wise pending', ic: 'layers', d: 'Which classes owe the most', s: 'How much of each class’s fees has come in, and which classes owe the most.', p: 'Session 2026-27 · till 26 Sep'},
+    groups: {t: 'Group lists', ic: 'target', d: 'Chase now, Support and the rest, printable', s: 'Every recovery group with its families and money, ready to hand to callers.', p: 'As of 26 Sep'},
+    olddues: {t: 'Old-dues recovery', ic: 'history', d: 'Previous years’ dues coming back', s: 'Money from previous sessions: how much there was on 1 April, how much came back, and who still owes.', p: '1 Apr – 26 Sep 2026'},
+    staff: {t: 'Staff work', ic: 'users', d: 'Calls, promises, % kept, ₹ recovered', s: 'Calls, promises and money recovered by each person.', p: 'September 2026'},
+    concessions: {t: 'Concessions & discounts', ic: 'percent', d: 'What was given, and by whom', s: 'What was given, why, and who approved it.', p: 'Session 2026-27'},
+    compare: {t: 'Year comparison', ic: 'trending-up', d: '% collected each month, this year vs last', s: 'Share of the year’s fees collected by each month, this year against last year.', p: '2026-27 vs 2025-26'},
+    audit: {t: 'Alerts & audit', ic: 'shield-check', d: 'Every change: who, when, before and after', s: 'Every change to money records: who made it, when, and the value before and after.', p: 'Last 7 days'}
+  };
+  var REPORT_BODY = {
+    daily: function(){
+      var days = [['Sat, 26 Sep', 42500, 9, 21, 5], ['Fri, 25 Sep', 31000, 7, 34, 7], ['Thu, 24 Sep', 58000, 12, 36, 9], ['Wed, 23 Sep', 27500, 6, 31, 6], ['Tue, 22 Sep', 38500, 8, 28, 4], ['Mon, 21 Sep', 24000, 5, 33, 8], ['Sat, 19 Sep', 36000, 7, 30, 6]];
+      return kpis([['Collected today', '₹42,500', '9 receipts'], ['Calls', '21 of 38', '17 left'], ['Promises due', '7', 'Worth ₹84,000'], ['Broken yesterday', '3', 'On today’s list'], ['Alerts', '2', 'Need a look'], ['Cash in hand', '₹28,000', 'Matches the day book']]) +
+        '<div class="grid split">' + card('Last 7 working days', 'Money and calls, day by day', table(['Day', '>Collected', '>Receipts', '>Calls', '>Promises'], days.map(function(d, i){ return [i ? d[0] : '<b>' + d[0] + '</b>', inr(d[1]), d[2], d[3], d[4]]; }), {foot: ['7 days', '₹2,57,500', '54', '213', '45']})) +
+        card('As sent on WhatsApp', '7 PM every day', '<div style="background:#efeae2;border-radius:16px;padding:14px"><div class="bubble" style="max-width:100%"><b>Sunrise Public School · Sat, 26 Sep</b><br>Collected today: ₹42,500 (9 receipts)<br>Calls: 21 of 38 done<br>Promises due today: 7 · ₹84,000<br>Broken yesterday: 3<br>Alerts: 1 receipt cancelled, 1 discount without approval<span class="t">7:00 PM</span></div></div>') + '</div>';
+    },
+    monthly: function(){
+      var M = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
+      var rows = M.map(function(m, i){
+        var got = i < 6 ? AN.now[i] : null, exp = i < 6 ? null : AN.expected[i - 6], d = got != null ? got - AN.last[i] : null;
+        return ['<b>' + m + '</b>', got != null ? L1(got) : '<span class="muted">—</span>', exp != null ? L1(exp) : '<span class="muted">—</span>', L1(AN.last[i]), d == null ? '<span class="muted">—</span>' : '<span style="font-weight:600;color:' + (d >= 0 ? 'var(--green-ink)' : 'var(--red-ink)') + '">' + (d >= 0 ? '+' : '−') + '₹' + Math.abs(d).toFixed(1) + ' L</span>'];
+      });
+      var chart = vbars({cats: M, series: [{name: function(i){ return i < 6 ? 'Collected' : 'Expected'; }, vals: AN.now.concat(AN.expected), fill: function(i){ return i < 6 ? 'var(--chart-1)' : '#8e8e93'; }}, {name: 'Last year', vals: AN.last, fill: 'var(--chart-3)'}], max: 10, ticks: [0, 2.5, 5, 7.5, 10], divider: 6, w: 1040, h: 270, fmt: function(v){ return '₹' + v + ' L'; }, label: 'Monthly collection this year against last year'});
+      return card('Month by month', '₹ lakh', chart, legend([['Collected', 'var(--chart-1)'], ['Expected', '#8e8e93'], ['Last year', 'var(--chart-3)']])) +
+        card('The numbers', 'October to March are expected amounts', table(['Month', '>Collected', '>Expected', '>Last year', '>Change'], rows, {foot: ['Year', '₹23.8 L so far', '₹10.5 L more', '₹34.1 L', '<span style="color:var(--green-ink)">+₹4.0 L</span>']}));
+    },
+    classwise: function(){
+      return '<div class="grid split">' + card('Every class', 'Tap a class to see its students', classTable()) + card('Pending by class', '₹15.2 L this year', hbars(AN.classes.map(function(c){ return {l: c[0], v: c[4], text: L1(c[4]), drill: 'class=' + c[1]}; }), {max: 1.6})) + '</div>';
+    },
+    groups: function(){
+      var G = [['chase', 142, '₹9.8 L', 'Call first and offer a plan'], ['nudge', 96, '₹3.1 L', 'Reminder, then one call'], ['promised', 24, '₹2.6 L', 'Remind a day before the date'], ['support', 61, '₹2.4 L', 'Soft reminders; owner decides'], ['tag', 56, '₹1.3 L', 'Owner sets ability in Quick Tag'], ['good', 410, '₹2.0 L', 'No calls, only thank-you']];
+      var F = [['Malhotra family', 'chase', '₹52,000', '₹8,000', 'Carry-forward', 'Priya'], ['Sharma family', 'chase', '₹38,000', '₹6,500', 'Year-end payer', 'Priya'], ['Mishra family', 'chase', '₹19,500', '₹11,000', 'Not paying', 'Sunita'], ['Gupta family', 'chase', '₹19,500', '—', 'Selective payer', 'Priya'], ['Khan family', 'chase', '₹13,000', '₹3,000', 'Year-end payer', "Mrs. D'Souza"], ['Singh family', 'chase', '₹12,000', '—', 'Irregular', 'Sunita'], ['Agarwal family', 'nudge', '₹18,000', '₹4,000', 'Late but steady', 'Sunita'], ['Joshi family', 'nudge', '₹8,000', '—', 'Late but steady', 'Priya'], ['Patel family', 'promised', '₹15,500', '—', 'Seasonal', 'Priya'], ['Yadav family', 'support', '₹30,000', '₹9,000', 'Hardship', 'Owner'], ['Das family', 'tag', '₹9,000', '—', 'New', '—']];
+      return card('Groups', 'Tap a group to see its students', table(['Group', '>Families', '>Pending', 'What staff do'], G.map(function(g){ return {attrs: ' class="link" data-drill="group=' + g[0] + '"', cells: ['<span class="pill ' + g[0] + '">' + GN[g[0]] + '</span>', g[1], '<b>' + g[2] + '</b>', g[3]]}; }))) +
+        card('Families to call first', 'Top of each group', table(['Family', 'Group', '>Pending', '>Old dues', 'Habit', 'Caller'], F.map(function(f){ return ['<b>' + f[0] + '</b>', '<span class="pill ' + f[1] + '">' + GN[f[1]] + '</span>', f[2], f[3], f[4], f[5]]; })));
+    },
+    olddues: function(){
+      return kpis([['On 1 April', '₹5.9 L', '158 families'], ['Recovered', '₹2.5 L', '42% so far'], ['Still owed', '₹3.4 L', '127 families']]) +
+        '<div class="grid g-2">' + card('By session', 'Where the old money is', table(['Session', '>Families', '>On 1 Apr', '>Recovered', '>Left'], [['<b>2025-26</b>', '96', '₹4.3 L', '₹1.8 L', '<b>₹2.5 L</b>'], ['<b>2024-25</b>', '24', '₹1.2 L', '₹0.5 L', '<b>₹0.7 L</b>'], ['<b>2023-24 and older</b>', '7', '₹0.4 L', '₹0.2 L', '<b>₹0.2 L</b>']], {foot: ['Total', '127', '₹5.9 L', '₹2.5 L', '₹3.4 L']})) +
+        card('Recovered each month', '₹ lakh', vbars({cats: AN.months, series: [{name: 'Recovered', vals: [1.1, 0.3, 0.2, 0.4, 0.1, 0.4], fill: 'var(--chart-1)'}], max: 1.2, ticks: [0, 0.4, 0.8, 1.2], tickFmt: function(v){ return v.toFixed(1); }, labels: true, fmt: function(v){ return v.toFixed(1); }, label: 'Old dues recovered by month'})) + '</div>' +
+        card('Families with the most old dues', 'Tap “Has old dues” in Students for everyone', table(['Family', 'From', '>Old dues', 'Group'], [['<b>Mishra family</b>', '2025-26', '₹11,000', '<span class="pill chase">Chase now</span>'], ['<b>Yadav family</b>', '2025-26', '₹9,000', '<span class="pill support">Support</span>'], ['<b>Malhotra family</b>', '2025-26', '₹8,000', '<span class="pill chase">Chase now</span>'], ['<b>Sharma family</b>', '2025-26', '₹6,500', '<span class="pill chase">Chase now</span>'], ['<b>Agarwal family</b>', '2025-26', '₹4,000', '<span class="pill nudge">Nudge</span>'], ['<b>Khan family</b>', '2025-26', '₹3,000', '<span class="pill chase">Chase now</span>']]), '<button class="link" type="button" data-drill="status=old">See students' + icon('chevron-right') + '</button>');
+    },
+    staff: function(){
+      return '<div class="grid g-2">' + card('Results by person', 'September 2026', staffTable()) + card('Calls each week', 'By person', staffWeekChart()) + '</div>' + card('What parents said', 'Results of 666 calls', outcomeBars());
+    },
+    concessions: function(){
+      var recent = [['26 Sep', '<b>Kulkarni family</b>', '₹1,000 discount', 'Sunita', '<span class="pill chase plain">Not approved</span>'], ['25 Sep', '<b>Joshi family</b>', '₹500 late fee waived', 'Priya', '<span class="pill good">Within limit</span>'], ['23 Sep', '<b>Iyer family</b>', 'Merit concession 10%', 'Sunita', '<span class="pill good">Approved by Mr. Verma</span>'], ['21 Sep', '<b>Nair family</b>', '₹500 late fee waived', 'Priya', '<span class="pill good">Within limit</span>'], ['15 Sep', '<b>Menon family</b>', '₹2,000 discount', 'Sunita', '<span class="pill good">Approved by Mr. Verma</span>'], ['11 Sep', '<b>Bose family</b>', '₹300 late fee waived', 'Priya', '<span class="pill good">Within limit</span>']];
+      return '<div class="grid g-2">' + card('Concessions by type', 'This session', concessionTable()) + card('Who gave discounts & waivers', 'Since April', giversTable()) + '</div>' +
+        card('Recent discounts & waivers', 'Newest first', table(['Date', 'Family', 'What', 'Given by', 'Approval'], recent));
+    },
+    compare: function(){
+      var last = [20, 26, 30, 38, 42, 54, 62, 71, 75, 81, 88, 93], now = [24, 30, 34, 42, 45, 61];
+      var M = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
+      return '<div class="grid split">' + card('Running total', 'Share of the year’s fees collected', '<div id="rp-cum" class="chart-box"></div>', CUM_LEGEND) +
+        card('Month by month', 'Share of the year collected by the end of each month', table(['Month', '>2026-27', '>2025-26', '>Gap'], M.map(function(m, i){ var n = now[i]; return ['<b>' + m + '</b>', n != null ? n + '%' : '<span class="muted">—</span>', last[i] + '%', n != null ? '<b style="color:var(--green-ink)">+' + (n - last[i]) + ' pts</b>' : '<span class="muted">—</span>']; }), {small: true})) + '</div>';
+    },
+    audit: function(){
+      var A = [['26 Sep · 10:12 AM', 'Sunita', 'Cancelled receipt R-2309 (Dutta family)', '₹5,500 → cancelled', 'Duplicate of R-2308', true], ['26 Sep · 10:05 AM', 'Sunita', 'Discount on Kulkarni family', '₹0 → ₹1,000', 'Above the ₹500 staff limit, no approval', true], ['25 Sep · 6:40 PM', 'Mr. Verma', 'Approved a late-fee waiver (Joshi family)', '₹500 → ₹0', '', false], ['25 Sep · 5:05 PM', 'Priya', 'Moved a promise date (Chopra family)', '20 Sep → 25 Sep', 'Parent asked for 5 more days', false], ['24 Sep · 12:30 PM', 'Sunita', 'Edited a phone number (Das family)', '90240 51867 → 90240 51876', 'Typo at admission', false], ['23 Sep · 11:10 AM', 'Mr. Verma', 'Merit concession (Iyer family)', '0% → 10%', 'Class 9 topper', false], ['22 Sep · 7:02 PM', 'Sunita', 'Closed the day', '₹38,500 collected · ₹24,500 cash handed over', '', false], ['21 Sep · 4:45 PM', 'Mr. Verma', 'Changed ability tag (Gupta family)', 'Medium → High', 'Pays transport, owns a shop', false]];
+      return card('Change log', 'Every change to money records is kept and can’t be deleted', table(['When', 'Who', 'What', 'Before → after', 'Note'], A.map(function(a){ return {attrs: a[5] ? ' class="flag"' : '', cells: ['<span class="nw num">' + a[0] + '</span>', a[1], '<b>' + a[2] + '</b>', '<span class="num">' + a[3] + '</span>', a[4] ? '<span class="muted">' + a[4] + '</span>' : '']}; })));
+    }
+  };
+  function renderReport(k){
+    var r = REPORTS[k];
+    $('#rp-title').textContent = r.t; $('#rp-sub').textContent = r.s; $('#rp-period').textContent = r.p;
+    $('#rp-excel').setAttribute('data-toast', r.t + ' exported to Excel');
+    $('#rp-send').setAttribute('data-toast', r.t + ' sent to your WhatsApp');
+    $('#rp-body').innerHTML = REPORT_BODY[k]();
+    if (k === 'compare') cumChart('rp-cum');
   }
 
   /* ---------- filters ---------- */
@@ -1946,14 +2631,25 @@ tr.flag td{background:var(--orange-tint)}
   /* ---------- events ---------- */
   document.addEventListener('click', function(e){
     var t;
+    if ((t = e.target.closest('#an-tabs button[data-an]'))) { anTab = t.getAttribute('data-an'); renderAnalytics(); return; }
+    if ((t = e.target.closest('[data-drill]'))) { e.preventDefault(); drillTo(t.getAttribute('data-drill')); return; }
+    if ((t = e.target.closest('[data-stu]'))) { openStudent(+t.getAttribute('data-stu')); return; }
+    if (e.target.closest('[data-close-drawer]') || e.target.id === 'st-drawer-bg') { closeDrawer(); return; }
+    if ((t = e.target.closest('[data-clear]'))) {
+      var ck = t.getAttribute('data-clear');
+      if (ck === 'all') resetSF(); else if (ck === 'q') { SF.q = ''; $('#st-q').value = ''; } else SF[ck] = 'all';
+      renderStudents(); return;
+    }
+    if (e.target.closest('#st-drill-clear') || e.target.closest('#st-empty-clear')) { resetSF(); renderStudents(); return; }
     if ((t = e.target.closest('[data-log]'))) { e.preventDefault(); openLog(t); return; }
     if ((t = e.target.closest('[data-outcome]'))) { pick(t.getAttribute('data-outcome')); return; }
     if ((t = e.target.closest('[data-close]')) || e.target === sheet) { closeLog(); return; }
     if ((t = e.target.closest('#role-seg button'))) { setRole(t.getAttribute('data-role')); return; }
     if ((t = e.target.closest('[data-set-role]'))) { setRole(t.getAttribute('data-set-role')); return; }
     if ((t = e.target.closest('#lang-seg button'))) { setLang(t.getAttribute('data-lang')); return; }
-    if ((t = e.target.closest('[data-go]'))) { e.preventDefault(); go(t.getAttribute('data-go')); return; }
-    if ((t = e.target.closest('[data-toast]'))) { e.preventDefault(); toast(t.getAttribute('data-toast')); return; }
+    var tg = e.target.closest('[data-go]'), tt = e.target.closest('[data-toast]');
+    if (tt && (!tg || tg.contains(tt))) { e.preventDefault(); toast(tt.getAttribute('data-toast')); return; }
+    if (tg) { e.preventDefault(); go(tg.getAttribute('data-go')); return; }
     if ((t = e.target.closest('[data-filter-val]'))) {
       var v = t.getAttribute('data-filter-val');
       $$('#group-tiles .gtile').forEach(function(g){ g.classList.toggle('on', g === t); });
@@ -2012,7 +2708,8 @@ tr.flag td{background:var(--orange-tint)}
   });
 
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') { closeLog(); app.classList.remove('nav-open'); }
+    if (e.key === 'Escape') { closeLog(); closeDrawer(); app.classList.remove('nav-open'); }
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-drill], tr[data-stu], .report-card')) { e.preventDefault(); e.target.click(); }
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-tpl]')) { e.preventDefault(); tplIndex = +e.target.getAttribute('data-tpl'); renderTpl(); }
   });
 
@@ -2036,13 +2733,19 @@ tr.flag td{background:var(--orange-tint)}
     var f = $('#fam-search'); f.value = q; f.dispatchEvent(new Event('input'));
   });
 
+  $('#st-q').addEventListener('input', function(){ SF.q = this.value.trim().toLowerCase(); renderStudents(); });
+  [['class', 'cls'], ['group', 'group'], ['habit', 'habit'], ['status', 'status'], ['sort', 'sort']].forEach(function(p){
+    $('#st-' + p[0]).addEventListener('change', function(){ SF[p[1]] = this.value; renderStudents(); });
+  });
+
   window.addEventListener('hashchange', function(){ var h = location.hash.replace('#', ''); if (h && h !== current) show(h); });
 
   /* ---------- boot ---------- */
-  cumChart(); monthChart(); classBars(); reportCards(); renderTag(); renderAlloc(); renderTpl();
+  cumChart('chart-cum'); monthChart(); classBars(); reportCards(); renderTag(); renderAlloc(); renderTpl();
+  resetSF(); renderStudents(); renderAnalytics();
   var start = (location.hash || '').replace('#', '');
   setRole('owner');
-  show(ALL.indexOf(start) !== -1 ? start : 'home');
+  show(start || 'home');
 })();
 </script>
 </body>
