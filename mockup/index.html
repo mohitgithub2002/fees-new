@@ -1,0 +1,2049 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shulk Fee Recovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap">
+<style>
+/* Shulk: clickable mockup of the school fee recovery app. Single light theme by design (white + black). */
+:root{
+  color-scheme: light;
+  --bg:#ffffff; --canvas:#f5f5f7; --canvas-2:#eeeef1; --sidebar:rgba(245,245,247,.86);
+  --ink:#1d1d1f; --ink-2:#3a3a3c; --muted:#6e6e73; --faint:#8e8e93;
+  --line:rgba(0,0,0,.08); --line-strong:rgba(0,0,0,.14); --hover:rgba(0,0,0,.045);
+  --cta:#000000; --cta-hover:#2c2c2e; --cta-ink:#ffffff; --focus:#0071e3;
+  --red:#ff3b30; --red-ink:#c4211a; --red-tint:#fff0ef;
+  --orange:#ff9500; --orange-ink:#9a5700; --orange-tint:#fff4e5;
+  --yellow:#f2c200; --yellow-ink:#7a6000; --yellow-tint:#fff9dc;
+  --blue:#007aff; --blue-ink:#0058b8; --blue-tint:#ebf4ff;
+  --green:#34c759; --green-ink:#17793a; --green-tint:#e9f9ee;
+  --grey:#8e8e93; --grey-ink:#48484a; --grey-tint:#f1f1f3;
+  --chart-1:#1d1d1f; --chart-2:#a1a1a6; --chart-3:#d9d9de; --grid:rgba(0,0,0,.07);
+  --r-xl:24px; --r-lg:18px; --r-md:14px; --r-sm:10px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.04);
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
+  --shadow-lg:0 30px 80px rgba(0,0,0,.20),0 2px 8px rgba(0,0,0,.08);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans Devanagari",sans-serif;
+  --font-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans Devanagari",sans-serif;
+  --side-w:264px;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--bg)}
+body{margin:0;font-family:var(--font);font-size:14px;line-height:1.45;color:var(--ink);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+h1,h2,h3,h4,p{margin:0}
+.ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px}
+.app[data-lang="hi"]{--font:"Noto Sans Devanagari",-apple-system,BlinkMacSystemFont,"Inter",sans-serif;--font-display:"Noto Sans Devanagari",-apple-system,BlinkMacSystemFont,"Inter",sans-serif}
+
+/* ---------- Shell ---------- */
+.app{display:grid;grid-template-columns:var(--side-w) minmax(0,1fr);min-height:100vh;min-height:100dvh;font-family:var(--font)}
+.sidebar{position:sticky;top:env(safe-area-inset-top,0px);height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;background:var(--sidebar);-webkit-backdrop-filter:saturate(180%) blur(24px);backdrop-filter:saturate(180%) blur(24px);border-right:1px solid var(--line);padding:18px 12px 12px;z-index:60}
+.brand{display:flex;align-items:center;gap:11px;padding:2px 10px 18px}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:#000;color:#fff;display:grid;place-items:center;font:700 17px/1 var(--font-display);letter-spacing:-.02em}
+.brand-name{font:600 16px/1.2 var(--font-display);letter-spacing:-.015em}
+.brand-sub{font-size:12px;color:var(--muted)}
+.nav{flex:1;overflow-y:auto;margin:0 -4px;padding:0 4px 18px;scrollbar-width:thin;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 28px),transparent)}
+.nav-group{margin-bottom:14px}
+.nav-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);padding:0 10px 6px}
+.nav a{display:flex;align-items:center;gap:11px;height:34px;padding:0 10px;border-radius:9px;color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:450;letter-spacing:-.005em;transition:background .15s}
+.nav a:hover{background:var(--hover)}
+.nav a.active{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 .5px rgba(0,0,0,.06)}
+.nav a .ic{color:var(--muted)}
+.nav a.active .ic{color:var(--ink)}
+.nav .count{margin-left:auto;font-size:12px;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums}
+.nav .count.hot{background:var(--red);color:#fff;border-radius:999px;min-width:20px;height:20px;padding:0 6px;display:grid;place-items:center;font-size:11px;font-weight:600}
+.side-foot{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:12px}
+.me{display:flex;align-items:center;gap:10px;padding:0 6px}
+.me-name{font-weight:600;font-size:13.5px;line-height:1.2}
+.me-role{font-size:12px;color:var(--muted)}
+.avatar{width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--ink-2);flex:none;letter-spacing:.02em}
+.avatar.lg{width:52px;height:52px;font-size:16px}
+.avatar.dark{background:#000;color:#fff;border-color:#000}
+.foot-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);padding:0 6px 6px}
+.side-foot .seg{width:100%}
+.side-foot .seg button{flex:1;padding:0 6px;font-size:12.5px}
+
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;display:flex;align-items:center;gap:12px;min-height:60px;padding:0 32px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.icon-btn.menu-btn{display:none}
+.search{flex:1;max-width:440px;display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;background:var(--canvas);border-radius:10px;color:var(--muted);min-width:0}
+.search input{border:0;background:transparent;outline:none;width:100%;color:var(--ink);font-size:14px;min-width:0}
+.search input::placeholder{color:var(--faint)}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.top-meta{font-size:13px;color:var(--muted);white-space:nowrap}
+.sample-chip{font-size:11.5px;font-weight:600;letter-spacing:.02em;color:var(--grey-ink);background:var(--grey-tint);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.icon-btn{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);background:#fff;color:var(--ink);cursor:pointer;position:relative;flex:none;text-decoration:none}
+.icon-btn:hover{background:var(--canvas)}
+.icon-btn .dot{position:absolute;top:6px;right:7px;width:8px;height:8px;border-radius:50%;background:var(--red);border:2px solid #fff}
+.role-banner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 32px;background:var(--canvas);border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
+.role-banner button{border:0;background:none;padding:0;font-weight:600;text-decoration:underline;cursor:pointer;color:var(--ink)}
+.content{padding:36px 32px 72px;width:100%;max-width:1320px;margin:0 auto}
+.scrim{display:none}
+
+/* ---------- Page header ---------- */
+.page-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 24px;margin-bottom:28px}
+.page-head > div:first-child{min-width:0;flex:1 1 420px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.page-title{font:700 36px/1.08 var(--font-display);letter-spacing:-.028em;text-wrap:balance}
+.page-sub{display:flex;gap:8px;align-items:flex-start;max-width:640px;margin-top:12px;color:var(--muted);font-size:15px;line-height:1.5}
+.page-sub .ic{width:16px;height:16px;margin-top:3px}
+.page-actions{display:flex;flex-wrap:wrap;gap:10px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;margin-bottom:14px}
+.back:hover{color:var(--ink)}
+.back .ic{width:16px;height:16px}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 18px;border-radius:999px;font-weight:500;font-size:14px;line-height:1;border:1px solid transparent;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s,transform .1s,border-color .15s;letter-spacing:-.005em}
+.btn:active{transform:scale(.98)}
+.btn .ic{width:16px;height:16px}
+.btn-primary{background:var(--cta);color:var(--cta-ink)}
+.btn-primary:hover{background:var(--cta-hover)}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line-strong)}
+.btn-secondary:hover{background:var(--canvas)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--hover)}
+.btn-inverse{background:#fff;color:#000}
+.btn-inverse:hover{background:#e8e8ed}
+.btn-sm{height:32px;padding:0 14px;font-size:13px}
+.btn-lg{height:50px;padding:0 26px;font-size:15.5px;font-weight:600}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.link{background:none;border:0;padding:0;color:var(--ink);font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-size:13.5px}
+.link .ic{width:15px;height:15px}
+.link:hover{text-decoration:underline}
+
+/* ---------- Surfaces ---------- */
+.stack{display:grid;gap:20px}
+.grid{display:grid;gap:20px}
+.g-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.split{grid-template-columns:minmax(0,1fr) 360px;align-items:start}
+.split-l{grid-template-columns:320px minmax(0,1fr);align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);padding:22px;min-width:0}
+.card.pad-0{padding:0}
+.card.soft{background:var(--canvas);border-color:transparent;box-shadow:none}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}
+.card-title{font-size:15.5px;font-weight:600;letter-spacing:-.01em}
+.card-sub{font-size:13px;color:var(--muted);margin-top:3px}
+.tile{background:var(--canvas);border-radius:var(--r-md);padding:16px;min-width:0}
+.label{font-size:13px;color:var(--muted);font-weight:500}
+.kpi{font:600 34px/1.1 var(--font-display);letter-spacing:-.028em;font-variant-numeric:tabular-nums;margin:10px 0 6px}
+.kpi-sm{font:600 24px/1.15 var(--font-display);letter-spacing:-.022em;font-variant-numeric:tabular-nums;margin-top:6px}
+.kpi small{font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0}
+.delta{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:600;color:var(--green-ink);background:var(--green-tint);border-radius:999px;padding:3px 8px}
+.delta .ic{width:13px;height:13px;stroke-width:2.2}
+.rows{display:grid}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);min-width:0}
+.row:last-child{border-bottom:0;padding-bottom:0}
+.row:first-child{padding-top:0}
+.row .grow{flex:1;min-width:0}
+.row .end{margin-left:auto;text-align:right;white-space:nowrap}
+.row-title{font-weight:600;font-size:14px}
+.row-sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.ico-box{width:36px;height:36px;border-radius:10px;background:var(--canvas);display:grid;place-items:center;flex:none;color:var(--ink-2)}
+.ico-box.red{background:var(--red-tint);color:var(--red-ink)}
+.ico-box.green{background:var(--green-tint);color:var(--green-ink)}
+.ico-box.dark{background:#000;color:#fff}
+.divider{height:1px;background:var(--line);margin:16px 0}
+.note{display:flex;gap:10px;align-items:flex-start;background:var(--canvas);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.note .ic{width:16px;height:16px;margin-top:1px;color:var(--muted)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:14px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.kv .total{font-weight:700;font-size:16px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* ---------- Pills & chips ---------- */
+.pill{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap;background:var(--grey-tint);color:var(--grey-ink);letter-spacing:0}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--grey);flex:none}
+.pill.plain::before{display:none}
+.pill .ic{width:13px;height:13px;stroke-width:2.2}
+.pill.chase{background:var(--red-tint);color:var(--red-ink)}.pill.chase::before{background:var(--red)}
+.pill.nudge{background:var(--orange-tint);color:var(--orange-ink)}.pill.nudge::before{background:var(--orange)}
+.pill.promised{background:var(--yellow-tint);color:var(--yellow-ink)}.pill.promised::before{background:var(--yellow)}
+.pill.support{background:var(--blue-tint);color:var(--blue-ink)}.pill.support::before{background:var(--blue)}
+.pill.good{background:var(--green-tint);color:var(--green-ink)}.pill.good::before{background:var(--green)}
+.pill.tag{background:var(--grey-tint);color:var(--grey-ink)}
+.pill.dark{background:#000;color:#fff}.pill.dark::before{background:#fff}
+.pill.outline{background:#fff;border:1px solid var(--line-strong);color:var(--ink-2)}
+.dotc{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
+.chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--line-strong);background:#fff;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
+.chip .ic{width:15px;height:15px}
+.chip.on{background:#000;color:#fff;border-color:#000}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+
+/* ---------- Segmented ---------- */
+.seg{display:inline-flex;gap:2px;padding:3px;background:var(--canvas-2);border-radius:11px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:none;height:30px;padding:0 13px;border:0;border-radius:8px;background:transparent;font-size:13px;font-weight:500;color:var(--ink-2);cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.seg button:hover{color:var(--ink)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1),0 0 0 .5px rgba(0,0,0,.05)}
+.seg .n{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:500}
+
+/* ---------- Tables ---------- */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{font-size:12px;font-weight:500;color:var(--muted);text-align:left;padding:0 14px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl th:first-child,.tbl td:first-child{padding-left:0}
+.tbl th:last-child,.tbl td:last-child{padding-right:0}
+.tbl tbody tr:last-child td{border-bottom:0}
+.tbl .r{text-align:right}
+.tbl .nw{white-space:nowrap}
+.tbl td.num,.tbl .r{font-variant-numeric:tabular-nums}
+.tbl tr.link{cursor:pointer}
+.tbl tr.link:hover td{background:#fafafb}
+.tbl tr.cancelled td{color:var(--faint)}
+.tbl tr.cancelled .strike{text-decoration:line-through}
+.cell-main{font-weight:600}
+.cell-sub{font-size:12.5px;color:var(--muted);margin-top:1px}
+.fam{display:flex;align-items:center;gap:12px;min-width:200px}
+.meter{display:inline-flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums;font-size:13px;font-weight:600}
+.meter i{display:block;width:56px;height:6px;border-radius:999px;background:var(--canvas-2);overflow:hidden}
+.meter i b{display:block;height:100%;background:#000;border-radius:inherit}
+.chev{color:var(--faint)}
+.chev .ic{width:16px;height:16px}
+
+/* ---------- Progress & charts ---------- */
+.progress{height:6px;border-radius:999px;background:var(--canvas-2);overflow:hidden}
+.progress > span{display:block;height:100%;background:#000;border-radius:inherit}
+.progress.lg{height:10px}
+.stackbar{display:flex;gap:2px;height:14px;border-radius:999px;overflow:hidden}
+.stackbar span{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.legend i.line{height:2px;width:16px;border-radius:2px}
+.legend i.dash{height:0;width:16px;border-top:2px dashed var(--chart-2);border-radius:0}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart text{font-family:var(--font);fill:var(--muted);font-size:11.5px}
+.chart .v{fill:var(--ink);font-weight:600;font-size:12px}
+.hbars{display:grid;gap:10px}
+.hbar{display:grid;grid-template-columns:72px minmax(0,1fr) 60px;align-items:center;gap:12px;font-size:13px}
+.hbar .track{height:10px;background:var(--canvas);border-radius:999px;overflow:hidden}
+.hbar .track b{display:block;height:100%;background:#1d1d1f;border-radius:0 999px 999px 0}
+.hbar .val{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.ring{position:relative;width:84px;height:84px;flex:none}
+.ring svg{width:84px;height:84px;transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font:600 19px var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+
+/* ---------- Hero ---------- */
+.hero{background:#000;color:#fff;border-radius:var(--r-xl);padding:30px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:center}
+.hero .eyebrow{color:rgba(255,255,255,.62)}
+.hero-num{font:600 60px/1 var(--font-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.hero-num small{font-size:20px;font-weight:500;color:rgba(255,255,255,.62);letter-spacing:-.01em;margin-left:6px}
+.hero p{color:rgba(255,255,255,.72);font-size:15px;margin:14px 0 22px;max-width:440px;line-height:1.5}
+.hero-list{display:grid;background:rgba(255,255,255,.06);border-radius:16px;padding:6px 18px}
+.hero-list div{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:14px}
+.hero-list div:last-child{border-bottom:0}
+.hero-list .n{margin-left:16px;min-width:56px;text-align:right;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hero-list .f{margin-left:auto;color:rgba(255,255,255,.55);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ---------- Group tiles & matrix ---------- */
+.gtile{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;text-align:left;cursor:pointer;display:grid;gap:4px;transition:border-color .15s,box-shadow .15s;min-width:0}
+.gtile:hover{border-color:var(--line-strong)}
+.gtile.on{border-color:#000;box-shadow:0 0 0 1px #000 inset}
+.gtile .gname{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.gtile .gamt{font:600 22px/1.2 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:6px}
+.gtile .gfam{font-size:12.5px;color:var(--muted)}
+.matrix{display:grid;grid-template-columns:78px repeat(4,minmax(64px,1fr));gap:4px;font-size:11.5px;min-width:360px}
+.matrix > div{padding:8px 6px;border-radius:8px;background:var(--canvas);display:flex;align-items:center;gap:6px;line-height:1.25}
+.matrix .mh{background:transparent;color:var(--muted);font-weight:500;align-items:flex-end;padding-bottom:4px}
+.matrix .rh{background:transparent;font-weight:600;color:var(--ink-2)}
+.matrix .c-chase{background:var(--red-tint);color:var(--red-ink);font-weight:600}
+.matrix .c-nudge{background:var(--orange-tint);color:var(--orange-ink)}
+.matrix .c-support{background:var(--blue-tint);color:var(--blue-ink)}
+.matrix .c-good{background:var(--green-tint);color:var(--green-ink)}
+.matrix .c-tag{background:var(--grey-tint);color:var(--grey-ink)}
+
+/* ---------- Calls ---------- */
+.call-section + .call-section{margin-top:26px}
+.sec-title{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.sec-title .n{color:var(--faint)}
+.call-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);min-width:0}
+.call-row:last-child{border-bottom:0}
+.call-row .who{flex:1;min-width:0;cursor:pointer}
+.call-row .amt{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;min-width:86px;text-align:right}
+.call-row .acts{display:flex;align-items:center;gap:8px;flex:none}
+.call-row.done .who .row-title{color:var(--muted)}
+.more{font-size:13px;color:var(--muted);padding-top:12px}
+
+/* ---------- Family card ---------- */
+.fam-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;text-align:center}
+.months div{display:grid;justify-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.months i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line-strong);background:#fff}
+.months .paid i{background:#000;border-color:#000}
+.months .paid i::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+.months .miss i{border-color:var(--red);background:var(--red-tint)}
+.months .future i{border-style:dashed;border-color:var(--chart-3)}
+.months .now{color:var(--ink);font-weight:700}
+.timeline{display:grid;gap:0}
+.tl{display:grid;grid-template-columns:18px minmax(0,1fr);gap:14px;position:relative;padding-bottom:18px}
+.tl:last-child{padding-bottom:0}
+.tl::before{content:"";position:absolute;left:8px;top:18px;bottom:0;width:1.5px;background:var(--line)}
+.tl:last-child::before{display:none}
+.tl .b{width:18px;height:18px;border-radius:50%;background:#fff;border:1.5px solid var(--line-strong);margin-top:1px}
+.tl .b.k{background:var(--green);border-color:var(--green)}
+.tl .b.x{background:var(--red);border-color:var(--red)}
+.tl-title{font-weight:600;font-size:14px}
+.tl-meta{font-size:12.5px;color:var(--muted)}
+.tl-quote{margin-top:6px;font-size:13.5px;color:var(--ink-2)}
+.offer{background:#000;color:#fff;border-radius:var(--r-lg);padding:22px}
+.offer .eyebrow{color:rgba(255,255,255,.6);display:flex;align-items:center;gap:6px}
+.offer .eyebrow .ic{width:14px;height:14px}
+.offer h3{font:600 20px/1.25 var(--font-display);letter-spacing:-.015em;margin-bottom:14px}
+.offer .part{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid rgba(255,255,255,.14);font-size:14px}
+.offer .part b{font-variant-numeric:tabular-nums}
+.offer .part span{color:rgba(255,255,255,.7)}
+.offer p{font-size:13px;color:rgba(255,255,255,.7);margin:10px 0 18px;line-height:1.5}
+.lockbox{border:1px dashed var(--line-strong);border-radius:var(--r-lg);padding:18px}
+.lockbox .top{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.lockbox .top .ic{width:14px;height:14px}
+.level{display:flex;gap:6px;margin:4px 0 12px}
+.level span{flex:1;height:34px;border-radius:9px;background:var(--canvas);display:grid;place-items:center;font-size:13px;font-weight:500;color:var(--muted)}
+.level span.on{background:#000;color:#fff;font-weight:600}
+
+/* ---------- Quick tag ---------- */
+.tagcard{max-width:760px;margin:0 auto;width:100%}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fact{background:var(--canvas);border-radius:12px;padding:12px 14px;min-width:0}
+.fact .label{font-size:12px;display:flex;align-items:center;gap:6px}
+.fact .label .ic{width:14px;height:14px}
+.fact b{display:block;font-size:14px;margin-top:4px;font-weight:600}
+.hint{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-strong);border-radius:14px;padding:14px 16px;font-size:14px}
+.hint .ic{margin-top:1px}
+.choose{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.choice{border:1.5px solid var(--line-strong);background:#fff;border-radius:18px;padding:18px 14px;cursor:pointer;display:grid;gap:4px;justify-items:center;text-align:center;transition:.15s}
+.choice:hover{border-color:#000;background:#000;color:#fff}
+.choice:hover small{color:rgba(255,255,255,.7)}
+.choice b{font:600 20px var(--font-display);letter-spacing:-.015em}
+.choice small{font-size:12.5px;color:var(--muted)}
+.switch-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.switch-row:last-child{border-bottom:0}
+.switch-row .t{font-weight:500}
+.switch-row .s{font-size:12.5px;color:var(--muted);margin-top:2px}
+input.switch{appearance:none;-webkit-appearance:none;width:44px;height:26px;border-radius:999px;background:#e3e3e8;position:relative;cursor:pointer;transition:background .2s;flex:none;margin:0}
+input.switch::before{content:"";position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:transform .2s}
+input.switch:checked{background:#000}
+input.switch:checked::before{transform:translateX(18px)}
+
+/* ---------- Forms ---------- */
+.field{display:grid;gap:7px;min-width:0}
+.field > label,.field > .flabel{font-size:13px;font-weight:500;color:var(--ink-2)}
+.input{height:44px;border:1px solid var(--line-strong);border-radius:12px;padding:0 14px;font-size:15px;color:var(--ink);background:#fff;width:100%;min-width:0}
+.input:focus{outline:none;border-color:#000;box-shadow:0 0 0 3px rgba(0,0,0,.08)}
+textarea.input{height:auto;padding:12px 14px;min-height:72px;resize:vertical;line-height:1.45}
+select.input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236e6e73' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.amount{position:relative}
+.amount span{position:absolute;left:16px;top:50%;transform:translateY(-50%);font:600 26px var(--font-display);color:var(--muted)}
+.amount input{height:64px;padding-left:40px;font:600 30px var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.alloc{display:grid;gap:0}
+.alloc .row{padding:11px 0}
+.alloc .state{font-size:12px;font-weight:600;border-radius:999px;padding:3px 9px;white-space:nowrap}
+.alloc .state.full{background:#000;color:#fff}
+.alloc .state.part{background:var(--canvas-2);color:var(--ink)}
+.alloc .state.none{color:var(--faint)}
+.receipt{background:var(--canvas);border-radius:var(--r-lg);padding:22px;position:relative;font-size:13.5px}
+.receipt::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:16px;background:radial-gradient(circle at 8px 0,transparent 7px,var(--canvas) 7.5px) 0 0/16px 16px repeat-x;transform:rotate(180deg)}
+.receipt .kv{font-size:13.5px}
+.dropzone{border:1.5px dashed var(--line-strong);border-radius:var(--r-lg);padding:28px;display:grid;justify-items:center;gap:8px;text-align:center;background:#fcfcfd}
+.file{display:flex;align-items:center;gap:12px;background:var(--canvas);border-radius:12px;padding:12px 14px;width:100%;max-width:420px;text-align:left}
+.stepper{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.step{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;color:var(--muted);min-width:0}
+.step i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line-strong);font-style:normal;font-size:12.5px;font-weight:600;flex:none;background:#fff}
+.step.done i{background:#000;border-color:#000;color:#fff}
+.step.cur{color:var(--ink);font-weight:600}
+.step.cur i{border-color:#000;color:#000}
+.step .ic{width:14px;height:14px;stroke-width:2.4}
+.check-ok{color:var(--green-ink)}
+.check-warn{color:var(--orange-ink)}
+tr.flag td{background:var(--orange-tint)}
+
+/* ---------- Phones (parent view, templates) ---------- */
+.phones{display:flex;flex-wrap:wrap;gap:36px;justify-content:center;align-items:flex-start}
+.phone{width:320px;max-width:100%;border-radius:50px;background:#0b0b0c;padding:11px;box-shadow:var(--shadow-lg),inset 0 0 0 2px #2a2a2c}
+.phone-screen{border-radius:40px;overflow:hidden;height:640px;display:flex;flex-direction:column;background:#fff;position:relative}
+.phone-caption{text-align:center;margin-top:16px;font-size:13px;color:var(--muted);max-width:320px}
+.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:96px;height:28px;border-radius:20px;background:#0b0b0c;z-index:3}
+.status{height:46px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 6px;font-size:13px;font-weight:600}
+.wa{background:#efeae2;flex:1;display:flex;flex-direction:column;min-height:0}
+.wa-head{background:#f7f7f7;display:flex;align-items:center;gap:10px;padding:8px 14px 10px;border-bottom:1px solid var(--line);flex:none}
+.wa-head .avatar{width:34px;height:34px;background:#000;color:#fff;border:0;font-size:11px}
+.wa-head b{font-size:14px;display:flex;align-items:center;gap:4px}
+.wa-head b .ic{width:14px;height:14px;color:#1fa855;stroke-width:2.4}
+.wa-head small{font-size:11.5px;color:var(--muted)}
+.wa-body{flex:1;overflow-y:auto;padding:12px 10px;display:flex;flex-direction:column;gap:8px}
+.wa-day{align-self:center;background:#fff;font-size:11px;color:var(--muted);padding:4px 10px;border-radius:8px;box-shadow:0 1px .5px rgba(0,0,0,.1)}
+.bubble{max-width:86%;background:#fff;border-radius:12px;padding:8px 10px 6px;font-size:13px;line-height:1.42;box-shadow:0 1px .5px rgba(0,0,0,.13);align-self:flex-start;word-wrap:break-word}
+.bubble.me{background:#d9fdd3;align-self:flex-end}
+.bubble .t{display:block;text-align:right;font-size:10.5px;color:var(--muted);margin-top:2px}
+.bubble a{color:#027eb5;text-decoration:none;word-break:break-all}
+.bubble .paybtn{display:flex;align-items:center;justify-content:center;gap:6px;margin:8px -10px -6px;border-top:1px solid var(--line);padding:9px;color:#027eb5;font-weight:600;font-size:13px}
+.bubble .paybtn .ic{width:15px;height:15px}
+.wa-input{flex:none;display:flex;gap:8px;align-items:center;padding:8px 10px 14px;background:#f7f7f7}
+.wa-input span{flex:1;background:#fff;border-radius:18px;height:34px;display:flex;align-items:center;padding:0 12px;font-size:13px;color:var(--faint)}
+.stmt{flex:1;overflow-y:auto;padding:6px 18px 18px;display:flex;flex-direction:column;gap:14px;min-height:0}
+.stmt-url{margin:0 14px;background:var(--canvas);border-radius:10px;height:32px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--ink-2);flex:none}
+.stmt-url .ic{width:12px;height:12px}
+
+/* ---------- Sheet & toast ---------- */
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.3);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);z-index:80;display:flex;align-items:center;justify-content:center;padding:16px}
+.sheet{background:#fff;border-radius:24px;box-shadow:var(--shadow-lg);width:min(620px,100%);max-height:calc(100dvh - 32px);overflow:auto;padding:26px}
+.sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}
+.sheet-title{font:600 21px/1.25 var(--font-display);letter-spacing:-.015em}
+.outcomes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.outcome{border:1px solid var(--line-strong);border-radius:14px;background:#fff;padding:14px 8px 12px;display:grid;justify-items:center;gap:8px;font-size:13px;font-weight:500;cursor:pointer;text-align:center;line-height:1.25;transition:.12s}
+.outcome:hover{background:var(--canvas)}
+.outcome .ic{width:20px;height:20px}
+.outcome.on{border-color:#000;box-shadow:0 0 0 1px #000 inset;background:#fff}
+.sheet-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);opacity:0;background:#1d1d1f;color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;font-weight:500;box-shadow:var(--shadow-lg);z-index:95;pointer-events:none;transition:opacity .25s,transform .25s;max-width:calc(100% - 32px);display:flex;gap:10px;align-items:center}
+.toast .ic{width:17px;height:17px;color:#34c759;stroke-width:2.4}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.owner-only{}
+.app:not([data-role="owner"]) .owner-only{display:none!important}
+.app[data-role="owner"] .not-owner{display:none!important}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1240px){
+  :root{--side-w:240px}
+  .content{padding:32px 24px 64px}
+  .topbar{padding-left:24px;padding-right:24px}
+  .role-banner{padding-left:24px;padding-right:24px}
+  .g-6{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .split{grid-template-columns:minmax(0,1fr) 320px}
+}
+@media (max-width:1100px){
+  .g-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .split,.split-l{grid-template-columns:minmax(0,1fr)}
+  .hero{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;height:auto;width:284px;max-width:86vw;padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));transform:translateX(-100%);transition:transform .28s cubic-bezier(.2,.8,.2,1);background:rgba(245,245,247,.97)}
+  .app.nav-open .sidebar{transform:none;box-shadow:var(--shadow-lg)}
+  .app.nav-open .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:55}
+  .icon-btn.menu-btn{display:grid}
+  .g-3{grid-template-columns:minmax(0,1fr)}
+  .top-meta{display:none}
+}
+@media (max-width:640px){
+  .content{padding:22px 16px 56px}
+  .topbar{padding-left:16px;padding-right:16px;gap:8px}
+  .role-banner{padding-left:16px;padding-right:16px}
+  .sample-chip{display:none}
+  .page-title{font-size:30px}
+  .page-sub{font-size:14.5px}
+  .page-actions{width:100%}
+  .page-actions .btn{flex:1 1 auto}
+  .kpi{font-size:30px}
+  .hero{padding:22px;gap:22px}
+  .hero-num{font-size:46px}
+  .card{padding:18px}
+  .g-2,.g-4{grid-template-columns:minmax(0,1fr)}
+  .g-6{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .choose{grid-template-columns:minmax(0,1fr)}
+  .outcomes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .backdrop{align-items:flex-end;padding:0}
+  .sheet{border-radius:24px 24px 0 0;max-height:92dvh;padding:22px 18px calc(22px + env(safe-area-inset-bottom,0px))}
+  .stepper{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .call-row{flex-wrap:wrap}
+  .call-row .who{flex-basis:calc(100% - 110px)}
+  .call-row .acts{margin-left:auto}
+  .hbar{grid-template-columns:56px minmax(0,1fr) 52px}
+  #chart-cum,#chart-month{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #chart-cum .chart,#chart-month .chart{min-width:560px}
+  .months i{width:18px;height:18px}
+  .phone-screen{height:600px}
+}
+@media (max-width:760px){#camp-grid{grid-template-columns:minmax(0,1fr)!important}#camp-grid .bubble{max-width:100%!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><!-- Icons: Lucide (ISC license) --><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></symbol><symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m4.9 4.9 14.2 14.2" /></symbol><symbol id="i-banknote" viewBox="0 0 24 24"><rect width="20" height="12" x="2" y="6" rx="2" /> <circle cx="12" cy="12" r="2" /> <path d="M6 12h.01M18 12h.01" /></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0" /> <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 7v14" /> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /> <rect width="20" height="14" x="2" y="6" rx="2" /></symbol><symbol id="i-bus" viewBox="0 0 24 24"><path d="M8 6v6" /> <path d="M15 6v6" /> <path d="M2 12h19.6" /> <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3" /> <circle cx="7" cy="18" r="2" /> <path d="M9 18h5" /> <circle cx="16" cy="18" r="2" /></symbol><symbol id="i-calendar-clock" viewBox="0 0 24 24"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" /> <path d="M16 2v4" /> <path d="M8 2v4" /> <path d="M3 10h5" /> <path d="M17.5 17.5 16 16.3V14" /> <circle cx="16" cy="16" r="6" /></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /> <circle cx="7" cy="17" r="2" /> <path d="M9 17h6" /> <circle cx="17" cy="17" r="2" /></symbol><symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5" /> <path d="m22 10-7.5 7.5L13 16" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></symbol><symbol id="i-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m15 9-6 6" /> <path d="m9 9 6 6" /></symbol><symbol id="i-corner-down-right" viewBox="0 0 24 24"><polyline points="15 10 20 15 15 20" /> <path d="M4 4v7a4 4 0 0 0 4 4h12" /></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="7 10 12 15 17 10" /> <line x1="12" x2="12" y1="15" y2="3" /></symbol><symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" /> <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" /> <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" /> <path d="m2 2 20 20" /></symbol><symbol id="i-file-spreadsheet" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M8 13h2" /> <path d="M14 13h2" /> <path d="M8 17h2" /> <path d="M14 17h2" /></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></symbol><symbol id="i-filter" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></symbol><symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3" /> <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /> <path d="m21 3 1 11h-2" /> <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" /> <path d="M3 4h8" /></symbol><symbol id="i-heart-handshake" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /> <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66" /> <path d="m18 15-2-2" /> <path d="m15 18-2-2" /></symbol><symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /> <path d="M3 3v5h5" /> <path d="M12 7v5l4 2" /></symbol><symbol id="i-house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /></symbol><symbol id="i-landmark" viewBox="0 0 24 24"><line x1="3" x2="21" y1="22" y2="22" /> <line x1="6" x2="6" y1="18" y2="11" /> <line x1="10" x2="10" y1="18" y2="11" /> <line x1="14" x2="14" y1="18" y2="11" /> <line x1="18" x2="18" y1="18" y2="11" /> <polygon points="12 2 20 7 4 7" /></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol><symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></symbol><symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z" /> <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /> <line x1="4" x2="20" y1="6" y2="6" /> <line x1="4" x2="20" y1="18" y2="18" /></symbol><symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></symbol><symbol id="i-message-square" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></symbol><symbol id="i-message-square-warning" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /> <path d="M12 7v2" /> <path d="M12 13h.01" /></symbol><symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19" /> <circle cx="6.5" cy="6.5" r="2.5" /> <circle cx="17.5" cy="17.5" r="2.5" /></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></symbol><symbol id="i-phone-call" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /> <path d="M14.05 2a9 9 0 0 1 8 7.94" /> <path d="M14.05 6A5 5 0 0 1 18 10" /></symbol><symbol id="i-phone-off" viewBox="0 0 24 24"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91" /> <line x1="22" x2="2" y1="2" y2="22" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol><symbol id="i-qr-code" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1" /> <rect width="5" height="5" x="16" y="3" rx="1" /> <rect width="5" height="5" x="3" y="16" rx="1" /> <path d="M21 16h-3a2 2 0 0 0-2 2v3" /> <path d="M21 21v.01" /> <path d="M12 7v3a2 2 0 0 1-2 2H7" /> <path d="M3 12h.01" /> <path d="M12 3h.01" /> <path d="M12 16v.01" /> <path d="M16 12h1" /> <path d="M21 12v.01" /> <path d="M12 21v-1" /></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" /> <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" /> <path d="M12 17.5v-11" /></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /> <path d="m21 21-4.3-4.3" /></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></symbol><symbol id="i-settings-2" viewBox="0 0 24 24"><path d="M20 7h-9" /> <path d="M14 17H5" /> <circle cx="17" cy="17" r="3" /> <circle cx="7" cy="7" r="3" /></symbol><symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-sliders-horizontal" viewBox="0 0 24 24"><line x1="21" x2="14" y1="4" y2="4" /> <line x1="10" x2="3" y1="4" y2="4" /> <line x1="21" x2="12" y1="12" y2="12" /> <line x1="8" x2="3" y1="12" y2="12" /> <line x1="21" x2="16" y1="20" y2="20" /> <line x1="12" x2="3" y1="20" y2="20" /> <line x1="14" x2="14" y1="2" y2="6" /> <line x1="8" x2="8" y1="10" y2="14" /> <line x1="16" x2="16" y1="18" y2="22" /></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /> <path d="M12 18h.01" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /> <path d="M20 3v4" /> <path d="M22 5h-4" /> <path d="M4 17v2" /> <path d="M5 18H3" /></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7" /> <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /> <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4" /> <path d="M2 7h20" /> <path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7" /></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /> <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /> <polyline points="16 7 22 7 22 13" /></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="17 8 12 3 7 8" /> <line x1="12" x2="12" y1="3" y2="15" /></symbol><symbol id="i-user-cog" viewBox="0 0 24 24"><circle cx="18" cy="15" r="3" /> <circle cx="9" cy="7" r="4" /> <path d="M10 15H6a4 4 0 0 0-4 4v2" /> <path d="m21.7 16.4-.9-.3" /> <path d="m15.2 13.9-.9-.3" /> <path d="m16.6 18.7.3-.9" /> <path d="m19.1 12.2.3-.9" /> <path d="m19.6 18.7-.4-1" /> <path d="m16.8 12.3-.4-1" /> <path d="m14.3 16.6 1-.4" /> <path d="m20.7 13.8 1-.4" /></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <circle cx="9" cy="7" r="4" /> <path d="M22 21v-2a4 4 0 0 0-3-3.87" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol><symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol></svg>
+<div class="app" id="app" data-role="owner" data-lang="en">
+
+<!-- ===================== SIDEBAR ===================== -->
+<aside class="sidebar" id="sidebar" aria-label="Main navigation">
+  <div class="brand">
+    <div class="brand-mark">श</div>
+    <div>
+      <div class="brand-name">Shulk</div>
+      <div class="brand-sub">Sunrise Public School</div>
+    </div>
+  </div>
+  <nav class="nav" id="nav">
+    <div class="nav-group">
+      <div class="nav-label" data-hi="सारांश">Overview</div>
+      <a href="#home" data-go="home" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-house"></use></svg><span data-hi="होम">Home</span></a>
+      <a href="#forecast" data-go="forecast" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-trending-up"></use></svg><span data-hi="अनुमान">Forecast</span></a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label" data-hi="वसूली">Recovery</div>
+      <a href="#recover" data-go="recover" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-target"></use></svg><span data-hi="वसूली बोर्ड">Recovery board</span><em class="count">142</em></a>
+      <a href="#calls" data-go="calls" data-roles="owner accountant caller"><svg class="ic" aria-hidden="true"><use href="#i-phone-call"></use></svg><span data-hi="आज की कॉल">Today's calls</span><em class="count">17</em></a>
+      <a href="#promises" data-go="promises" data-roles="owner accountant caller"><svg class="ic" aria-hidden="true"><use href="#i-handshake"></use></svg><span data-hi="वादे">Promises</span><em class="count">7</em></a>
+      <a href="#quicktag" data-go="quicktag" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-tag"></use></svg><span data-hi="क्विक टैग">Quick Tag</span><em class="count">56</em></a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label" data-hi="पैसा">Money</div>
+      <a href="#collect" data-go="collect" data-roles="owner accountant"><svg class="ic" aria-hidden="true"><use href="#i-wallet"></use></svg><span data-hi="फीस जमा करें">Collect fee</span></a>
+      <a href="#daybook" data-go="daybook" data-roles="owner accountant"><svg class="ic" aria-hidden="true"><use href="#i-book-open"></use></svg><span data-hi="रोज़नामचा">Day book</span></a>
+      <a href="#approvals" data-go="approvals" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-check-check"></use></svg><span data-hi="मंज़ूरी">Approvals</span><em class="count hot" id="approvals-count">2</em></a>
+      <a href="#alerts" data-go="alerts" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-triangle-alert"></use></svg><span data-hi="चेतावनी">Alerts</span><em class="count hot" id="alerts-count">2</em></a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label" data-hi="लोग">People</div>
+      <a href="#families" data-go="families" data-roles="owner accountant caller"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg><span data-hi="परिवार">Families</span><em class="count">765</em></a>
+      <a href="#staff" data-go="staff" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-user-cog"></use></svg><span data-hi="स्टाफ और भूमिकाएँ">Staff &amp; roles</span></a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label" data-hi="संपर्क">Engage</div>
+      <a href="#campaigns" data-go="campaigns" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-megaphone"></use></svg><span data-hi="अभियान">Campaigns</span></a>
+      <a href="#templates" data-go="templates" data-roles="owner accountant caller"><svg class="ic" aria-hidden="true"><use href="#i-message-square"></use></svg><span data-hi="संदेश टेम्पलेट">Message templates</span></a>
+      <a href="#parent" data-go="parent" data-roles="owner accountant caller"><svg class="ic" aria-hidden="true"><use href="#i-smartphone"></use></svg><span data-hi="अभिभावक दृश्य">Parent view</span></a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label" data-hi="जानकारी">Insights</div>
+      <a href="#reports" data-go="reports" data-roles="owner accountant"><svg class="ic" aria-hidden="true"><use href="#i-chart-column"></use></svg><span data-hi="रिपोर्ट">Reports</span></a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label" data-hi="सेटअप">Setup</div>
+      <a href="#setup" data-go="setup" data-roles="owner accountant"><svg class="ic" aria-hidden="true"><use href="#i-sliders-horizontal"></use></svg><span data-hi="फीस सेटअप">Fee setup</span></a>
+      <a href="#import" data-go="import" data-roles="owner accountant"><svg class="ic" aria-hidden="true"><use href="#i-file-spreadsheet"></use></svg><span data-hi="डेटा आयात">Import data</span></a>
+      <a href="#settings" data-go="settings" data-roles="owner"><svg class="ic" aria-hidden="true"><use href="#i-settings-2"></use></svg><span data-hi="सेटिंग्स">Settings</span></a>
+    </div>
+  </nav>
+  <div class="side-foot">
+    <div>
+      <div class="foot-label" data-hi="इस रूप में देखें">View as</div>
+      <div class="seg" id="role-seg" role="group" aria-label="View the app as">
+        <button type="button" data-role="owner" class="on">Owner</button>
+        <button type="button" data-role="accountant">Accountant</button>
+        <button type="button" data-role="caller">Caller</button>
+      </div>
+    </div>
+    <div class="me">
+      <div class="avatar dark" id="me-avatar">MV</div>
+      <div style="min-width:0">
+        <div class="me-name" id="me-name">Mr. Verma</div>
+        <div class="me-role" id="me-role">Owner · Principal</div>
+      </div>
+    </div>
+  </div>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<!-- ===================== MAIN ===================== -->
+<div class="main">
+  <header class="topbar">
+    <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu"><svg class="ic" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+    <label class="search" for="global-search">
+      <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+      <input id="global-search" type="search" placeholder="Search family, phone or admission no." autocomplete="off">
+    </label>
+    <div class="top-right">
+      <span class="top-meta num">Sat, 26 Sep · Session 2026-27</span>
+      <span class="sample-chip">Sample data</span>
+      <div class="seg" id="lang-seg" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="on">EN</button>
+        <button type="button" data-lang="hi">हिं</button>
+      </div>
+      <a class="icon-btn owner-only" href="#alerts" data-go="alerts" aria-label="Alerts"><svg class="ic" aria-hidden="true"><use href="#i-bell"></use></svg><span class="dot"></span></a>
+    </div>
+  </header>
+  <div class="role-banner" id="role-banner" hidden>
+    <svg class="ic" aria-hidden="true"><use href="#i-eye-off"></use></svg>
+    <span id="role-banner-text"></span>
+    <button type="button" data-set-role="owner">Switch back to Owner</button>
+  </div>
+
+  <main class="content">
+
+<!-- ===================== HOME ===================== -->
+<section data-screen="home" class="stack">
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Saturday, 26 September</p>
+      <h1 class="page-title" data-hi="शुभ संध्या, वर्मा जी">Good evening, Mr. Verma</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>This is what you see first: money pending, money in, who can pay but isn't paying, and what your team is doing today.</span></p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-secondary" type="button" data-toast="Today's summary sent to your WhatsApp"><svg class="ic" aria-hidden="true"><use href="#i-send"></use></svg>Send me today's summary</button>
+      <a class="btn btn-primary" href="#recover" data-go="recover">See who to chase<svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+    </div>
+  </header>
+
+  <div class="grid g-3">
+    <div class="card">
+      <div class="label" data-hi="बाकी फीस">Pending fees</div>
+      <div class="kpi">₹18.6 L</div>
+      <div class="stackbar" style="height:8px;margin:12px 0 10px" aria-hidden="true">
+        <span style="width:81.7%;background:var(--chart-1)"></span><span style="width:18.3%;background:var(--chart-2)"></span>
+      </div>
+      <div class="legend"><span><i style="background:var(--chart-1)"></i>This year ₹15.2 L</span><span><i style="background:var(--chart-2)"></i>Old dues ₹3.4 L</span></div>
+    </div>
+    <div class="card">
+      <div class="label" data-hi="इस साल जमा">Collected this year</div>
+      <div style="display:flex;align-items:center;gap:18px;margin-top:10px">
+        <div class="ring" aria-label="61 percent collected">
+          <svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="36" fill="none" stroke="var(--canvas-2)" stroke-width="8"/><circle cx="42" cy="42" r="36" fill="none" stroke="#000" stroke-width="8" stroke-linecap="round" stroke-dasharray="138 226.2"/></svg>
+          <b>61%</b>
+        </div>
+        <div style="min-width:0">
+          <div class="kpi-sm">₹23.8 L</div>
+          <div class="muted num" style="font-size:13px">of ₹39.0 L for the year</div>
+          <div style="margin-top:8px"><span class="delta"><svg class="ic" aria-hidden="true"><use href="#i-trending-up"></use></svg>7 pts vs last year</span></div>
+        </div>
+      </div>
+      <div class="muted num" style="font-size:12.5px;margin-top:12px">Last year on this date: 54%</div>
+    </div>
+    <div class="card">
+      <div class="label" data-hi="आज जमा">Money in today</div>
+      <div class="kpi">₹42,500</div>
+      <div class="muted num" style="font-size:13px">This month ₹6.1 L · 9 receipts today</div>
+      <div class="divider"></div>
+      <div class="legend num"><span><i style="background:var(--chart-1)"></i>Cash ₹28,000</span><span><i style="background:var(--chart-2)"></i>UPI ₹12,500</span><span><i style="background:var(--chart-3)"></i>Cheque ₹2,000</span></div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow" data-hi="दे सकते हैं, पर नहीं दे रहे">Can pay, not paying</p>
+      <div class="hero-num">₹9.8 L<small>142 families</small></div>
+      <p>These families have High or Medium ability to pay but are behind. This is where your team's time brings back the most money.</p>
+      <a class="btn btn-inverse btn-lg" href="#recover" data-go="recover">Open the list<svg class="ic" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
+    </div>
+    <div class="hero-list">
+      <div>Year-end payers<span class="f">58 families</span><span class="n">₹4.1 L</span></div>
+      <div>Selective payers<span class="f">31 families</span><span class="n">₹2.3 L</span></div>
+      <div>Carry-forward<span class="f">29 families</span><span class="n">₹2.2 L</span></div>
+      <div>Not paying at all<span class="f">24 families</span><span class="n">₹1.2 L</span></div>
+    </div>
+  </div>
+
+  <div class="grid g-3">
+    <div class="card">
+      <div class="card-head"><div><h2 class="card-title" data-hi="आज का काम">Today's work</h2><p class="card-sub">Team call list for Saturday</p></div><a class="link" href="#calls" data-go="calls">Open<svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></a></div>
+      <div class="num" style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:8px"><span><b>21</b> of 38 calls done</span><span class="muted">17 left</span></div>
+      <div class="progress lg"><span style="width:55.3%"></span></div>
+      <div class="rows" style="margin-top:14px">
+        <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-handshake"></use></svg></div><div class="grow"><div class="row-title">7 promises due today</div><div class="row-sub num">Worth ₹84,000</div></div></div>
+        <div class="row"><div class="ico-box red"><svg class="ic" aria-hidden="true"><use href="#i-circle-x"></use></svg></div><div class="grow"><div class="row-title">3 promises broken yesterday</div><div class="row-sub">Moved to the top of today's list</div></div></div>
+        <div class="row owner-only"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-tag"></use></svg></div><div class="grow"><div class="row-title">56 families need an ability tag</div><div class="row-sub">About 30 seconds each</div></div><a class="link" href="#quicktag" data-go="quicktag">Tag</a></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div><h2 class="card-title" data-hi="31 मार्च तक अपेक्षित">Expected by 31 March</h2><p class="card-sub">Of ₹18.6 L pending, by chance of payment</p></div><a class="link" href="#forecast" data-go="forecast">Forecast<svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></a></div>
+      <div class="stackbar" style="height:16px" role="img" aria-label="Sure 7.1 lakh, Likely 5.4 lakh, Doubtful 6.1 lakh">
+        <span style="width:38.2%;background:var(--chart-1)" title="Sure: ₹7.1 L"></span><span style="width:29%;background:var(--chart-2)" title="Likely: ₹5.4 L"></span><span style="width:32.8%;background:var(--chart-3)" title="Doubtful: ₹6.1 L"></span>
+      </div>
+      <div class="rows" style="margin-top:16px">
+        <div class="row"><span class="dotc" style="background:var(--chart-1)"></span><div class="grow"><div class="row-title">Sure</div><div class="row-sub">Families who always pay by March</div></div><b class="num">₹7.1 L</b></div>
+        <div class="row"><span class="dotc" style="background:var(--chart-2)"></span><div class="grow"><div class="row-title">Likely</div><div class="row-sub">Will pay if followed up</div></div><b class="num">₹5.4 L</b></div>
+        <div class="row"><span class="dotc" style="background:var(--chart-3)"></span><div class="grow"><div class="row-title">Doubtful</div><div class="row-sub">Low ability or long unpaid</div></div><b class="num">₹6.1 L</b></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div><h2 class="card-title" data-hi="चेतावनी">Alerts</h2><p class="card-sub">Changes that need a second look</p></div><a class="link" href="#alerts" data-go="alerts">All<svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></a></div>
+      <div class="rows">
+        <div class="row"><div class="ico-box red"><svg class="ic" aria-hidden="true"><use href="#i-receipt"></use></svg></div><div class="grow"><div class="row-title">Receipt R-2309 cancelled</div><div class="row-sub num">₹5,500 · Dutta family · by Sunita, 10:12 AM</div></div></div>
+        <div class="row"><div class="ico-box red"><svg class="ic" aria-hidden="true"><use href="#i-percent"></use></svg></div><div class="grow"><div class="row-title">Discount without approval</div><div class="row-sub num">₹1,000 · Kulkarni family · staff limit ₹500</div></div></div>
+        <div class="row"><div class="ico-box green"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"></use></svg></div><div class="grow"><div class="row-title">Cash matches</div><div class="row-sub num">₹28,000 collected = ₹28,000 in hand</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid split">
+    <div class="card">
+      <div class="card-head">
+        <div><h2 class="card-title">Share of the year's fees collected</h2><p class="card-sub">Running total by month, this year vs last year</p></div>
+        <div class="legend"><span><i class="line" style="background:var(--chart-1)"></i>2026-27</span><span><i class="dash"></i>2025-26</span></div>
+      </div>
+      <div id="chart-cum"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div><h2 class="card-title">Top 5 to chase</h2><p class="card-sub">Highest priority first</p></div></div>
+      <div class="rows">
+        <div class="row link-row" data-toast="In this mockup, the Sharma family has the full card"><div class="grow"><div class="row-title">Malhotra family</div><div class="row-sub">Carry-forward · cleared last year only in June</div></div><b class="num">₹60,000</b></div>
+        <div class="row" style="cursor:pointer" data-go="family"><div class="grow"><div class="row-title">Sharma family</div><div class="row-sub">Year-end payer · broke a promise in August</div></div><b class="num">₹44,500</b></div>
+        <div class="row link-row" data-toast="In this mockup, the Sharma family has the full card"><div class="grow"><div class="row-title">Mishra family</div><div class="row-sub">No payment in 6 months · owns a business</div></div><b class="num">₹30,500</b></div>
+        <div class="row link-row" data-toast="In this mockup, the Sharma family has the full card"><div class="grow"><div class="row-title">Gupta family</div><div class="row-sub">Pays transport on time, tuition unpaid</div></div><b class="num">₹19,500</b></div>
+        <div class="row link-row" data-toast="In this mockup, the Sharma family has the full card"><div class="grow"><div class="row-title">Khan family</div><div class="row-sub">Year-end payer · 88 days since last payment</div></div><b class="num">₹16,000</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FORECAST ===================== -->
+<section data-screen="forecast" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Overview</p>
+      <h1 class="page-title" data-hi="अनुमान">Forecast</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>How much of the pending money will really come in by 31 March, and in which months. It uses each family's own payment history.</span></p>
+    </div>
+  </header>
+  <div class="grid g-4">
+    <div class="card"><div class="label">Pending now</div><div class="kpi">₹18.6 L</div><div class="muted" style="font-size:13px">This year + old dues</div></div>
+    <div class="card"><div class="label"><span class="dotc" style="background:var(--chart-1);margin-right:6px"></span>Sure</div><div class="kpi">₹7.1 L</div><div class="muted" style="font-size:13px">Families who always clear by March</div></div>
+    <div class="card"><div class="label"><span class="dotc" style="background:var(--chart-2);margin-right:6px"></span>Likely</div><div class="kpi">₹5.4 L</div><div class="muted" style="font-size:13px">Pay when followed up</div></div>
+    <div class="card"><div class="label"><span class="dotc" style="background:var(--chart-3);margin-right:6px"></span>Doubtful</div><div class="kpi">₹6.1 L</div><div class="muted" style="font-size:13px">Low ability or long unpaid</div></div>
+  </div>
+  <div class="grid split">
+    <div class="card">
+      <div class="card-head">
+        <div><h2 class="card-title">Money in, month by month</h2><p class="card-sub">Collected so far, then expected until 31 March · ₹ lakh</p></div>
+        <div class="legend"><span><i style="background:var(--chart-1)"></i>Collected</span><span><i style="background:var(--chart-2)"></i>Expected</span></div>
+      </div>
+      <div id="chart-month"></div>
+      <div class="note" style="margin-top:14px"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"></use></svg><span>Expected by 31 March: <b class="num">₹10.5 L</b>. November is high because year-end and business families get Diwali money; Feb–Mar is when year-end payers clear.</span></div>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <h2 class="card-title">What if</h2>
+        <p class="card-sub" style="margin-bottom:18px">Move the slider to see what better follow-up on Chase-now families is worth.</p>
+        <label class="field" for="whatif">
+          <span class="flabel">Chase-now families who pay in full: <b id="whatif-pct" class="num">50%</b></span>
+          <input id="whatif" type="range" min="0" max="100" step="10" value="50" style="accent-color:#000;width:100%">
+        </label>
+        <div class="kpi" id="whatif-amt" style="margin-top:18px">+₹4.9 L</div>
+        <div class="muted num" style="font-size:13px">More by 31 March · 142 families owe ₹9.8 L</div>
+      </div>
+      <div class="card soft">
+        <h2 class="card-title" style="margin-bottom:10px">How the chance is worked out</h2>
+        <div class="rows" style="font-size:13.5px">
+          <div class="row"><div class="grow">Family has paid before</div><span class="muted">Share cleared by March in past years</span></div>
+          <div class="row"><div class="grow">New family</div><span class="muted">Group average, learned after one year</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RECOVERY BOARD ===================== -->
+<section data-screen="recover" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Recovery</p>
+      <h1 class="page-title" data-hi="वसूली बोर्ड">Recovery board</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Every family with dues, placed in a group by ability to pay and payment habit. Your team starts at the top of Chase now.</span></p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-secondary" type="button" data-toast="Chase-now list exported to Excel"><svg class="ic" aria-hidden="true"><use href="#i-download"></use></svg>Export</button>
+      <button class="btn btn-primary" type="button" data-toast="142 families shared between Priya, Sunita and 2 class teachers"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg>Assign to callers</button>
+    </div>
+  </header>
+
+  <div class="grid g-6" id="group-tiles">
+    <button type="button" class="gtile on" data-filter-val="chase"><span class="gname"><span class="dotc" style="background:var(--red)"></span>Chase now</span><span class="gamt">₹9.8 L</span><span class="gfam">142 families</span></button>
+    <button type="button" class="gtile" data-filter-val="nudge"><span class="gname"><span class="dotc" style="background:var(--orange)"></span>Nudge</span><span class="gamt">₹3.1 L</span><span class="gfam">96 families</span></button>
+    <button type="button" class="gtile" data-filter-val="promised"><span class="gname"><span class="dotc" style="background:var(--yellow)"></span>Promised</span><span class="gamt">₹2.6 L</span><span class="gfam">24 families</span></button>
+    <button type="button" class="gtile" data-filter-val="support"><span class="gname"><span class="dotc" style="background:var(--blue)"></span>Support</span><span class="gamt">₹2.4 L</span><span class="gfam">61 families</span></button>
+    <button type="button" class="gtile" data-filter-val="tag"><span class="gname"><span class="dotc" style="background:var(--grey)"></span>Tag first</span><span class="gamt">₹1.3 L</span><span class="gfam">56 families</span></button>
+    <button type="button" class="gtile" data-filter-val="good"><span class="gname"><span class="dotc" style="background:var(--green)"></span>Good payers</span><span class="gamt">₹2.0 L</span><span class="gfam">410 families · not yet due</span></button>
+  </div>
+
+  <div class="grid split">
+    <div class="card">
+      <div class="card-head" style="flex-wrap:wrap">
+        <div><h2 class="card-title" id="recover-title">Chase now, by priority</h2><p class="card-sub">Priority = overdue amount × ability × habit, plus broken promises and old dues</p></div>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl" id="recover-table">
+          <thead><tr><th>Family</th><th>Group</th><th class="r">Pending</th><th class="r">Old dues</th><th>Last paid</th><th>Why they're here</th><th>Priority</th><th>Caller</th><th></th></tr></thead>
+          <tbody>
+            <tr class="link" data-cat="chase" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Malhotra family</div><div class="cell-sub">Ishaan 10-B · Myra 6-A</div></td><td><span class="pill chase">Chase now</span></td><td class="r">₹52,000</td><td class="r">₹8,000</td><td class="nw">18 Apr</td><td>Carry-forward · cleared last year only in June</td><td><span class="meter"><i><b style="width:96%"></b></i>96</span></td><td>Priya</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="chase" data-go="family"><td><div class="cell-main">Sharma family</div><div class="cell-sub">Aarav 7-B · Diya 3-A</div></td><td><span class="pill chase">Chase now</span></td><td class="r">₹38,000</td><td class="r">₹6,500</td><td class="nw">14 Jul</td><td>Year-end payer · broke a promise in August</td><td><span class="meter"><i><b style="width:91%"></b></i>91</span></td><td>Priya</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="chase" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Mishra family</div><div class="cell-sub">Ananya 9-B</div></td><td><span class="pill chase">Chase now</span></td><td class="r">₹19,500</td><td class="r">₹11,000</td><td class="nw">21 Mar</td><td>No payment in 6 months · owns a business</td><td><span class="meter"><i><b style="width:84%"></b></i>84</span></td><td>Sunita</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="chase" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Gupta family</div><div class="cell-sub">Kavya 9-A</div></td><td><span class="pill chase">Chase now</span></td><td class="r">₹19,500</td><td class="r">—</td><td class="nw">2 May</td><td>Selective payer · transport paid, tuition unpaid</td><td><span class="meter"><i><b style="width:78%"></b></i>78</span></td><td>Priya</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="chase" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Khan family</div><div class="cell-sub">Ayaan 5-C</div></td><td><span class="pill chase">Chase now</span></td><td class="r">₹13,000</td><td class="r">₹3,000</td><td class="nw">30 Jun</td><td>Year-end payer · 88 days since last payment</td><td><span class="meter"><i><b style="width:63%"></b></i>63</span></td><td>Mrs. D'Souza</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="chase" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Singh family</div><div class="cell-sub">Jasleen 4-A</div></td><td><span class="pill chase">Chase now</span></td><td class="r">₹12,000</td><td class="r">—</td><td class="nw">9 Sep</td><td>Irregular · 7 small payments since April</td><td><span class="meter"><i><b style="width:48%"></b></i>48</span></td><td>Sunita</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="nudge" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Agarwal family</div><div class="cell-sub">Riya 8-A · Dev 2-B</div></td><td><span class="pill nudge">Nudge</span></td><td class="r">₹18,000</td><td class="r">₹4,000</td><td class="nw">11 Aug</td><td>Late but steady · pays about 40 days late</td><td><span class="meter"><i><b style="width:44%"></b></i>44</span></td><td>Sunita</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="nudge" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Joshi family</div><div class="cell-sub">Tanvi 6-A</div></td><td><span class="pill nudge">Nudge</span></td><td class="r">₹8,000</td><td class="r">—</td><td class="nw">20 Aug</td><td>Late but steady · Q2 is 78 days late</td><td><span class="meter"><i><b style="width:31%"></b></i>31</span></td><td>Priya</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="promised" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Patel family</div><div class="cell-sub">Krish 7-A</div></td><td><span class="pill promised">Promised</span></td><td class="r">₹15,500</td><td class="r">—</td><td class="nw">4 Jun</td><td>Seasonal · promised ₹15,500 for today</td><td><span class="meter"><i><b style="width:40%"></b></i>40</span></td><td>Priya</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="support" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Yadav family</div><div class="cell-sub">Pooja 6-B · Rahul 3-B</div></td><td><span class="pill support">Support</span></td><td class="r">₹30,000</td><td class="r">₹9,000</td><td class="nw">15 Jan</td><td>Hardship: crop loss · review on 15 Dec</td><td><span class="meter"><i><b style="width:12%"></b></i>12</span></td><td>Owner</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="tag" hidden data-go="quicktag"><td><div class="cell-main">Das family</div><div class="cell-sub">Arjun UKG</div></td><td><span class="pill tag">Tag first</span></td><td class="r">₹9,000</td><td class="r">—</td><td class="nw">12 Jun</td><td>New family · ability not set yet</td><td><span class="meter"><i><b style="width:35%"></b></i>35</span></td><td>—</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="good" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Jain family</div><div class="cell-sub">Aadya 1-A</div></td><td><span class="pill good">Good payer</span></td><td class="r">₹6,500</td><td class="r">—</td><td class="nw">3 Jul</td><td>Early payer · next installment due 10 Oct</td><td><span class="meter"><i><b style="width:4%"></b></i>4</span></td><td>—</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+            <tr class="link" data-cat="good" hidden data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Reddy family</div><div class="cell-sub">Sai 10-A</div></td><td><span class="pill good">Good payer</span></td><td class="r">₹9,750</td><td class="r">—</td><td class="nw">8 Jul</td><td>On-time · next installment due 10 Oct</td><td><span class="meter"><i><b style="width:3%"></b></i>3</span></td><td>—</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="more" id="recover-more">Showing 6 of 142 · sorted by priority</p>
+    </div>
+    <div class="card">
+      <h2 class="card-title">How families are grouped</h2>
+      <p class="card-sub" style="margin-bottom:16px">Ability to pay (rows) × payment habit (columns)</p>
+      <div class="table-wrap">
+        <div class="matrix" role="table" aria-label="Grouping matrix">
+          <div class="mh"></div><div class="mh">On time</div><div class="mh">Late, same year</div><div class="mh">Year-end · carry · irregular</div><div class="mh">Not paying</div>
+          <div class="rh">High</div><div class="c-good">Good</div><div class="c-nudge">Nudge</div><div class="c-chase">Chase</div><div class="c-chase">Chase</div>
+          <div class="rh">Medium</div><div class="c-good">Good</div><div class="c-nudge">Nudge</div><div class="c-chase">Chase</div><div class="c-chase">Chase</div>
+          <div class="rh">Low</div><div class="c-good">Good</div><div class="c-support">Support</div><div class="c-support">Support</div><div class="c-support">Support</div>
+          <div class="rh">Not tagged</div><div class="c-good">Good</div><div class="c-tag">Tag first</div><div class="c-tag">Tag first</div><div class="c-tag">Tag first</div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:16px"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg><span>Only you see ability labels. Callers see the group and the suggested approach.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TODAY'S CALLS ===================== -->
+<section data-screen="calls" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Recovery</p>
+      <h1 class="page-title" data-hi="आज की कॉल">Today's calls</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>The call list for today, already in order. Tap a family to see everything before you call, then log what they said with one tap.</span></p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary" type="button" data-log="Kapoor family|Sunil Kapoor · +91 94140 55012 · promised ₹9,500 for today"><svg class="ic" aria-hidden="true"><use href="#i-phone-call"></use></svg>Start next call</button>
+    </div>
+  </header>
+
+  <div class="grid g-4">
+    <div class="card">
+      <div class="label">Done today</div>
+      <div class="kpi num">21 <small>of 38</small></div>
+      <div class="progress"><span style="width:55.3%"></span></div>
+    </div>
+    <div class="card"><div class="label">Promises taken today</div><div class="kpi">5</div><div class="muted num" style="font-size:13px">Worth ₹1.1 L</div></div>
+    <div class="card"><div class="label">Not reachable</div><div class="kpi">6</div><div class="muted" style="font-size:13px">Retried tomorrow at another time</div></div>
+    <div class="card"><div class="label">Calls allowed</div><div class="kpi-sm" style="margin-top:12px">9 AM – 7 PM</div><div class="muted" style="font-size:13px;margin-top:6px">One call per family every 3 days</div></div>
+  </div>
+
+  <div class="card">
+    <div class="call-section">
+      <div class="sec-title"><svg class="ic" aria-hidden="true"><use href="#i-handshake"></use></svg>Promises due today <span class="n">7</span></div>
+      <div class="call-row done"><div class="avatar">MP</div><div class="who" data-toast="In this mockup, the Sharma family has the full card"><div class="row-title">Patel family</div><div class="row-sub">Mehul Patel · promised ₹15,500 for today</div></div><div class="amt">₹15,500</div><div class="acts"><span class="pill good"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>Will pay by 6 PM</span></div></div>
+      <div class="call-row"><div class="avatar">RB</div><div class="who" data-toast="In this mockup, the Sharma family has the full card"><div class="row-title">Bansal family</div><div class="row-sub">Rakesh Bansal · promised ₹12,000 for today</div></div><div class="amt">₹12,000</div><div class="acts"><button class="icon-btn" type="button" aria-label="Call" data-toast="Calling +91 98290 11220…"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg></button><button class="btn btn-primary btn-sm" type="button" data-log="Bansal family|Rakesh Bansal · +91 98290 11220 · promised ₹12,000 for today">Log result</button></div></div>
+      <div class="call-row"><div class="avatar">SK</div><div class="who" data-toast="In this mockup, the Sharma family has the full card"><div class="row-title">Kapoor family</div><div class="row-sub">Sunil Kapoor · promised ₹9,500 for today</div></div><div class="amt">₹9,500</div><div class="acts"><button class="icon-btn" type="button" aria-label="Call" data-toast="Calling +91 94140 55012…"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg></button><button class="btn btn-primary btn-sm" type="button" data-log="Kapoor family|Sunil Kapoor · +91 94140 55012 · promised ₹9,500 for today">Log result</button></div></div>
+      <p class="more">+ 4 more · Joshi, Rao, Thomas, Qureshi</p>
+    </div>
+    <div class="call-section">
+      <div class="sec-title"><svg class="ic" aria-hidden="true"><use href="#i-circle-x"></use></svg>Broken yesterday <span class="n">3</span></div>
+      <div class="call-row done"><div class="avatar">AC</div><div class="who" data-toast="In this mockup, the Sharma family has the full card"><div class="row-title">Chopra family</div><div class="row-sub">Promised ₹10,000 for 25 Sep</div></div><div class="amt">₹10,000</div><div class="acts"><span class="pill good"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>Will pay 30 Sep</span></div></div>
+      <div class="call-row"><div class="avatar">NS</div><div class="who" data-toast="In this mockup, the Sharma family has the full card"><div class="row-title">Saxena family</div><div class="row-sub">Promised ₹7,500 for 25 Sep</div></div><div class="amt">₹7,500</div><div class="acts"><button class="icon-btn" type="button" aria-label="Call" data-toast="Calling +91 97720 31408…"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg></button><button class="btn btn-primary btn-sm" type="button" data-log="Saxena family|Neha Saxena · +91 97720 31408 · broke a promise yesterday">Log result</button></div></div>
+      <p class="more">+ 1 more · Arora</p>
+    </div>
+    <div class="call-section">
+      <div class="sec-title"><svg class="ic" aria-hidden="true"><use href="#i-target"></use></svg>Chase now <span class="n">by priority</span></div>
+      <div class="call-row done"><div class="avatar">SM</div><div class="who" data-toast="In this mockup, the Sharma family has the full card"><div class="row-title">Malhotra family</div><div class="row-sub">Carry-forward · ₹8,000 old dues</div></div><div class="amt">₹60,000</div><div class="acts"><span class="pill promised plain">Wants 3 parts</span></div></div>
+      <div class="call-row done"><div class="avatar">AG</div><div class="who" data-toast="In this mockup, the Sharma family has the full card"><div class="row-title">Gupta family</div><div class="row-sub">Selective payer · tuition unpaid</div></div><div class="amt">₹19,500</div><div class="acts"><span class="pill tag plain">Not reachable</span></div></div>
+      <div class="call-row"><div class="avatar dark">RS</div><div class="who" data-go="family"><div class="row-title">Sharma family</div><div class="row-sub">Year-end payer · broke a promise in August · tap to see card</div></div><div class="amt">₹44,500</div><div class="acts"><button class="icon-btn" type="button" aria-label="Call" data-toast="Calling +91 98290 43210…"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg></button><button class="btn btn-primary btn-sm" type="button" data-log="Sharma family|Rajesh Sharma · +91 98290 43210 · Year-end payer">Log result</button></div></div>
+      <div class="call-row"><div class="avatar">AM</div><div class="who" data-toast="In this mockup, the Sharma family has the full card"><div class="row-title">Mishra family</div><div class="row-sub">No payment in 6 months</div></div><div class="amt">₹30,500</div><div class="acts"><button class="icon-btn" type="button" aria-label="Call" data-toast="Calling +91 99280 70114…"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg></button><button class="btn btn-primary btn-sm" type="button" data-log="Mishra family|Alok Mishra · +91 99280 70114 · no payment in 6 months">Log result</button></div></div>
+      <p class="more">+ 9 more today · the rest of the 142 roll into the next days</p>
+    </div>
+    <div class="call-section">
+      <div class="sec-title"><svg class="ic" aria-hidden="true"><use href="#i-calendar-clock"></use></svg>Callbacks <span class="n">2</span></div>
+      <div class="call-row"><div class="avatar">IK</div><div class="who" data-toast="In this mockup, the Sharma family has the full card"><div class="row-title">Khan family</div><div class="row-sub">Asked to be called after 5 PM</div></div><div class="amt">₹16,000</div><div class="acts"><button class="icon-btn" type="button" aria-label="Call" data-toast="Calling +91 90010 66241…"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg></button><button class="btn btn-primary btn-sm" type="button" data-log="Khan family|Imran Khan · +91 90010 66241 · asked for a call after 5 PM">Log result</button></div></div>
+      <p class="more">+ 1 more · Menon</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAMILY CARD ===================== -->
+<section data-screen="family" class="stack" hidden>
+  <div>
+    <a class="back" href="#recover" data-go="back"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"></use></svg>Back</a>
+    <header class="page-head" style="margin-bottom:0">
+      <div class="fam-head">
+        <div class="avatar lg dark">RS</div>
+        <div style="min-width:0">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><h1 class="page-title">Sharma family</h1><span class="pill chase">Chase now</span></div>
+          <p class="muted" style="margin-top:6px;font-size:15px">Rajesh Sharma (Father) · Ward 4 · <span class="num">+91 98290 43210</span> · Prefers Hindi</p>
+        </div>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-secondary" type="button" data-toast="Opening WhatsApp chat with Rajesh Sharma"><svg class="ic" aria-hidden="true"><use href="#i-message-circle"></use></svg>WhatsApp</button>
+        <button class="btn btn-secondary" type="button" data-toast="Overdue reminder sent on WhatsApp (in Hindi)"><svg class="ic" aria-hidden="true"><use href="#i-send"></use></svg>Send reminder</button>
+        <button class="btn btn-primary" type="button" data-log="Sharma family|Rajesh Sharma · +91 98290 43210 · Year-end payer"><svg class="ic" aria-hidden="true"><use href="#i-phone-call"></use></svg>Call &amp; log result</button>
+      </div>
+    </header>
+    <p class="page-sub" style="margin-top:14px"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Everything to know before calling: children, fees, when they last paid, their habit, what was said last time, and what to offer.</span></p>
+  </div>
+
+  <div class="grid split">
+    <div class="stack">
+      <div class="grid g-2">
+        <div class="card">
+          <div class="label">Total to collect</div>
+          <div class="kpi">₹44,500</div>
+          <dl class="kv" style="margin:14px 0 0">
+            <dt>This year's fees</dt><dd>₹58,000</dd>
+            <dt>Paid</dt><dd>₹20,000</dd>
+            <dt>Pending this year</dt><dd>₹38,000</dd>
+            <dt>Old dues (2025-26)</dt><dd>₹6,500</dd>
+          </dl>
+        </div>
+        <div class="card">
+          <div class="label">Last payment</div>
+          <div class="kpi">₹10,000</div>
+          <div class="muted" style="font-size:13.5px">14 Jul · UPI · <b style="color:var(--ink)">76 days ago</b></div>
+          <div class="divider"></div>
+          <div class="rows" style="font-size:13.5px">
+            <div class="row"><div class="grow">Habit</div><span class="pill outline plain">Year-end payer · 2 yrs</span></div>
+            <div class="row"><div class="grow">Promises</div><span class="num">1 kept · <b style="color:var(--red-ink)">1 broken</b></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div><h2 class="card-title">Children</h2><p class="card-sub">Both in school, grouped by the father's phone number</p></div></div>
+        <div class="table-wrap">
+          <table class="tbl">
+            <thead><tr><th>Child</th><th>Class</th><th class="r">Year's fee</th><th class="r">Paid</th><th class="r">Pending</th><th>Concession</th></tr></thead>
+            <tbody>
+              <tr><td class="cell-main">Aarav Sharma</td><td>7-B</td><td class="r">₹32,000</td><td class="r">₹10,000</td><td class="r"><b>₹22,000</b></td><td class="muted">—</td></tr>
+              <tr><td class="cell-main">Diya Sharma</td><td>3-A</td><td class="r">₹26,000</td><td class="r">₹10,000</td><td class="r"><b>₹16,000</b></td><td class="muted">Sibling · approved by Mr. Verma</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div><h2 class="card-title">Payments this session</h2><p class="card-sub">Paid 34% by September. The last 2 years they cleared about 90% in Feb–Mar.</p></div></div>
+        <div class="months" aria-label="Payments by month">
+          <div class="paid"><i></i>Apr</div><div class="miss"><i></i>May</div><div class="miss"><i></i>Jun</div><div class="paid"><i></i>Jul</div><div class="miss"><i></i>Aug</div><div class="miss now"><i></i>Sep</div>
+          <div class="future"><i></i>Oct</div><div class="future"><i></i>Nov</div><div class="future"><i></i>Dec</div><div class="future"><i></i>Jan</div><div class="future"><i></i>Feb</div><div class="future"><i></i>Mar</div>
+        </div>
+        <div class="legend" style="margin-top:16px"><span><i style="background:#000;border-radius:50%"></i>Paid</span><span><i style="background:var(--red-tint);border:1.5px solid var(--red);border-radius:50%"></i>Nothing paid</span><span><i style="border:1.5px dashed var(--chart-3);border-radius:50%"></i>Coming up</span></div>
+        <div class="divider"></div>
+        <div class="rows" style="font-size:13.5px">
+          <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-receipt"></use></svg></div><div class="grow"><div class="row-title">₹10,000 · UPI</div><div class="row-sub">14 Jul · Receipt R-1733 · paid 1 day before the promise date</div></div></div>
+          <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-banknote"></use></svg></div><div class="grow"><div class="row-title">₹10,000 · Cash</div><div class="row-sub">8 Apr · Receipt R-0187 · at re-admission</div></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div><h2 class="card-title">Call history</h2><p class="card-sub">Every conversation, so nobody asks the same question twice</p></div></div>
+        <div class="timeline">
+          <div class="tl"><span class="b x"></span><div><div class="tl-title">Promise broken · ₹15,000 by 20 Aug</div><div class="tl-meta">10 Aug · Priya</div><div class="tl-quote">“Will pay after the 20th, waiting for a payment from a customer.”</div></div></div>
+          <div class="tl"><span class="b"></span><div><div class="tl-title">Not reachable</div><div class="tl-meta">2 Jul · Priya · retried the next day</div></div></div>
+          <div class="tl"><span class="b k"></span><div><div class="tl-title">Promise kept · ₹10,000 by 15 Jul</div><div class="tl-meta">12 Jun · Sunita · paid on 14 Jul</div><div class="tl-quote">“Will pay in July when school reopens.”</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="offer">
+        <p class="eyebrow"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"></use></svg>Suggested offer</p>
+        <h3>Two parts, cleared by mid-December</h3>
+        <div class="part"><span>Part 1 · by 31 Oct<br><small>Clears old dues first</small></span><b>₹22,000</b></div>
+        <div class="part"><span>Part 2 · by 15 Dec</span><b>₹22,500</b></div>
+        <p>Waive the ₹500 late fee if part 1 is on time. They usually pay after Diwali, so the first date is just before it. This is within your staff limits, so no approval is needed.</p>
+        <button class="btn btn-inverse btn-block" type="button" data-log="Sharma family|Rajesh Sharma · +91 98290 43210 · offering the 2-part plan" data-preset="pay">Offer this plan</button>
+      </div>
+
+      <div class="lockbox owner-only">
+        <div class="top"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>Ability to pay · only you see this</div>
+        <div class="level"><span class="on">High</span><span>Medium</span><span>Low</span></div>
+        <div class="chips" style="margin-bottom:12px"><span class="pill outline plain"><svg class="ic" aria-hidden="true"><use href="#i-store"></use></svg>Business owner</span><span class="pill outline plain"><svg class="ic" aria-hidden="true"><use href="#i-car"></use></svg>Car</span><span class="pill outline plain"><svg class="ic" aria-hidden="true"><use href="#i-bus"></use></svg>School transport</span></div>
+        <p class="muted" style="font-size:12.5px">Tagged by Mr. Verma on 2 Sep. Callers see only “Chase now”.</p>
+      </div>
+      <div class="lockbox not-owner">
+        <div class="top"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>Ability to pay</div>
+        <p class="muted" style="font-size:13.5px">Only the owner can see this family's ability label. You can see the group and the suggested offer.</p>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title" style="margin-bottom:12px">Next step</h2>
+        <div class="rows">
+          <div class="row"><div class="ico-box dark"><svg class="ic" aria-hidden="true"><use href="#i-calendar-clock"></use></svg></div><div class="grow"><div class="row-title">Call on Mon, 28 Sep</div><div class="row-sub">Assigned to Priya · 3rd on her list</div></div></div>
+          <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-map-pin"></use></svg></div><div class="grow"><div class="row-title">Meet at PTM · 3 Oct</div><div class="row-sub">Remind the class teacher of 7-B</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROMISES ===================== -->
+<section data-screen="promises" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Recovery</p>
+      <h1 class="page-title" data-hi="वादे">Promises</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Every promise a parent has made, and whether they kept it. Parents get a reminder a day before. A broken promise goes to the top of the next day's calls.</span></p>
+    </div>
+  </header>
+  <div class="grid g-4">
+    <div class="card"><div class="label">Due today</div><div class="kpi">7</div><div class="muted num" style="font-size:13px">Worth ₹84,000</div></div>
+    <div class="card"><div class="label">Next 7 days</div><div class="kpi">18</div><div class="muted num" style="font-size:13px">Worth ₹2.1 L</div></div>
+    <div class="card"><div class="label">Broken this month</div><div class="kpi">9</div><div class="muted" style="font-size:13px">3 of them yesterday</div></div>
+    <div class="card"><div class="label">Kept (last 90 days)</div><div class="kpi">68%</div><div class="progress"><span style="width:68%"></span></div></div>
+  </div>
+  <div class="card">
+    <div class="card-head" style="flex-wrap:wrap">
+      <div class="seg" data-seg-filter="#promise-table">
+        <button type="button" class="on" data-val="today">Due today <span class="n">7</span></button>
+        <button type="button" data-val="upcoming">Upcoming</button>
+        <button type="button" data-val="broken">Broken</button>
+        <button type="button" data-val="kept">Kept</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="tbl" id="promise-table">
+        <thead><tr><th>Family</th><th class="r">Amount</th><th>Promised for</th><th>Taken by</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr data-cat="today"><td class="cell-main">Patel family</td><td class="r">₹15,500</td><td>Today</td><td>Priya · 12 Sep</td><td><span class="pill promised">Reminded today</span></td></tr>
+          <tr data-cat="today"><td class="cell-main">Bansal family</td><td class="r">₹12,000</td><td>Today</td><td>Priya · 18 Sep</td><td><span class="pill promised">Waiting</span></td></tr>
+          <tr data-cat="today"><td class="cell-main">Kapoor family</td><td class="r">₹9,500</td><td>Today</td><td>Sunita · 19 Sep</td><td><span class="pill promised">Waiting</span></td></tr>
+          <tr data-cat="today"><td class="cell-main">Joshi family</td><td class="r">₹14,000</td><td>Today</td><td>Priya · 14 Sep</td><td><span class="pill promised">Waiting</span></td></tr>
+          <tr data-cat="today"><td class="cell-main">Rao family</td><td class="r">₹11,000</td><td>Today</td><td>Mr. Ansari · 20 Sep</td><td><span class="pill promised">Waiting</span></td></tr>
+          <tr data-cat="today"><td class="cell-main">Thomas family</td><td class="r">₹12,500</td><td>Today</td><td>Priya · 16 Sep</td><td><span class="pill promised">Waiting</span></td></tr>
+          <tr data-cat="today"><td class="cell-main">Qureshi family</td><td class="r">₹9,500</td><td>Today</td><td>Sunita · 21 Sep</td><td><span class="pill promised">Waiting</span></td></tr>
+          <tr data-cat="upcoming" hidden><td class="cell-main">Chopra family</td><td class="r">₹10,000</td><td>Wed, 30 Sep</td><td>Priya · today</td><td><span class="pill outline plain">Reminder on 29 Sep</span></td></tr>
+          <tr data-cat="upcoming" hidden><td class="cell-main">Menon family</td><td class="r">₹20,000</td><td>Thu, 1 Oct</td><td>Sunita · 22 Sep</td><td><span class="pill outline plain">Reminder on 30 Sep</span></td></tr>
+          <tr data-cat="upcoming" hidden><td class="cell-main">Khanna family</td><td class="r">₹6,500</td><td>Fri, 2 Oct</td><td>Priya · 23 Sep</td><td><span class="pill outline plain">Reminder on 1 Oct</span></td></tr>
+          <tr data-cat="broken" hidden><td class="cell-main">Chopra family</td><td class="r">₹10,000</td><td>25 Sep</td><td>Priya · 15 Sep</td><td><span class="pill chase">Broken · new promise 30 Sep</span></td></tr>
+          <tr data-cat="broken" hidden><td class="cell-main">Saxena family</td><td class="r">₹7,500</td><td>25 Sep</td><td>Sunita · 17 Sep</td><td><span class="pill chase">Broken · on today's list</span></td></tr>
+          <tr data-cat="broken" hidden><td class="cell-main">Arora family</td><td class="r">₹12,000</td><td>25 Sep</td><td>Priya · 18 Sep</td><td><span class="pill chase">Broken · on today's list</span></td></tr>
+          <tr data-cat="broken" hidden class="link" data-go="family"><td class="cell-main">Sharma family</td><td class="r">₹15,000</td><td>20 Aug</td><td>Priya · 10 Aug</td><td><span class="pill chase">Broken</span></td></tr>
+          <tr data-cat="kept" hidden><td class="cell-main">Nair family</td><td class="r">₹18,000</td><td>24 Sep</td><td>Priya · 14 Sep</td><td><span class="pill good">Kept · paid 24 Sep</span></td></tr>
+          <tr data-cat="kept" hidden><td class="cell-main">Bose family</td><td class="r">₹9,000</td><td>22 Sep</td><td>Sunita · 11 Sep</td><td><span class="pill good">Kept · paid 21 Sep</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUICK TAG ===================== -->
+<section data-screen="quicktag" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Recovery</p>
+      <h1 class="page-title" data-hi="क्विक टैग">Quick Tag</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Set each family's ability to pay in about 30 seconds. Start with the 100 families who owe the most. Only you will ever see these labels.</span></p>
+    </div>
+  </header>
+  <div class="tagcard stack">
+    <div>
+      <div class="num" style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:8px"><span><b id="tag-done">44</b> of 100 top families tagged</span><span class="muted"><span id="tag-left">56</span> left</span></div>
+      <div class="progress lg"><span id="tag-bar" style="width:44%"></span></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div>
+          <h2 class="page-title" style="font-size:26px" id="tag-name">Das family</h2>
+          <p class="muted" style="margin-top:4px;font-size:14.5px" id="tag-sub">Suman Das (Father) · Ward 6 · Arjun, UKG</p>
+        </div>
+        <div style="text-align:right"><div class="label">Pending</div><div class="kpi-sm" id="tag-due">₹9,000</div></div>
+      </div>
+      <div class="facts" style="margin-top:18px">
+        <div class="fact"><div class="label"><svg class="ic" aria-hidden="true"><use href="#i-briefcase"></use></svg>Occupation</div><b id="tag-job">Bank clerk (private job)</b></div>
+        <div class="fact"><div class="label"><svg class="ic" aria-hidden="true"><use href="#i-map-pin"></use></svg>Locality</div><b id="tag-area">Ward 6</b></div>
+        <div class="fact"><div class="label"><svg class="ic" aria-hidden="true"><use href="#i-car"></use></svg>Vehicle</div><b id="tag-veh">Two-wheeler</b></div>
+        <div class="fact"><div class="label"><svg class="ic" aria-hidden="true"><use href="#i-bus"></use></svg>School transport</div><b id="tag-bus">Yes · paid on time</b></div>
+        <div class="fact"><div class="label"><svg class="ic" aria-hidden="true"><use href="#i-receipt"></use></svg>Tuition</div><b id="tag-fee">3 months pending</b></div>
+        <div class="fact"><div class="label"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg>Staff note</div><b id="tag-note">“Polite, busy father”</b></div>
+      </div>
+      <div class="hint" style="margin-top:14px"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"></use></svg><span id="tag-hint"><b>Suggests at least Medium.</b> Pays transport on time while tuition is pending.</span></div>
+      <div class="choose" style="margin-top:18px">
+        <button class="choice" type="button" data-tag="High"><b>High</b><small>Can pay easily</small></button>
+        <button class="choice" type="button" data-tag="Medium"><b>Medium</b><small>Can pay with a plan</small></button>
+        <button class="choice" type="button" data-tag="Low"><b>Low</b><small>Is really struggling</small></button>
+      </div>
+      <div class="divider"></div>
+      <div class="grid g-2" style="gap:16px;align-items:end">
+        <label class="field" for="usual-habit"><span class="flabel">How do they usually pay? (staff memory)</span>
+          <select class="input" id="usual-habit"><option>Don't know yet</option><option>At admission, in full</option><option>In installments</option><option>At the end of the year</option><option>Next year</option><option>Small amounts, irregular</option></select>
+        </label>
+        <div class="switch-row" style="border:0;padding:0 0 8px"><div><div class="t">Hardship</div><div class="s">Job loss, illness, death in family</div></div><input class="switch" type="checkbox" id="hardship" aria-label="Hardship"></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn btn-ghost btn-sm" type="button" id="tag-skip">Skip for now<svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COLLECT FEE ===================== -->
+<section data-screen="collect" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Money</p>
+      <h1 class="page-title" data-hi="फीस जमा करें">Collect fee</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Find the family and enter the amount. The app pays off the oldest dues first and sends the receipt to the parent on WhatsApp.</span></p>
+    </div>
+  </header>
+  <div class="grid g-2" style="align-items:start">
+    <div class="card">
+      <label class="search" for="collect-search" style="max-width:none;height:44px;border-radius:12px"><svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg><input id="collect-search" type="search" value="Agarwal" aria-label="Find family"></label>
+      <div style="display:flex;align-items:center;gap:14px;margin:20px 0 6px">
+        <div class="avatar lg">RA</div>
+        <div style="min-width:0"><h2 class="card-title" style="font-size:18px">Agarwal family</h2><p class="card-sub">Ritu Agarwal (Mother) · Riya 8-A · Dev 2-B · +91 98110 27745</p></div>
+        <span class="pill nudge" style="margin-left:auto">Nudge</span>
+      </div>
+      <div class="divider"></div>
+      <div class="flabel label" style="margin-bottom:8px">Dues, oldest first</div>
+      <div class="rows">
+        <div class="row"><div class="grow"><div class="row-title">Old dues 2025-26</div><div class="row-sub">Overdue since April</div></div><b class="num">₹4,000</b></div>
+        <div class="row"><div class="grow"><div class="row-title">Q2 installment (July), balance</div><div class="row-sub">78 days late · late fee waived last time</div></div><b class="num">₹3,500</b></div>
+        <div class="row"><div class="grow"><div class="row-title">Q3 installment (October)</div><div class="row-sub">Riya ₹8,000 · Dev ₹6,500 · due 10 Oct</div></div><b class="num">₹14,500</b></div>
+        <div class="row"><div class="grow"><div class="row-title" style="font-size:15px">Total due</div></div><b class="num" style="font-size:16px">₹22,000</b></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <label class="field" for="amt"><span class="flabel">Amount received</span>
+          <div class="amount"><span>₹</span><input class="input" id="amt" type="text" inputmode="numeric" value="16,000" aria-label="Amount in rupees"></div>
+        </label>
+        <div class="label" style="margin:18px 0 6px">How it will be applied</div>
+        <div class="alloc rows" id="alloc"></div>
+        <div class="field" style="margin-top:18px"><span class="flabel">Payment mode</span>
+          <div class="seg" id="mode-seg"><button type="button" class="on"><svg class="ic" aria-hidden="true"><use href="#i-banknote"></use></svg>Cash</button><button type="button"><svg class="ic" aria-hidden="true"><use href="#i-qr-code"></use></svg>UPI</button><button type="button"><svg class="ic" aria-hidden="true"><use href="#i-file-text"></use></svg>Cheque</button><button type="button"><svg class="ic" aria-hidden="true"><use href="#i-landmark"></use></svg>Bank</button></div>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" style="margin-top:22px" type="button" id="collect-btn">Collect ₹16,000 &amp; send receipt</button>
+        <p class="muted" style="font-size:12.5px;text-align:center;margin-top:10px">Collected by Sunita (Accountant) · goes into today's day book</p>
+      </div>
+      <div class="receipt">
+        <div style="display:flex;justify-content:space-between;gap:12px;margin-bottom:14px"><div><b>Sunrise Public School</b><div class="muted" style="font-size:12.5px">Fee receipt · preview</div></div><div style="text-align:right" class="num"><b>R-2315</b><div class="muted" style="font-size:12.5px">26 Sep 2026</div></div></div>
+        <dl class="kv" id="receipt-kv"></dl>
+        <p class="muted" style="font-size:12.5px;margin-top:12px;display:flex;gap:6px;align-items:center"><svg class="ic" aria-hidden="true"><use href="#i-message-circle"></use></svg>Sent on WhatsApp to +91 98110 27745</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DAY BOOK ===================== -->
+<section data-screen="daybook" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Money</p>
+      <h1 class="page-title" data-hi="रोज़नामचा">Day book</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Everything collected today, by payment mode. Close the day once the cash is handed over; after that, any change needs the owner's approval.</span></p>
+    </div>
+    <div class="page-actions"><button class="btn btn-primary" type="button" id="close-day"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>Close day</button></div>
+  </header>
+  <div class="grid g-4">
+    <div class="card"><div class="label">Total today</div><div class="kpi">₹42,500</div><div class="muted" style="font-size:13px">9 receipts · 1 cancelled</div></div>
+    <div class="card"><div class="label"><svg class="ic" aria-hidden="true"><use href="#i-banknote"></use></svg> Cash</div><div class="kpi">₹28,000</div><div class="muted" style="font-size:13px">5 receipts</div></div>
+    <div class="card"><div class="label">UPI</div><div class="kpi">₹12,500</div><div class="muted" style="font-size:13px">3 receipts · matched automatically</div></div>
+    <div class="card"><div class="label">Cheque</div><div class="kpi">₹2,000</div><div class="muted" style="font-size:13px">1 receipt · deposit on Monday</div></div>
+  </div>
+  <div class="grid split">
+    <div class="card">
+      <div class="card-head"><div><h2 class="card-title">Receipts</h2><p class="card-sub">Saturday, 26 September</p></div></div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Time</th><th>Receipt</th><th>Family</th><th>Mode</th><th>By</th><th class="r">Amount</th></tr></thead>
+          <tbody>
+            <tr><td class="num">09:12</td><td class="num">R-2305</td><td class="cell-main">Iyer family</td><td>Cash</td><td>Sunita</td><td class="r">₹6,000</td></tr>
+            <tr><td class="num">09:38</td><td class="num">R-2306</td><td class="cell-main">Pillai family</td><td>UPI</td><td>Online</td><td class="r">₹3,500</td></tr>
+            <tr><td class="num">10:05</td><td class="num">R-2307</td><td class="cell-main">Kulkarni family</td><td>Cash</td><td>Sunita</td><td class="r">₹8,000</td></tr>
+            <tr><td class="num">10:09</td><td class="num">R-2308</td><td class="cell-main">Dutta family</td><td>Cash</td><td>Sunita</td><td class="r">₹5,500</td></tr>
+            <tr class="cancelled"><td class="num">10:12</td><td class="num strike">R-2309</td><td><span class="strike">Dutta family</span> <span class="pill chase plain">Cancelled · duplicate</span></td><td>Cash</td><td>Sunita</td><td class="r strike">₹5,500</td></tr>
+            <tr><td class="num">10:31</td><td class="num">R-2310</td><td class="cell-main">Mehra family</td><td>Cheque</td><td>Sunita</td><td class="r">₹2,000</td></tr>
+            <tr><td class="num">11:02</td><td class="num">R-2311</td><td class="cell-main">Sethi family</td><td>UPI</td><td>Online</td><td class="r">₹4,000</td></tr>
+            <tr><td class="num">11:40</td><td class="num">R-2312</td><td class="cell-main">Rawat family</td><td>Cash</td><td>Sunita</td><td class="r">₹5,000</td></tr>
+            <tr><td class="num">12:15</td><td class="num">R-2313</td><td class="cell-main">Goyal family</td><td>UPI</td><td>Online</td><td class="r">₹5,000</td></tr>
+            <tr><td class="num">12:48</td><td class="num">R-2314</td><td class="cell-main">Tiwari family</td><td>Cash</td><td>Sunita</td><td class="r">₹3,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <h2 class="card-title" style="margin-bottom:14px">Cash handover</h2>
+        <dl class="kv">
+          <dt>Cash collected</dt><dd>₹28,000</dd>
+          <dt>Handed to Mr. Verma</dt><dd>₹28,000</dd>
+          <dt class="total">Difference</dt><dd class="total" style="color:var(--green-ink)">₹0</dd>
+        </dl>
+        <div class="note" style="margin-top:16px"><svg class="ic" aria-hidden="true"><use href="#i-shield-check"></use></svg><span>Cash matches. After you close the day, edits and cancellations need the owner's approval.</span></div>
+      </div>
+      <div class="card soft">
+        <h2 class="card-title" style="margin-bottom:6px">Day status</h2>
+        <p class="muted" id="day-status" style="font-size:13.5px">Open · last receipt at 12:48 PM</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== APPROVALS ===================== -->
+<section data-screen="approvals" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Money</p>
+      <h1 class="page-title" data-hi="मंज़ूरी">Approvals</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Requests that go beyond the limits you set for staff. Approve or reject in one tap, and the staff member is told at once.</span></p>
+    </div>
+  </header>
+  <div class="grid g-2" style="align-items:start">
+    <div class="card approval">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><span class="pill promised">Waiting for you</span><span class="muted num" style="font-size:12.5px">11:05 AM</span></div>
+      <h2 class="page-title" style="font-size:24px;margin-top:14px">₹1,500 discount</h2>
+      <p class="muted" style="margin-top:4px">Bhatia family · requested by Sunita (Accountant)</p>
+      <div class="note" style="margin-top:16px"><svg class="ic" aria-hidden="true"><use href="#i-message-square"></use></svg><span>“Mr. Bhatia will pay the full year's balance of ₹31,000 today if ₹1,500 is waived.”</span></div>
+      <dl class="kv" style="margin-top:16px"><dt>Staff limit for discounts</dt><dd>₹500</dd><dt>Money that comes in today</dt><dd>₹29,500</dd><dt>Family's habit</dt><dd>Carry-forward</dd></dl>
+      <div class="approval-actions" style="display:flex;gap:10px;margin-top:20px"><button class="btn btn-secondary" type="button" data-reject>Reject</button><button class="btn btn-primary" type="button" data-approve style="flex:1"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>Approve</button></div>
+    </div>
+    <div class="card approval">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><span class="pill promised">Waiting for you</span><span class="muted num" style="font-size:12.5px">12:20 PM</span></div>
+      <h2 class="page-title" style="font-size:24px;margin-top:14px">Split into 4 parts</h2>
+      <p class="muted" style="margin-top:4px">Khan family · requested by Mrs. D'Souza (Class teacher)</p>
+      <div class="note" style="margin-top:16px"><svg class="ic" aria-hidden="true"><use href="#i-message-square"></use></svg><span>“Father's shop was shut for 2 months. He can pay ₹4,000 every month from October.”</span></div>
+      <dl class="kv" style="margin-top:16px"><dt>Staff limit for splitting</dt><dd>3 parts</dd><dt>Plan</dt><dd>4 × ₹4,000 · Oct–Jan</dd><dt>Family's habit</dt><dd>Year-end payer</dd></dl>
+      <div class="approval-actions" style="display:flex;gap:10px;margin-top:20px"><button class="btn btn-secondary" type="button" data-reject>Reject</button><button class="btn btn-primary" type="button" data-approve style="flex:1"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>Approve</button></div>
+    </div>
+  </div>
+  <div class="card soft"><div class="rows"><div class="row"><div class="ico-box" style="background:#fff"><svg class="ic" aria-hidden="true"><use href="#i-history"></use></svg></div><div class="grow"><div class="row-title">Last 30 days</div><div class="row-sub num">12 approved · 3 rejected · ₹14,500 in discounts and waivers</div></div><button class="link" type="button" data-toast="Approval history opened">History<svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></button></div></div></div>
+</section>
+
+<!-- ===================== ALERTS ===================== -->
+<section data-screen="alerts" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Money</p>
+      <h1 class="page-title" data-hi="चेतावनी">Alerts</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Where money goes missing: changes inside the school that need a second look, and dues that nobody is chasing.</span></p>
+    </div>
+  </header>
+  <div class="card">
+    <div class="card-head"><div><h2 class="card-title">Inside the school</h2><p class="card-sub">Every change is logged: who, when, before and after</p></div><span class="pill chase plain" id="alerts-pill">2 new</span></div>
+    <div class="rows">
+      <div class="row alert-row"><div class="ico-box red"><svg class="ic" aria-hidden="true"><use href="#i-receipt"></use></svg></div><div class="grow"><div class="row-title">Receipt R-2309 cancelled · ₹5,500</div><div class="row-sub">Dutta family · by Sunita at 10:12 AM · reason: “Duplicate of R-2308”</div></div><div class="end"><button class="btn btn-secondary btn-sm" type="button" data-ok>Mark OK</button></div></div>
+      <div class="row alert-row"><div class="ico-box red"><svg class="ic" aria-hidden="true"><use href="#i-percent"></use></svg></div><div class="grow"><div class="row-title">₹1,000 discount given without approval</div><div class="row-sub">Kulkarni family · by Sunita at 10:05 AM · staff limit is ₹500</div></div><div class="end"><button class="btn btn-secondary btn-sm" type="button" data-toast="Message sent to Sunita asking for the reason">Ask Sunita</button></div></div>
+      <div class="row"><div class="ico-box green"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"></use></svg></div><div class="grow"><div class="row-title">Cash matches today</div><div class="row-sub num">₹28,000 collected · ₹28,000 handed over</div></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head"><div><h2 class="card-title">Dues nobody is chasing</h2><p class="card-sub">Money that is owed but has fallen through the cracks</p></div></div>
+    <div class="rows">
+      <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-phone-off"></use></svg></div><div class="grow"><div class="row-title">23 families with dues, no contact in 30+ days</div><div class="row-sub num">₹3.9 L pending</div></div><div class="end"><button class="btn btn-primary btn-sm" type="button" data-toast="23 families added to next week's call lists">Add to call lists</button></div></div>
+      <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-bus"></use></svg></div><div class="grow"><div class="row-title">4 students use school transport but aren't billed</div><div class="row-sub num">₹4,800 a month</div></div><div class="end"><button class="btn btn-secondary btn-sm" type="button" data-go="setup">Fix billing</button></div></div>
+      <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-file-text"></use></svg></div><div class="grow"><div class="row-title">3 concessions have no reason written</div><div class="row-sub">Given by staff in July and August</div></div><div class="end"><button class="btn btn-secondary btn-sm" type="button" data-toast="Opening the 3 concessions">Review</button></div></div>
+      <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-circle-help"></use></svg></div><div class="grow"><div class="row-title">2 students have no fee plan</div><div class="row-sub">Admitted in August</div></div><div class="end"><button class="btn btn-secondary btn-sm" type="button" data-go="setup">Add plan</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAMILIES ===================== -->
+<section data-screen="families" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">People</p>
+      <h1 class="page-title" data-hi="परिवार">Families</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>All 765 families in the school. Siblings are grouped under one family, so one call covers every child.</span></p>
+    </div>
+    <div class="page-actions"><button class="btn btn-primary" type="button" data-toast="New admission form opened"><svg class="ic" aria-hidden="true"><use href="#i-plus"></use></svg>Add family</button></div>
+  </header>
+  <div class="card">
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px">
+      <label class="search" for="fam-search" style="max-width:340px;flex:1 1 240px"><svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg><input id="fam-search" type="search" placeholder="Name, phone or admission no."></label>
+      <div class="chips">
+        <button type="button" class="chip"><svg class="ic" aria-hidden="true"><use href="#i-filter"></use></svg>All classes</button>
+        <button type="button" class="chip">Group<svg class="ic" aria-hidden="true"><use href="#i-chevron-down"></use></svg></button>
+        <button type="button" class="chip">Habit<svg class="ic" aria-hidden="true"><use href="#i-chevron-down"></use></svg></button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="tbl" id="fam-table">
+        <thead><tr><th>Family</th><th>Children</th><th>Group</th><th>Habit</th><th class="r">To collect</th><th>Last paid</th><th></th></tr></thead>
+        <tbody>
+          <tr class="link" data-go="family"><td><div class="cell-main">Sharma family</div><div class="cell-sub num">Rajesh · +91 98290 43210</div></td><td>Aarav 7-B · Diya 3-A</td><td><span class="pill chase">Chase now</span></td><td>Year-end payer</td><td class="r">₹44,500</td><td class="nw">14 Jul</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Malhotra family</div><div class="cell-sub num">Sanjay · +91 98280 11873</div></td><td>Ishaan 10-B · Myra 6-A</td><td><span class="pill chase">Chase now</span></td><td>Carry-forward</td><td class="r">₹60,000</td><td class="nw">18 Apr</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Agarwal family</div><div class="cell-sub num">Ritu · +91 98110 27745</div></td><td>Riya 8-A · Dev 2-B</td><td><span class="pill nudge">Nudge</span></td><td>Late but steady</td><td class="r">₹22,000</td><td class="nw">11 Aug</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Gupta family</div><div class="cell-sub num">Anil · +91 94140 22019</div></td><td>Kavya 9-A</td><td><span class="pill chase">Chase now</span></td><td>Selective payer</td><td class="r">₹19,500</td><td class="nw">2 May</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Patel family</div><div class="cell-sub num">Mehul · +91 97990 40318</div></td><td>Krish 7-A</td><td><span class="pill promised">Promised</span></td><td>Seasonal</td><td class="r">₹15,500</td><td class="nw">4 Jun</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Yadav family</div><div class="cell-sub num">Ramesh · +91 96360 88120</div></td><td>Pooja 6-B · Rahul 3-B</td><td><span class="pill support">Support</span></td><td>Not paying · hardship</td><td class="r">₹39,000</td><td class="nw">15 Jan</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Mishra family</div><div class="cell-sub num">Alok · +91 99280 70114</div></td><td>Ananya 9-B</td><td><span class="pill chase">Chase now</span></td><td>Not paying</td><td class="r">₹30,500</td><td class="nw">21 Mar</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Khan family</div><div class="cell-sub num">Imran · +91 90010 66241</div></td><td>Ayaan 5-C</td><td><span class="pill chase">Chase now</span></td><td>Year-end payer</td><td class="r">₹16,000</td><td class="nw">30 Jun</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Singh family</div><div class="cell-sub num">Harpreet · +91 98150 33462</div></td><td>Jasleen 4-A</td><td><span class="pill chase">Chase now</span></td><td>Irregular</td><td class="r">₹12,000</td><td class="nw">9 Sep</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-go="quicktag"><td><div class="cell-main">Das family</div><div class="cell-sub num">Suman · +91 90240 51876</div></td><td>Arjun UKG</td><td><span class="pill tag">Tag first</span></td><td>New · watching</td><td class="r">₹9,000</td><td class="nw">12 Jun</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Jain family</div><div class="cell-sub num">Nikhil · +91 98292 60451</div></td><td>Aadya 1-A</td><td><span class="pill good">Good payer</span></td><td>Early payer</td><td class="r">₹0 overdue</td><td class="nw">3 Jul</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+          <tr class="link" data-toast="In this mockup, the Sharma family has the full card"><td><div class="cell-main">Reddy family</div><div class="cell-sub num">K. Reddy · +91 94600 18209</div></td><td>Sai 10-A</td><td><span class="pill good">Good payer</span></td><td>On-time</td><td class="r">₹0 overdue</td><td class="nw">8 Jul</td><td class="chev"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"></use></svg></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="more" id="fam-more">Showing 12 of 765</p>
+  </div>
+</section>
+
+<!-- ===================== STAFF ===================== -->
+<section data-screen="staff" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">People</p>
+      <h1 class="page-title" data-hi="स्टाफ और भूमिकाएँ">Staff &amp; roles</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Who can see and do what. Callers never see ability labels or school totals. Use “View as” in the sidebar to try each role.</span></p>
+    </div>
+    <div class="page-actions"><button class="btn btn-primary" type="button" data-toast="Invite sent on WhatsApp"><svg class="ic" aria-hidden="true"><use href="#i-plus"></use></svg>Add staff</button></div>
+  </header>
+  <div class="grid split">
+    <div class="card">
+      <div class="card-head"><div><h2 class="card-title">This month's recovery work</h2><p class="card-sub">1–26 September</p></div></div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Person</th><th>Role</th><th class="r">Calls</th><th class="r">Promises</th><th class="r">Kept</th><th class="r">Recovered</th></tr></thead>
+          <tbody>
+            <tr><td><div class="fam" style="min-width:0"><div class="avatar">PK</div><div><div class="cell-main">Priya Kaushik</div><div class="cell-sub">Front office</div></div></div></td><td>Caller</td><td class="r">412</td><td class="r">96</td><td class="r">71%</td><td class="r"><b>₹4.6 L</b></td></tr>
+            <tr><td><div class="fam" style="min-width:0"><div class="avatar">SB</div><div><div class="cell-main">Sunita Bhat</div><div class="cell-sub">Fee counter</div></div></div></td><td>Accountant</td><td class="r">138</td><td class="r">31</td><td class="r">65%</td><td class="r"><b>₹1.4 L</b></td></tr>
+            <tr><td><div class="fam" style="min-width:0"><div class="avatar">AD</div><div><div class="cell-main">Mrs. D'Souza</div><div class="cell-sub">Class teacher 7-B</div></div></div></td><td>Caller · own class</td><td class="r">64</td><td class="r">12</td><td class="r">58%</td><td class="r"><b>₹0.5 L</b></td></tr>
+            <tr><td><div class="fam" style="min-width:0"><div class="avatar">FA</div><div><div class="cell-main">Mr. Ansari</div><div class="cell-sub">Class teacher 9-A</div></div></div></td><td>Caller · own class</td><td class="r">52</td><td class="r">9</td><td class="r">67%</td><td class="r"><b>₹0.4 L</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <h2 class="card-title" style="margin-bottom:14px">What each role can do</h2>
+      <div class="table-wrap">
+        <table class="tbl" style="font-size:13px">
+          <thead><tr><th></th><th>Owner</th><th>Accountant</th><th>Caller</th></tr></thead>
+          <tbody>
+            <tr><td>School totals</td><td><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></td><td class="muted">Collections</td><td class="muted">—</td></tr>
+            <tr><td>Ability labels</td><td><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></td><td class="muted">—</td><td class="muted">—</td></tr>
+            <tr><td>Collect fees</td><td><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></td><td><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></td><td class="muted">—</td></tr>
+            <tr><td>Give offers</td><td>Any</td><td class="muted">Within limits</td><td class="muted">Within limits</td></tr>
+            <tr><td>Call list</td><td><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></td><td><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></td><td class="muted">Own list</td></tr>
+            <tr><td>Cancel receipt</td><td><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></td><td class="muted">Ask owner</td><td class="muted">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CAMPAIGNS ===================== -->
+<section data-screen="campaigns" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Engage</p>
+      <h1 class="page-title" data-hi="अभियान">Campaigns</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>One message with one offer, sent to a whole group at the right time of year. Then see who paid.</span></p>
+    </div>
+    <div class="page-actions"><button class="btn btn-secondary" type="button" data-toast="New campaign form opened"><svg class="ic" aria-hidden="true"><use href="#i-plus"></use></svg>New campaign</button></div>
+  </header>
+  <div class="card">
+    <div class="grid" style="grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center" id="camp-grid">
+      <div>
+        <span class="pill dark plain"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"></use></svg>Suggested for October</span>
+        <h2 class="page-title" style="font-size:30px;margin-top:14px">Diwali campaign</h2>
+        <p class="muted" style="margin-top:8px;font-size:15px;max-width:520px">Business families get Diwali money and kharif harvest comes in. Year-end payers pay far more often when asked in October.</p>
+        <div class="grid g-3" style="margin-top:22px;gap:12px">
+          <div class="tile"><div class="label">Who</div><b style="display:block;margin-top:4px">Chase now + Year-end payers</b><div class="muted num" style="font-size:12.5px;margin-top:2px">86 families · ₹4.2 L</div></div>
+          <div class="tile"><div class="label">Offer</div><b style="display:block;margin-top:4px">Clear by 31 Oct, no late fee</b><div class="muted" style="font-size:12.5px;margin-top:2px">Within staff limits</div></div>
+          <div class="tile"><div class="label">When</div><b style="display:block;margin-top:4px">Thu, 15 Oct · 10 AM</b><div class="muted" style="font-size:12.5px;margin-top:2px">WhatsApp, SMS backup</div></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+          <button class="btn btn-primary btn-lg" type="button" data-toast="Scheduled: 86 families on Thu, 15 Oct at 10 AM"><svg class="ic" aria-hidden="true"><use href="#i-send"></use></svg>Schedule for 86 families</button>
+          <button class="btn btn-secondary btn-lg" type="button" data-go="templates">Edit message</button>
+        </div>
+      </div>
+      <div class="bubble" style="max-width:300px;background:#d9fdd3;align-self:center;font-size:13.5px;box-shadow:var(--shadow)">
+        नमस्ते राजेश जी। दिवाली की शुभकामनाएँ! आरव और दिया की बाकी फीस ₹44,500 है। 31 अक्टूबर तक जमा करने पर लेट फीस माफ़। UPI से भुगतान करें: <a>pay.sunrise.school/s/8K2</a>
+        <span class="t">10:00 AM</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head"><div><h2 class="card-title">Past campaigns</h2><p class="card-sub">What worked last year</p></div></div>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th>Campaign</th><th>Sent</th><th class="r">Families</th><th class="r">Paid</th><th class="r">Collected</th></tr></thead>
+        <tbody>
+          <tr><td class="cell-main">Re-admission: clear old dues</td><td>Apr 2026</td><td class="r">148</td><td class="r">97 · 66%</td><td class="r"><b>₹4.1 L</b></td></tr>
+          <tr><td class="cell-main">Result day reminder</td><td>Mar 2026</td><td class="r">212</td><td class="r">131 · 62%</td><td class="r"><b>₹6.8 L</b></td></tr>
+          <tr><td class="cell-main">Diwali: no late fee</td><td>Oct 2025</td><td class="r">94</td><td class="r">51 · 54%</td><td class="r"><b>₹3.6 L</b></td></tr>
+          <tr><td class="cell-main">Summer soft reminder</td><td>May 2025</td><td class="r">320</td><td class="r">88 · 28%</td><td class="r"><b>₹2.2 L</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TEMPLATES ===================== -->
+<section data-screen="templates" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Engage</p>
+      <h1 class="page-title" data-hi="संदेश टेम्पलेट">Message templates</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Polite, ready-made messages. Each one fills in the parent's name, the children, the amount and a UPI pay link, in the family's own language.</span></p>
+    </div>
+  </header>
+  <div class="grid split-l">
+    <div class="card" style="padding:10px">
+      <div class="rows" id="tpl-list"></div>
+    </div>
+    <div class="card">
+      <div class="card-head" style="flex-wrap:wrap">
+        <div><h2 class="card-title" id="tpl-title">Overdue</h2><p class="card-sub" id="tpl-when">Sent 7 days after the due date</p></div>
+        <div class="seg" id="tpl-lang"><button type="button" data-l="en">English</button><button type="button" data-l="hi" class="on">हिंदी</button></div>
+      </div>
+      <div style="background:#efeae2;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px;min-height:220px">
+        <span class="wa-day">Today</span>
+        <div class="bubble" id="tpl-bubble" style="max-width:420px"></div>
+      </div>
+      <div class="note" style="margin-top:14px"><svg class="ic" aria-hidden="true"><use href="#i-shield-check"></use></svg><span>Only sent between 9 AM and 7 PM, at most 2 reminders a week, never on festival days. Parents agreed to messages at admission.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARENT VIEW ===================== -->
+<section data-screen="parent" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Engage</p>
+      <h1 class="page-title" data-hi="अभिभावक दृश्य">Parent view</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>What a parent sees. There is no app and no login: just polite WhatsApp messages and a secure link to pay.</span></p>
+    </div>
+  </header>
+  <div class="phones">
+    <div>
+      <div class="phone"><div class="phone-screen">
+        <div class="notch"></div>
+        <div class="status" style="background:#f7f7f7"><span>9:41</span><span><svg class="ic" aria-hidden="true"><use href="#i-wifi"></use></svg></span></div>
+        <div class="wa">
+          <div class="wa-head"><span class="avatar">SPS</span><div><b>Sunrise Public School<svg class="ic" aria-hidden="true"><use href="#i-circle-check"></use></svg></b><small>Business account</small></div></div>
+          <div class="wa-body">
+            <span class="wa-day">Mon, 28 Sep</span>
+            <div class="bubble">नमस्ते राजेश जी। आरव (7-B) और दिया (3-A) की ₹38,000 फीस बाकी है, और पिछले साल का ₹6,500। कृपया UPI से भुगतान करें या किस्तों के लिए ऑफिस को कॉल करें।<span class="t">10:02 AM</span><span class="paybtn"><svg class="ic" aria-hidden="true"><use href="#i-qr-code"></use></svg>Pay by UPI</span></div>
+            <div class="bubble me">31 अक्टूबर तक ₹22,000 दे दूँगा<span class="t">11:48 AM</span></div>
+            <div class="bubble">धन्यवाद राजेश जी। हमने नोट कर लिया: 31 अक्टूबर तक ₹22,000।<span class="t">11:49 AM</span></div>
+            <span class="wa-day">Fri, 30 Oct</span>
+            <div class="bubble">याद दिलाना: कल ₹22,000 की तारीख है।<span class="t">10:00 AM</span><span class="paybtn"><svg class="ic" aria-hidden="true"><use href="#i-qr-code"></use></svg>Pay ₹22,000</span></div>
+            <div class="bubble">रसीद R-2466: ₹22,000 UPI से प्राप्त हुए। धन्यवाद! बाकी ₹22,500, 15 दिसंबर तक।<span class="t">7:14 PM</span></div>
+          </div>
+          <div class="wa-input"><span>Message</span></div>
+        </div>
+      </div></div>
+      <p class="phone-caption">WhatsApp: reminder, the parent's promise, a reminder the day before, and an instant receipt.</p>
+    </div>
+    <div>
+      <div class="phone"><div class="phone-screen">
+        <div class="notch"></div>
+        <div class="status"><span>9:41</span><span><svg class="ic" aria-hidden="true"><use href="#i-wifi"></use></svg></span></div>
+        <div class="stmt-url"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>pay.sunrise.school</div>
+        <div class="stmt">
+          <div style="display:flex;align-items:center;gap:10px;margin-top:8px"><div class="brand-mark" style="width:30px;height:30px;font-size:14px">S</div><div><b style="font-size:14px">Sunrise Public School</b><div class="muted" style="font-size:11.5px">Fee statement · Sharma family</div></div></div>
+          <div><div class="muted" style="font-size:12px">Total to pay</div><div style="font:600 34px/1.1 var(--font-display);letter-spacing:-.03em" class="num">₹44,500</div></div>
+          <div class="rows" style="font-size:13px">
+            <div class="row"><div class="grow"><b>Aarav · 7-B</b><div class="row-sub">This year</div></div><span class="num">₹22,000</span></div>
+            <div class="row"><div class="grow"><b>Diya · 3-A</b><div class="row-sub">This year</div></div><span class="num">₹16,000</span></div>
+            <div class="row"><div class="grow"><b>Old dues</b><div class="row-sub">2025-26</div></div><span class="num">₹6,500</span></div>
+          </div>
+          <div style="display:grid;gap:8px">
+            <div style="border:1.5px solid #000;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;font-size:13px"><span><b>Part 1</b> · agreed plan</span><b class="num">₹22,000</b></div>
+            <div style="border:1px solid var(--line-strong);border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;font-size:13px"><span>Full amount</span><span class="num">₹44,500</span></div>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block" type="button" data-toast="In the real app this opens the parent's UPI app">Pay ₹22,000 by UPI</button>
+          <p class="muted" style="font-size:11px;text-align:center">Secure link · payment history needs an OTP</p>
+        </div>
+      </div></div>
+      <p class="phone-caption">The statement link inside every message: dues per child and one Pay button.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REPORTS ===================== -->
+<section data-screen="reports" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Insights</p>
+      <h1 class="page-title" data-hi="रिपोर्ट">Reports</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Ready-made reports for the owner. The daily summary also arrives on WhatsApp at 7 PM, so there's no need to open the app.</span></p>
+    </div>
+  </header>
+  <div class="grid split">
+    <div class="card">
+      <div class="card-head"><div><h2 class="card-title">Pending by class</h2><p class="card-sub">This year's fees only · ₹15.2 L in total</p></div></div>
+      <div class="hbars" id="class-bars"></div>
+    </div>
+    <div class="card">
+      <h2 class="card-title" style="margin-bottom:14px">Daily summary · 7 PM</h2>
+      <div style="background:#efeae2;border-radius:16px;padding:14px">
+        <div class="bubble" style="max-width:100%">
+          <b>Sunrise Public School · Sat, 26 Sep</b><br>
+          Collected today: ₹42,500 (9 receipts)<br>
+          Calls: 21 of 38 done<br>
+          Promises due today: 7 · ₹84,000<br>
+          Broken yesterday: 3<br>
+          Alerts: 1 receipt cancelled, 1 discount without approval
+          <span class="t">7:00 PM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid g-3" id="report-cards"></div>
+</section>
+
+<!-- ===================== FEE SETUP ===================== -->
+<section data-screen="setup" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Setup</p>
+      <h1 class="page-title" data-hi="फीस सेटअप">Fee setup</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Set once per session: fee heads, fees per class, installments, the late fee, concessions, and what staff may offer without asking you.</span></p>
+    </div>
+    <div class="page-actions"><button class="btn btn-primary" type="button" data-toast="Fee setup saved for session 2026-27">Save changes</button></div>
+  </header>
+  <div class="grid g-3">
+    <div class="card"><div class="label">Session</div><div class="kpi-sm">2026-27</div><div class="muted" style="font-size:13px;margin-top:4px">1 Apr 2026 – 31 Mar 2027</div></div>
+    <div class="card"><div class="label">Installments</div><div class="kpi-sm">Quarterly</div><div class="muted" style="font-size:13px;margin-top:4px">Due 10 Apr, 10 Jul, 10 Oct, 10 Jan</div></div>
+    <div class="card"><div class="label">Late fee</div><div class="kpi-sm">₹100 a week</div><div class="muted" style="font-size:13px;margin-top:4px">After 15 days · at most ₹500 per installment</div></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><div><h2 class="card-title">Fee heads</h2><p class="card-sub">What a year's fee is made of</p></div><button class="btn btn-secondary btn-sm" type="button" data-toast="New fee head added"><svg class="ic" aria-hidden="true"><use href="#i-plus"></use></svg>Add head</button></div>
+    <div class="chips"><span class="chip on">Tuition</span><span class="chip on">Annual charges</span><span class="chip on">Exam</span><span class="chip on">Computer</span><span class="chip">Admission · one time</span><span class="chip">Transport · by route</span><span class="chip">Activity</span></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><div><h2 class="card-title">Fees per class</h2><p class="card-sub">Yearly amounts · transport billed separately</p></div></div>
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th>Classes</th><th class="r">Tuition</th><th class="r">Annual</th><th class="r">Exam</th><th class="r">Computer</th><th class="r">Year total</th><th class="r">Per quarter</th></tr></thead>
+        <tbody>
+          <tr><td class="cell-main">Nursery – UKG</td><td class="r">₹18,000</td><td class="r">₹4,000</td><td class="r">₹1,000</td><td class="r">—</td><td class="r"><b>₹23,000</b></td><td class="r">₹5,750</td></tr>
+          <tr><td class="cell-main">Class 1 – 5</td><td class="r">₹20,000</td><td class="r">₹4,500</td><td class="r">₹1,500</td><td class="r">—</td><td class="r"><b>₹26,000</b></td><td class="r">₹6,500</td></tr>
+          <tr><td class="cell-main">Class 6 – 8</td><td class="r">₹24,500</td><td class="r">₹5,000</td><td class="r">₹1,500</td><td class="r">₹1,000</td><td class="r"><b>₹32,000</b></td><td class="r">₹8,000</td></tr>
+          <tr><td class="cell-main">Class 9 – 10</td><td class="r">₹30,000</td><td class="r">₹5,500</td><td class="r">₹2,000</td><td class="r">₹1,500</td><td class="r"><b>₹39,000</b></td><td class="r">₹9,750</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="grid g-2" style="align-items:start">
+    <div class="card">
+      <h2 class="card-title">Concessions</h2>
+      <div class="rows" style="margin-top:12px">
+        <div class="row"><div class="grow"><div class="row-title">Sibling</div><div class="row-sub">5% on the younger child</div></div><span class="muted num">118 students</span></div>
+        <div class="row"><div class="grow"><div class="row-title">Staff child</div><div class="row-sub">50% of tuition</div></div><span class="muted num">9 students</span></div>
+        <div class="row"><div class="grow"><div class="row-title">Merit</div><div class="row-sub">Up to 25% · owner approves</div></div><span class="muted num">14 students</span></div>
+        <div class="row"><div class="grow"><div class="row-title">RTE seats</div><div class="row-sub">Government pays · kept out of recovery lists</div></div><span class="muted num">25 students</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2 class="card-title">What staff can offer without asking you</h2>
+      <div style="margin-top:6px">
+        <div class="switch-row"><div><div class="t">Split dues into parts</div><div class="s">Up to 3 parts with fixed dates</div></div><input class="switch" type="checkbox" checked aria-label="Split dues"></div>
+        <div class="switch-row"><div><div class="t">Waive the late fee</div><div class="s">Up to ₹500, if paid by the agreed date</div></div><input class="switch" type="checkbox" checked aria-label="Waive late fee"></div>
+        <div class="switch-row"><div><div class="t">Small discount</div><div class="s">Up to ₹500 for clearing the year or old dues</div></div><input class="switch" type="checkbox" checked aria-label="Small discount"></div>
+        <div class="switch-row"><div><div class="t">Doorstep collection</div><div class="s">Staff can book a home visit</div></div><input class="switch" type="checkbox" aria-label="Doorstep collection"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== IMPORT ===================== -->
+<section data-screen="import" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Setup</p>
+      <h1 class="page-title" data-hi="डेटा आयात">Import data</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>Bring in students, fees and old dues from your Excel sheets. Nothing is saved until you have checked the preview.</span></p>
+    </div>
+  </header>
+  <div class="card">
+    <div class="stepper">
+      <div class="step done"><i><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></i>Get templates</div>
+      <div class="step done"><i><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></i>Upload</div>
+      <div class="step cur"><i>3</i>Check</div>
+      <div class="step"><i>4</i>Import</div>
+    </div>
+  </div>
+  <div class="grid split-l">
+    <div class="stack">
+      <div class="card">
+        <h2 class="card-title" style="margin-bottom:10px">Excel templates</h2>
+        <div class="rows">
+          <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-file-spreadsheet"></use></svg></div><div class="grow"><div class="row-title">Students &amp; families</div><div class="row-sub">Required</div></div></div>
+          <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-file-spreadsheet"></use></svg></div><div class="grow"><div class="row-title">Fee structure</div><div class="row-sub">Required</div></div></div>
+          <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-file-spreadsheet"></use></svg></div><div class="grow"><div class="row-title">Opening old dues</div><div class="row-sub">Required</div></div></div>
+          <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-file-spreadsheet"></use></svg></div><div class="grow"><div class="row-title">Past payments</div><div class="row-sub">Optional · 1–2 years lets habits show from day one</div></div></div>
+        </div>
+      </div>
+      <div class="dropzone">
+        <div class="ico-box dark"><svg class="ic" aria-hidden="true"><use href="#i-upload"></use></svg></div>
+        <b>Drop an Excel file here</b>
+        <span class="muted" style="font-size:13px">or choose one from this computer</span>
+        <div class="file" style="margin-top:10px"><svg class="ic" aria-hidden="true"><use href="#i-file-spreadsheet"></use></svg><div style="min-width:0"><b style="font-size:13.5px">students_2026.xlsx</b><div class="muted num" style="font-size:12px">812 rows · uploaded 2 min ago</div></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head" style="flex-wrap:wrap"><div><h2 class="card-title">Check results</h2><p class="card-sub">812 rows in students_2026.xlsx</p></div></div>
+      <div class="grid g-4" style="gap:10px">
+        <div class="tile"><div class="label check-ok"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"></use></svg> Ready</div><div class="kpi-sm">804</div></div>
+        <div class="tile"><div class="label check-warn"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"></use></svg> Duplicates</div><div class="kpi-sm">3</div></div>
+        <div class="tile"><div class="label check-warn"><svg class="ic" aria-hidden="true"><use href="#i-circle-alert"></use></svg> No phone</div><div class="kpi-sm">5</div></div>
+        <div class="tile"><div class="label check-ok"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"></use></svg> Unknown class</div><div class="kpi-sm">0</div></div>
+      </div>
+      <div class="table-wrap" style="margin-top:18px">
+        <table class="tbl" style="font-size:13px">
+          <thead><tr><th>Row</th><th>Student</th><th>Class</th><th>Parent phone</th><th class="r">Old dues</th><th>Check</th></tr></thead>
+          <tbody>
+            <tr><td class="num">2</td><td>Aarav Sharma</td><td>7-B</td><td class="num">98290 43210</td><td class="r">₹3,500</td><td class="check-ok">OK</td></tr>
+            <tr><td class="num">3</td><td>Diya Sharma</td><td>3-A</td><td class="num">98290 43210</td><td class="r">₹3,000</td><td class="check-ok">OK · sibling grouped</td></tr>
+            <tr class="flag"><td class="num">57</td><td>Kavya Gupta</td><td>9-A</td><td class="num">94140 22019</td><td class="r">—</td><td class="check-warn">Duplicate of row 56</td></tr>
+            <tr class="flag"><td class="num">212</td><td>Neil Fernandes</td><td>2-A</td><td class="muted">missing</td><td class="r">₹1,200</td><td class="check-warn">No phone number</td></tr>
+            <tr><td class="num">213</td><td>Arjun Das</td><td>UKG</td><td class="num">90240 51876</td><td class="r">—</td><td class="check-ok">OK</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;justify-content:flex-end">
+        <button class="btn btn-secondary" type="button" data-toast="Download the 8 flagged rows, fix them in Excel, then upload again">Fix in Excel</button>
+        <button class="btn btn-primary" type="button" data-toast="804 students imported · 8 rows left to fix">Import 804 rows</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SETTINGS ===================== -->
+<section data-screen="settings" class="stack" hidden>
+  <header class="page-head">
+    <div>
+      <p class="eyebrow">Setup</p>
+      <h1 class="page-title" data-hi="सेटिंग्स">Settings</h1>
+      <p class="page-sub"><svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg><span>School details, languages, the WhatsApp connection, contact rules that protect relationships with parents, and your daily summary.</span></p>
+    </div>
+  </header>
+  <div class="grid g-2" style="align-items:start">
+    <div class="stack">
+      <div class="card">
+        <h2 class="card-title" style="margin-bottom:12px">School</h2>
+        <dl class="kv"><dt>Name</dt><dd>Sunrise Public School</dd><dt>City</dt><dd>Jaipur, Rajasthan</dd><dt>Office phone</dt><dd>0141 222 4455</dd><dt>Students</dt><dd>812 in 765 families</dd></dl>
+      </div>
+      <div class="card">
+        <h2 class="card-title" style="margin-bottom:6px">WhatsApp</h2>
+        <div class="rows">
+          <div class="row"><div class="ico-box green"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"></use></svg></div><div class="grow"><div class="row-title">Click-to-WhatsApp</div><div class="row-sub">Staff send from their own phone · free</div></div><span class="pill good">On</span></div>
+          <div class="row"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-send"></use></svg></div><div class="grow"><div class="row-title">Automatic sending (Business API)</div><div class="row-sub">Approved templates · small cost per message</div></div><button class="btn btn-primary btn-sm" type="button" data-toast="Connection guide opened">Connect</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="card-title" style="margin-bottom:6px">Language</h2>
+        <div class="switch-row"><div><div class="t">Messages to parents</div><div class="s">Each family can have its own</div></div><span class="pill outline plain">Hindi by default</span></div>
+        <div class="switch-row"><div><div class="t">App language</div><div class="s">Also in the top bar</div></div><span class="pill outline plain">English · हिंदी</span></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <h2 class="card-title">Contact rules</h2>
+        <p class="card-sub">Keep reminders polite and within limits</p>
+        <div style="margin-top:6px">
+          <div class="switch-row"><div><div class="t">Calls only 9 AM – 7 PM</div></div><input class="switch" type="checkbox" checked aria-label="Call hours"></div>
+          <div class="switch-row"><div><div class="t">One call per family every 3 days</div></div><input class="switch" type="checkbox" checked aria-label="Call gap"></div>
+          <div class="switch-row"><div><div class="t">At most 2 reminders a week</div></div><input class="switch" type="checkbox" checked aria-label="Reminder limit"></div>
+          <div class="switch-row"><div><div class="t">No calls on festival days</div></div><input class="switch" type="checkbox" checked aria-label="Festival days"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="card-title">Notifications to you</h2>
+        <div style="margin-top:6px">
+          <div class="switch-row"><div><div class="t">Daily summary on WhatsApp</div><div class="s">Every day at 7 PM</div></div><input class="switch" type="checkbox" checked aria-label="Daily summary"></div>
+          <div class="switch-row"><div><div class="t">When a receipt is cancelled</div><div class="s">Right away</div></div><input class="switch" type="checkbox" checked aria-label="Receipt cancelled"></div>
+          <div class="switch-row"><div><div class="t">Weekly report</div><div class="s">Monday at 8 AM</div></div><input class="switch" type="checkbox" aria-label="Weekly report"></div>
+        </div>
+      </div>
+      <div class="card soft">
+        <h2 class="card-title" style="margin-bottom:6px">Data &amp; privacy</h2>
+        <p class="muted" style="font-size:13.5px">Parent consent is recorded at admission (DPDP Act 2023). Ability labels are visible to the owner only. Data is deleted after a student leaves, except what the law requires us to keep.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+</div>
+
+<!-- ===================== LOG RESULT SHEET ===================== -->
+<div class="backdrop" id="log-sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="log-title">
+    <div class="sheet-head">
+      <div><h2 class="sheet-title" id="log-title">Log call result · Sharma family</h2><p class="card-sub" id="log-sub">Rajesh Sharma · +91 98290 43210</p></div>
+      <button class="icon-btn" type="button" data-close aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"></use></svg></button>
+    </div>
+    <div class="label" style="margin-bottom:10px">What did they say?</div>
+    <div class="outcomes" id="outcomes">
+      <button type="button" class="outcome" data-outcome="pay"><svg class="ic" aria-hidden="true"><use href="#i-handshake"></use></svg>Will pay</button>
+      <button type="button" class="outcome" data-outcome="paid"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"></use></svg>Paid already</button>
+      <button type="button" class="outcome" data-outcome="unreach"><svg class="ic" aria-hidden="true"><use href="#i-phone-off"></use></svg>Not reachable</button>
+      <button type="button" class="outcome" data-outcome="callback"><svg class="ic" aria-hidden="true"><use href="#i-calendar-clock"></use></svg>Call back later</button>
+      <button type="button" class="outcome" data-outcome="plan"><svg class="ic" aria-hidden="true"><use href="#i-layers"></use></svg>Wants installments</button>
+      <button type="button" class="outcome" data-outcome="money"><svg class="ic" aria-hidden="true"><use href="#i-heart-handshake"></use></svg>Money problem</button>
+      <button type="button" class="outcome" data-outcome="complaint"><svg class="ic" aria-hidden="true"><use href="#i-message-square-warning"></use></svg>Complaint</button>
+      <button type="button" class="outcome" data-outcome="refused"><svg class="ic" aria-hidden="true"><use href="#i-ban"></use></svg>Refused</button>
+    </div>
+    <div id="pay-form" hidden style="margin-top:18px">
+      <div class="grid g-2" style="gap:12px">
+        <label class="field" for="p-amt"><span class="flabel">Amount</span><input class="input num" id="p-amt" value="₹22,000"></label>
+        <label class="field" for="p-date"><span class="flabel">By date</span><input class="input" id="p-date" value="Sat, 31 Oct 2026"></label>
+      </div>
+      <label class="field" for="p-note" style="margin-top:12px"><span class="flabel">Note (optional)</span><textarea class="input" id="p-note">Business picks up at Diwali. Agreed to the 2-part plan.</textarea></label>
+    </div>
+    <div class="note" id="next-step" style="margin-top:16px" hidden><svg class="ic" aria-hidden="true"><use href="#i-corner-down-right"></use></svg><span id="next-text"></span></div>
+    <div class="sheet-foot">
+      <button class="btn btn-secondary" type="button" data-close>Cancel</button>
+      <button class="btn btn-primary" type="button" id="log-save" disabled>Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="ic" aria-hidden="true"><use href="#i-circle-check"></use></svg><span id="toast-text"></span></div>
+</div>
+
+<script>
+(function(){
+  var app = document.getElementById('app');
+  var ALL = ['home','forecast','recover','calls','promises','quicktag','collect','daybook','approvals','alerts','families','family','staff','campaigns','templates','parent','reports','setup','import','settings'];
+  var ROLE_ROUTES = {
+    owner: ALL,
+    accountant: ['collect','daybook','calls','promises','families','family','templates','parent','reports','setup','import'],
+    caller: ['calls','promises','families','family','templates','parent']
+  };
+  var START = {owner:'home', accountant:'collect', caller:'calls'};
+  var PEOPLE = {
+    owner: {init:'MV', name:'Mr. Verma', role:'Owner · Principal'},
+    accountant: {init:'SB', name:'Sunita Bhat', role:'Accountant'},
+    caller: {init:'PK', name:'Priya Kaushik', role:'Caller · front office'}
+  };
+  var role = 'owner', current = 'home', previous = 'recover';
+
+  function $(s, r){ return (r || document).querySelector(s); }
+  function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
+  /* ---------- toast ---------- */
+  var toastTimer;
+  function toast(msg){
+    $('#toast-text').textContent = msg;
+    var t = $('#toast'); t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+
+  /* ---------- routing ---------- */
+  function allowed(r){ return ROLE_ROUTES[role].indexOf(r) !== -1; }
+  function show(r){
+    if (!$('[data-screen="' + r + '"]') || !allowed(r)) r = START[role];
+    if (r !== current) previous = current;
+    current = r;
+    $$('[data-screen]').forEach(function(s){ s.hidden = s.getAttribute('data-screen') !== r; });
+    $$('.nav a').forEach(function(a){
+      var g = a.getAttribute('data-go');
+      a.classList.toggle('active', g === r || (r === 'family' && g === 'families'));
+    });
+    app.classList.remove('nav-open');
+    window.scrollTo(0, 0);
+  }
+  function go(r){
+    if (r === 'back') r = previous && previous !== 'family' ? previous : 'recover';
+    try { history.replaceState(null, '', '#' + r); } catch(e) {}
+    show(r);
+  }
+
+  /* ---------- role ---------- */
+  function setRole(r){
+    role = r;
+    app.setAttribute('data-role', r);
+    $$('#role-seg button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-role') === r); });
+    $$('.nav a').forEach(function(a){ a.hidden = a.getAttribute('data-roles').split(' ').indexOf(r) === -1; });
+    $$('.nav-group').forEach(function(g){ g.hidden = $$('a', g).every(function(a){ return a.hidden; }); });
+    var p = PEOPLE[r];
+    $('#me-avatar').textContent = p.init; $('#me-name').textContent = p.name; $('#me-role').textContent = p.role;
+    var banner = $('#role-banner');
+    if (r === 'owner') { banner.hidden = true; }
+    else {
+      banner.hidden = false;
+      $('#role-banner-text').textContent = r === 'caller'
+        ? 'Viewing as Priya (Caller). She sees her call list and family cards, but no ability labels, school totals or approvals.'
+        : 'Viewing as Sunita (Accountant). She sees fee collection, the day book and setup, but no ability labels or approvals.';
+    }
+    show(allowed(current) ? current : START[r]);
+  }
+
+  /* ---------- language ---------- */
+  function setLang(l){
+    app.setAttribute('data-lang', l);
+    $$('#lang-seg button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang') === l); });
+    $$('[data-hi]').forEach(function(el){
+      if (!el.hasAttribute('data-en')) el.setAttribute('data-en', el.textContent);
+      el.textContent = l === 'hi' ? el.getAttribute('data-hi') : el.getAttribute('data-en');
+    });
+    document.documentElement.lang = l === 'hi' ? 'hi' : 'en';
+  }
+
+  /* ---------- log result sheet ---------- */
+  var NEXT = {
+    pay: 'Promise saved. The parent gets a WhatsApp confirmation now and a reminder one day before. The app checks on the date.',
+    paid: 'The accountant is asked to find and match the payment. No more calls until it is checked.',
+    unreach: 'Retry tomorrow at a different time. After 3 tries it goes to the class teacher.',
+    callback: 'A callback is added to the list for the time they asked.',
+    plan: 'Offer up to 3 parts yourself. Anything more goes to the owner for approval.',
+    money: 'The owner reviews the family and may move them to Support.',
+    complaint: 'Goes to the principal. Calls pause until it is resolved.',
+    refused: 'Escalated to the principal for a personal call.'
+  };
+  var LABEL = {pay:'Will pay 31 Oct', paid:'Says paid', unreach:'Not reachable', callback:'Call back', plan:'Wants a plan', money:'Money problem', complaint:'Complaint', refused:'Refused'};
+  var sheet = $('#log-sheet'), outcome = null, sourceRow = null;
+  function openLog(btn){
+    var parts = (btn.getAttribute('data-log') || '').split('|');
+    $('#log-title').textContent = 'Log call result · ' + parts[0];
+    $('#log-sub').textContent = parts[1] || '';
+    sourceRow = btn.closest('.call-row');
+    pick(btn.getAttribute('data-preset') || null);
+    sheet.hidden = false;
+    setTimeout(function(){ var f = $('.outcome', sheet); if (f) f.focus(); }, 30);
+  }
+  function pick(o){
+    outcome = o;
+    $$('.outcome').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-outcome') === o); });
+    $('#pay-form').hidden = o !== 'pay';
+    $('#next-step').hidden = !o;
+    if (o) $('#next-text').textContent = NEXT[o];
+    var save = $('#log-save');
+    save.disabled = !o;
+    save.textContent = o === 'pay' ? 'Save & send WhatsApp confirmation' : 'Save';
+  }
+  function closeLog(){ sheet.hidden = true; }
+
+  /* ---------- quick tag ---------- */
+  var TAGQ = [
+    {name:'Das family', sub:'Suman Das (Father) · Ward 6 · Arjun, UKG', due:'₹9,000', job:'Bank clerk (private job)', area:'Ward 6', veh:'Two-wheeler', bus:'Yes · paid on time', fee:'3 months pending', note:'“Polite, busy father”', hint:'<b>Suggests at least Medium.</b> Pays transport on time while tuition is pending.'},
+    {name:'Chauhan family', sub:'Vikram Chauhan (Father) · Civil Lines · Aditi 8-B, Kabir 4-A', due:'₹27,000', job:'Business · hardware shop', area:'Civil Lines', veh:'Car', bus:'No · drops them himself', fee:'5 months pending', note:'“Kids in skating club”', hint:'<b>Suggests High.</b> Owns a business and a car, and pays for extra activities.'},
+    {name:'Fernandes family', sub:'Maria Fernandes (Mother) · Station Road · Neil, 2-A', due:'₹13,000', job:'Tailoring · daily work', area:'Station Road', veh:'None', bus:'No', fee:'4 months pending', note:'“Single parent, always apologetic”', hint:'<b>No strong signal.</b> Your judgement matters most here.'}
+  ];
+  var tagIndex = 0, tagged = 44;
+  function renderTag(){
+    var f = TAGQ[tagIndex % TAGQ.length];
+    $('#tag-name').textContent = f.name; $('#tag-sub').textContent = f.sub; $('#tag-due').textContent = f.due;
+    $('#tag-job').textContent = f.job; $('#tag-area').textContent = f.area; $('#tag-veh').textContent = f.veh;
+    $('#tag-bus').textContent = f.bus; $('#tag-fee').textContent = f.fee; $('#tag-note').textContent = f.note;
+    $('#tag-hint').innerHTML = f.hint;
+    $('#tag-done').textContent = tagged; $('#tag-left').textContent = 100 - tagged;
+    $('#tag-bar').style.width = tagged + '%';
+    $('#hardship').checked = false; $('#usual-habit').selectedIndex = 0;
+  }
+
+  /* ---------- collect fee ---------- */
+  var DUES = [['Old dues 2025-26', 4000], ['Q2 balance (July)', 3500], ['Q3 installment (October)', 14500]];
+  function inr(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
+  function renderAlloc(){
+    var raw = parseInt(($('#amt').value || '').replace(/[^0-9]/g, ''), 10) || 0;
+    var left = raw, html = '', kv = '';
+    DUES.forEach(function(d){
+      var take = Math.min(left, d[1]); left -= take;
+      var state = take === d[1] ? '<span class="state full">Cleared</span>' : take > 0 ? '<span class="state part">' + inr(take) + ' of ' + inr(d[1]) + '</span>' : '<span class="state none">Not touched</span>';
+      html += '<div class="row"><div class="grow"><div class="row-title">' + d[0] + '</div></div>' + state + '</div>';
+      if (take > 0) kv += '<dt>' + d[0] + '</dt><dd>' + inr(take) + '</dd>';
+    });
+    var total = DUES.reduce(function(a, d){ return a + d[1]; }, 0);
+    var remain = Math.max(total - raw, 0);
+    html += '<div class="row"><div class="grow"><div class="row-title">Still due after this</div></div><b class="num">' + inr(remain) + '</b></div>';
+    $('#alloc').innerHTML = html;
+    var mode = $('#mode-seg .on').textContent.trim();
+    kv += '<dt class="total">Received · ' + mode + '</dt><dd class="total">' + inr(Math.min(raw, total)) + '</dd>';
+    $('#receipt-kv').innerHTML = kv;
+    $('#collect-btn').textContent = raw > 0 ? 'Collect ' + inr(Math.min(raw, total)) + ' & send receipt' : 'Enter an amount';
+    $('#collect-btn').disabled = raw <= 0;
+  }
+
+  /* ---------- templates ---------- */
+  var TPL = [
+    {k:'before', t:'Before the due date', w:'3 days before each installment', en:'Namaste Rajesh ji. A gentle reminder from Sunrise Public School: the October installment for Aarav (7-B) and Diya (3-A), ₹14,500, is due on 10 Oct. Pay by UPI: pay.sunrise.school/s/8K2', hi:'नमस्ते राजेश जी। सनराइज़ पब्लिक स्कूल की ओर से याद दिलाना: आरव (7-B) और दिया (3-A) की अक्टूबर किस्त ₹14,500, 10 अक्टूबर तक जमा करनी है। UPI से भुगतान करें: pay.sunrise.school/s/8K2'},
+    {k:'today', t:'Due today', w:'On the due date, 10 AM', en:'Namaste Rajesh ji. The fee of ₹14,500 for Aarav and Diya is due today. You can pay in a minute by UPI: pay.sunrise.school/s/8K2', hi:'नमस्ते राजेश जी। आरव और दिया की ₹14,500 फीस आज जमा करनी है। UPI से एक मिनट में भुगतान करें: pay.sunrise.school/s/8K2'},
+    {k:'overdue', t:'Overdue', w:'7 days after the due date', en:'Namaste Rajesh ji. Fees of ₹38,000 for Aarav (7-B) and Diya (3-A) are pending, plus ₹6,500 from last year. Please pay by UPI: pay.sunrise.school/s/8K2 or call the office on 0141 222 4455 if a payment plan would help.', hi:'नमस्ते राजेश जी। आरव (7-B) और दिया (3-A) की ₹38,000 फीस बाकी है, और पिछले साल का ₹6,500 बकाया है। कृपया UPI से भुगतान करें: pay.sunrise.school/s/8K2 किस्तों में भुगतान के लिए ऑफिस को कॉल करें: 0141 222 4455'},
+    {k:'confirm', t:'Promise confirmation', w:'Right after a call with a promise', en:'Thank you, Rajesh ji. We have noted your promise: ₹22,000 by 31 Oct. Pay any time by UPI: pay.sunrise.school/s/8K2', hi:'धन्यवाद राजेश जी। हमने आपका वादा नोट कर लिया है: 31 अक्टूबर तक ₹22,000। कभी भी UPI से भुगतान करें: pay.sunrise.school/s/8K2'},
+    {k:'remind', t:'Promise reminder', w:'1 day before the promise date', en:'Namaste Rajesh ji. A reminder of your promise: ₹22,000 by tomorrow, 31 Oct. Pay by UPI: pay.sunrise.school/s/8K2', hi:'नमस्ते राजेश जी। आपके वादे की याद: कल, 31 अक्टूबर तक ₹22,000। UPI से भुगतान करें: pay.sunrise.school/s/8K2'},
+    {k:'receipt', t:'Receipt', w:'Right after every payment', en:'Received with thanks: ₹22,000 by UPI on 30 Oct. Receipt R-2466. Remaining: ₹22,500, due by 15 Dec.', hi:'धन्यवाद, 30 अक्टूबर को UPI से ₹22,000 प्राप्त हुए। रसीद R-2466। बाकी: ₹22,500, 15 दिसंबर तक।'},
+    {k:'thanks', t:'Thank you', w:'After an on-time payment', en:'Thank you, Nikhil ji, for paying Aadya’s fees on time every term. It helps the school plan better.', hi:'धन्यवाद निखिल जी, आद्या की फीस हर बार समय पर जमा करने के लिए। इससे स्कूल को बेहतर योजना बनाने में मदद मिलती है।'}
+  ];
+  var tplIndex = 2, tplLang = 'hi';
+  function renderTpl(){
+    var list = $('#tpl-list');
+    list.innerHTML = TPL.map(function(t, i){
+      return '<div class="row" style="padding:10px 12px;border-radius:12px;cursor:pointer;' + (i === tplIndex ? 'background:var(--canvas);' : '') + '" data-tpl="' + i + '" tabindex="0" role="button"><div class="grow"><div class="row-title">' + t.t + '</div><div class="row-sub">' + t.w + '</div></div></div>';
+    }).join('');
+    var t = TPL[tplIndex];
+    $('#tpl-title').textContent = t.t; $('#tpl-when').textContent = 'Sent ' + t.w.charAt(0).toLowerCase() + t.w.slice(1);
+    var text = tplLang === 'hi' ? t.hi : t.en;
+    $('#tpl-bubble').innerHTML = text.replace(/(pay\.sunrise\.school\/s\/8K2)/, '<a>$1</a>') + '<span class="t">10:00 AM</span>';
+    $$('#tpl-lang button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-l') === tplLang); });
+  }
+
+  /* ---------- charts (drawn from data, one scale each) ---------- */
+  var MONTHS = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+  function cumChart(){
+    var last = [20,26,30,38,42,54,62,71,75,81,88,93], now = [24,30,34,42,45.4,61];
+    var W = 640, H = 250, L = 40, R = 600, T = 18, B = 210;
+    var x = function(i){ return L + i * (R - L) / 11; }, y = function(v){ return B - v * (B - T) / 100; };
+    var s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Share of fees collected by month: 61 percent by September this year against 54 percent last year">';
+    [0,25,50,75,100].forEach(function(g){ s += '<line x1="' + L + '" x2="' + R + '" y1="' + y(g) + '" y2="' + y(g) + '" stroke="var(--grid)"/><text x="' + (L - 8) + '" y="' + (y(g) + 4) + '" text-anchor="end">' + g + '%</text>'; });
+    MONTHS.forEach(function(m, i){ s += '<text x="' + x(i) + '" y="' + (B + 22) + '" text-anchor="middle">' + m + '</text>'; });
+    s += '<line x1="' + x(5) + '" x2="' + x(5) + '" y1="' + T + '" y2="' + B + '" stroke="var(--line-strong)" stroke-dasharray="2 4"/>';
+    s += '<text x="' + x(5) + '" y="' + (T - 4) + '" text-anchor="middle" style="font-weight:600;fill:var(--ink)">Today</text>';
+    s += '<polyline fill="none" stroke="var(--chart-2)" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round" stroke-linejoin="round" points="' + last.map(function(v, i){ return x(i) + ',' + y(v); }).join(' ') + '"/>';
+    var area = 'M' + x(0) + ',' + B + ' ' + now.map(function(v, i){ return 'L' + x(i) + ',' + y(v); }).join(' ') + ' L' + x(5) + ',' + B + 'Z';
+    s += '<path d="' + area + '" fill="#000" fill-opacity=".05"/>';
+    s += '<polyline fill="none" stroke="var(--chart-1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="' + now.map(function(v, i){ return x(i) + ',' + y(v); }).join(' ') + '"/>';
+    s += '<circle cx="' + x(5) + '" cy="' + y(54) + '" r="4.5" fill="#fff" stroke="var(--chart-2)" stroke-width="2"/>';
+    s += '<circle cx="' + x(5) + '" cy="' + y(61) + '" r="5.5" fill="#000" stroke="#fff" stroke-width="2"/>';
+    s += '<text class="v" x="' + (x(5) - 10) + '" y="' + (y(61) - 10) + '" text-anchor="end">61%</text>';
+    s += '<text x="' + (x(5) + 10) + '" y="' + (y(54) + 16) + '">54% last year</text>';
+    s += '<text x="' + (x(11) + 8) + '" y="' + (y(93) + 4) + '">93%</text>';
+    for (var i = 0; i < 12; i++) {
+      var tip = MONTHS[i] + ': ' + (now[i] != null ? now[i] + '% this year, ' : '') + last[i] + '% last year';
+      s += '<rect x="' + (x(i) - 22) + '" y="' + T + '" width="44" height="' + (B - T) + '" fill="transparent"><title>' + tip + '</title></rect>';
+    }
+    s += '</svg>';
+    $('#chart-cum').innerHTML = s;
+  }
+  function monthChart(){
+    var vals = [9.4,2.3,1.6,3.1,1.3,6.1,1.9,2.6,1.2,1.0,1.6,2.2];
+    var W = 640, H = 250, L = 40, R = 624, T = 14, B = 210, max = 10;
+    var band = (R - L) / 12, bw = 26;
+    var y = function(v){ return B - v * (B - T) / max; };
+    var s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Collected by month April to September, expected October to March">';
+    [0,2.5,5,7.5,10].forEach(function(g){ s += '<line x1="' + L + '" x2="' + R + '" y1="' + y(g) + '" y2="' + y(g) + '" stroke="var(--grid)"/><text x="' + (L - 8) + '" y="' + (y(g) + 4) + '" text-anchor="end">' + g + '</text>'; });
+    vals.forEach(function(v, i){
+      var cx = L + band * i + band / 2, x0 = cx - bw / 2, top = y(v), r = 4;
+      var fill = i < 6 ? 'var(--chart-1)' : 'var(--chart-2)';
+      s += '<path d="M' + x0 + ',' + B + ' V' + (top + r) + ' Q' + x0 + ',' + top + ' ' + (x0 + r) + ',' + top + ' H' + (x0 + bw - r) + ' Q' + (x0 + bw) + ',' + top + ' ' + (x0 + bw) + ',' + (top + r) + ' V' + B + ' Z" fill="' + fill + '"><title>' + MONTHS[i] + ': ₹' + v + ' L ' + (i < 6 ? 'collected' : 'expected') + '</title></path>';
+      s += '<text x="' + cx + '" y="' + (B + 22) + '" text-anchor="middle">' + MONTHS[i] + '</text>';
+      if (i === 0 || i === 5 || i === 7 || i === 11) s += '<text class="v" x="' + cx + '" y="' + (top - 7) + '" text-anchor="middle">' + v + '</text>';
+    });
+    s += '<line x1="' + (L + band * 6) + '" x2="' + (L + band * 6) + '" y1="' + T + '" y2="' + B + '" stroke="var(--line-strong)" stroke-dasharray="2 4"/>';
+    s += '</svg>';
+    $('#chart-month').innerHTML = s;
+  }
+  function classBars(){
+    var d = [['Nursery',0.6],['LKG',0.7],['UKG',0.8],['Class 1',1.0],['Class 2',1.1],['Class 3',1.2],['Class 4',1.1],['Class 5',1.3],['Class 6',1.4],['Class 7',1.6],['Class 8',1.5],['Class 9',1.3],['Class 10',1.6]];
+    $('#class-bars').innerHTML = d.map(function(r){
+      return '<div class="hbar" title="' + r[0] + ': ₹' + r[1] + ' L pending"><span>' + r[0] + '</span><span class="track"><b style="width:' + (r[1] / 1.6 * 100) + '%"></b></span><span class="val">₹' + r[1].toFixed(1) + ' L</span></div>';
+    }).join('');
+  }
+  function reportCards(){
+    var R = [
+      ['calendar-check','Daily summary','On WhatsApp every day at 7 PM'],
+      ['chart-column','Monthly collection','Collected vs expected vs last year'],
+      ['layers','Class-wise pending','Which classes owe the most'],
+      ['target','Group lists','Chase now, Support and the rest, printable'],
+      ['history','Old-dues recovery','Previous years’ dues coming back'],
+      ['users','Staff work','Calls, promises, % kept, ₹ recovered'],
+      ['percent','Concessions & discounts','What was given, and by whom'],
+      ['trending-up','Year comparison','% collected each month, this year vs last'],
+      ['shield-check','Alerts & audit','Every change: who, when, before and after']
+    ];
+    $('#report-cards').innerHTML = R.map(function(r){
+      return '<div class="card" style="display:flex;gap:14px;align-items:flex-start"><div class="ico-box"><svg class="ic" aria-hidden="true"><use href="#i-' + r[0] + '"></use></svg></div><div style="flex:1;min-width:0"><div class="row-title">' + r[1] + '</div><div class="row-sub">' + r[2] + '</div><div style="display:flex;gap:14px;margin-top:10px"><button class="link" type="button" data-toast="' + r[1] + ' opened">Open</button><button class="link" type="button" data-toast="' + r[1] + ' exported to Excel" style="color:var(--muted)">Excel</button></div></div></div>';
+    }).join('');
+  }
+
+  /* ---------- filters ---------- */
+  function filterRows(table, val){
+    $$('tbody tr', table).forEach(function(tr){ tr.hidden = val !== 'all' && tr.getAttribute('data-cat') !== val; });
+  }
+  var GROUP_TITLE = {chase:'Chase now, by priority', nudge:'Nudge: pays, but late', promised:'Promised: waiting on a date', support:'Support: low ability to pay', tag:'Tag first: ability not set', good:'Good payers: nothing overdue'};
+  var GROUP_COUNT = {chase:'Showing 6 of 142 · sorted by priority', nudge:'Showing 2 of 96', promised:'Showing 1 of 24', support:'Showing 1 of 61', tag:'Showing 1 of 56', good:'Showing 2 of 410'};
+
+  /* ---------- events ---------- */
+  document.addEventListener('click', function(e){
+    var t;
+    if ((t = e.target.closest('[data-log]'))) { e.preventDefault(); openLog(t); return; }
+    if ((t = e.target.closest('[data-outcome]'))) { pick(t.getAttribute('data-outcome')); return; }
+    if ((t = e.target.closest('[data-close]')) || e.target === sheet) { closeLog(); return; }
+    if ((t = e.target.closest('#role-seg button'))) { setRole(t.getAttribute('data-role')); return; }
+    if ((t = e.target.closest('[data-set-role]'))) { setRole(t.getAttribute('data-set-role')); return; }
+    if ((t = e.target.closest('#lang-seg button'))) { setLang(t.getAttribute('data-lang')); return; }
+    if ((t = e.target.closest('[data-go]'))) { e.preventDefault(); go(t.getAttribute('data-go')); return; }
+    if ((t = e.target.closest('[data-toast]'))) { e.preventDefault(); toast(t.getAttribute('data-toast')); return; }
+    if ((t = e.target.closest('[data-filter-val]'))) {
+      var v = t.getAttribute('data-filter-val');
+      $$('#group-tiles .gtile').forEach(function(g){ g.classList.toggle('on', g === t); });
+      filterRows($('#recover-table'), v);
+      $('#recover-title').textContent = GROUP_TITLE[v]; $('#recover-more').textContent = GROUP_COUNT[v];
+      return;
+    }
+    if ((t = e.target.closest('[data-seg-filter] button'))) {
+      var seg = t.parentNode;
+      $$('button', seg).forEach(function(b){ b.classList.toggle('on', b === t); });
+      filterRows($(seg.getAttribute('data-seg-filter')), t.getAttribute('data-val'));
+      return;
+    }
+    if ((t = e.target.closest('#mode-seg button'))) { $$('#mode-seg button').forEach(function(b){ b.classList.toggle('on', b === t); }); renderAlloc(); return; }
+    if ((t = e.target.closest('#tpl-lang button'))) { tplLang = t.getAttribute('data-l'); renderTpl(); return; }
+    if ((t = e.target.closest('[data-tpl]'))) { tplIndex = +t.getAttribute('data-tpl'); renderTpl(); return; }
+    if ((t = e.target.closest('[data-tag]'))) {
+      var name = TAGQ[tagIndex % TAGQ.length].name;
+      tagged = Math.min(tagged + 1, 100); tagIndex++;
+      renderTag(); toast(name + ' tagged as ' + t.getAttribute('data-tag') + ' · next family');
+      return;
+    }
+    if (e.target.closest('#tag-skip')) { tagIndex++; renderTag(); toast('Skipped · it will come back tomorrow'); return; }
+    if ((t = e.target.closest('[data-approve]')) || (t = e.target.closest('[data-reject]'))) {
+      var card = t.closest('.approval'), ok = t.hasAttribute('data-approve');
+      card.querySelector('.pill').className = 'pill ' + (ok ? 'good' : 'chase');
+      card.querySelector('.pill').textContent = ok ? 'Approved' : 'Rejected';
+      card.querySelector('.approval-actions').innerHTML = '<p class="muted" style="font-size:13.5px">' + (ok ? 'Approved by Mr. Verma just now. The staff member has been told.' : 'Rejected. The staff member has been told to offer something within the limits.') + '</p>';
+      var c = $('#approvals-count'), n = Math.max(0, (+c.textContent) - 1); c.textContent = n; c.hidden = n === 0;
+      toast(ok ? 'Approved · staff member told on WhatsApp' : 'Rejected · staff member told');
+      return;
+    }
+    if ((t = e.target.closest('[data-ok]'))) {
+      var row = t.closest('.alert-row'); row.style.opacity = '.45'; t.outerHTML = '<span class="pill good">Checked</span>';
+      var a = $('#alerts-count'), m = Math.max(0, (+a.textContent) - 1); a.textContent = m; a.hidden = m === 0; $('#alerts-pill').textContent = m + ' new';
+      toast('Marked as checked'); return;
+    }
+    if (e.target.closest('#close-day')) { $('#day-status').textContent = 'Closed at 7:02 PM by Sunita · edits now need the owner'; toast('Day closed · ₹42,500 recorded'); return; }
+    if (e.target.closest('#collect-btn')) { toast('Receipt R-2315 sent to Ritu Agarwal on WhatsApp'); return; }
+    if (e.target.closest('#menu-btn')) { app.classList.add('nav-open'); return; }
+    if (e.target.closest('#scrim')) { app.classList.remove('nav-open'); return; }
+    if ((t = e.target.closest('.seg button')) && !t.closest('[data-seg-filter]')) {
+      $$('button', t.parentNode).forEach(function(b){ b.classList.toggle('on', b === t); });
+    }
+  });
+
+  $('#log-save').addEventListener('click', function(){
+    if (!outcome) return;
+    var fam = $('#log-title').textContent.replace('Log call result · ', '');
+    closeLog();
+    if (sourceRow) {
+      sourceRow.classList.add('done');
+      $('.acts', sourceRow).innerHTML = '<span class="pill ' + (outcome === 'pay' ? 'good' : 'tag plain') + '">' + LABEL[outcome] + '</span>';
+    }
+    toast(outcome === 'pay' ? 'Promise saved · WhatsApp confirmation sent to ' + fam : 'Saved · next step scheduled for ' + fam);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { closeLog(); app.classList.remove('nav-open'); }
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-tpl]')) { e.preventDefault(); tplIndex = +e.target.getAttribute('data-tpl'); renderTpl(); }
+  });
+
+  $('#amt').addEventListener('input', function(){
+    var raw = this.value.replace(/[^0-9]/g, '');
+    this.value = raw ? (+raw).toLocaleString('en-IN') : '';
+    renderAlloc();
+  });
+  $('#whatif').addEventListener('input', function(){
+    $('#whatif-pct').textContent = this.value + '%';
+    $('#whatif-amt').textContent = '+₹' + (9.8 * this.value / 100).toFixed(1) + ' L';
+  });
+  $('#fam-search').addEventListener('input', function(){
+    var q = this.value.trim().toLowerCase(), shown = 0;
+    $$('#fam-table tbody tr').forEach(function(tr){ var hit = !q || tr.textContent.toLowerCase().indexOf(q) !== -1; tr.hidden = !hit; if (hit) shown++; });
+    $('#fam-more').textContent = q ? shown + ' matching families' : 'Showing 12 of 765';
+  });
+  $('#global-search').addEventListener('keydown', function(e){
+    if (e.key !== 'Enter') return;
+    var q = this.value; go('families');
+    var f = $('#fam-search'); f.value = q; f.dispatchEvent(new Event('input'));
+  });
+
+  window.addEventListener('hashchange', function(){ var h = location.hash.replace('#', ''); if (h && h !== current) show(h); });
+
+  /* ---------- boot ---------- */
+  cumChart(); monthChart(); classBars(); reportCards(); renderTag(); renderAlloc(); renderTpl();
+  var start = (location.hash || '').replace('#', '');
+  setRole('owner');
+  show(ALL.indexOf(start) !== -1 ? start : 'home');
+})();
+</script>
+</body>
+</html>
