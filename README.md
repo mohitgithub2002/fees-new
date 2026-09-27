@@ -8,7 +8,7 @@ An app for school owners and principals in India to **recover more of their scho
 - **predict** how much money will come in
 - spot **missing money**
 
-Current stage: **planning**. There is no code yet.
+Current stage: **planning**. There is a clickable mockup, but no product code yet.
 
 📄 **Read the full plan:** [docs/fee-recovery-system-plan.md](docs/fee-recovery-system-plan.md)
 
